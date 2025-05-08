@@ -8,10 +8,14 @@ import matplotlib.pyplot as plt
 import time
 
 # Seiteneinstellungen
-st.set_page_config(page_title="Lern-Dashboard: Fake News & Deepfakes", layout="wide")
+st.set_page_config(
+    page_title="Lern-Dashboard: Fake News & Deepfakes",
+    initial_sidebar_state="collapsed",
+    layout="wide")
 
 # Design-Anpassung
-st.markdown("""
+st.markdown(
+    """
 <style>
 html, body, [class*="css"]  {
     background-color: #fffaf5;
@@ -29,7 +33,9 @@ html, body, [class*="css"]  {
     background-color: #ffa733;
 }
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 # Header
 st.title("Lern-Dashboard: Fake News & Deepfakes")
@@ -44,10 +50,23 @@ st.write("Fake News sind absichtlich verbreitete Falschinformationen.")
 
 # Abschnitt: Weltkarte
 st.subheader("Woher kommen Fake News?")
-map_data = pd.DataFrame({
-    'Land': ['United States', 'Russia', 'China', 'Germany', 'Brazil', 'India', 'United Kingdom', 'France', 'Iran', 'Turkey'],
-    'Anteil (%)': [35, 20, 15, 5, 4, 6, 3, 2, 7, 3]
-})
+map_data = pd.DataFrame(
+    {
+        "Land": [
+            "United States",
+            "Russia",
+            "China",
+            "Germany",
+            "Brazil",
+            "India",
+            "United Kingdom",
+            "France",
+            "Iran",
+            "Turkey",
+        ],
+        "Anteil (%)": [35, 20, 15, 5, 4, 6, 3, 2, 7, 3],
+    }
+)
 
 map_fig = px.choropleth(
     map_data,
@@ -55,7 +74,7 @@ map_fig = px.choropleth(
     locationmode="country names",
     color="Anteil (%)",
     color_continuous_scale="OrRd",
-    labels={"Anteil (%)": "Anteil an Fake News (%)"}
+    labels={"Anteil (%)": "Anteil an Fake News (%)"},
 )
 
 # Umstellung auf eine Globus-Darstellung
@@ -65,12 +84,11 @@ map_fig.update_geos(
     showcountries=True,
     landcolor="lightgray",
     oceancolor="lightblue",
-    showocean=True
+    showocean=True,
 )
 
 map_fig.update_layout(
-    title_text="Woher kommen Fake News?",
-    margin={"r":0,"t":50,"l":0,"b":0}
+    title_text="Woher kommen Fake News?", margin={"r": 0, "t": 50, "l": 0, "b": 0}
 )
 
 st.plotly_chart(map_fig, use_container_width=True)
@@ -90,9 +108,17 @@ canvas = st.empty()
 # Animation (nur einmal durchlaufen)
 for i in range(1, len(steps) + 1):
     fig, ax = plt.subplots(figsize=(8, 6))
-    node_colors = ['#f7941d' if n in steps[:i] else '#dddddd' for n in G.nodes]
-    nx.draw(G, pos, with_labels=True, node_color=node_colors, edge_color='#aaaaaa',
-            node_size=300, font_size=8, ax=ax)
+    node_colors = ["#f7941d" if n in steps[:i] else "#dddddd" for n in G.nodes]
+    nx.draw(
+        G,
+        pos,
+        with_labels=True,
+        node_color=node_colors,
+        edge_color="#aaaaaa",
+        node_size=300,
+        font_size=8,
+        ax=ax,
+    )
     canvas.pyplot(fig)
     time.sleep(0.2)
 
@@ -109,13 +135,17 @@ st.header("Kennzahlen")
 st.write("Zahlen und Statistiken zur Entwicklung von Fake News.")
 
 st.subheader("Entwicklung von Fake News und Deepfakes")
-df = pd.DataFrame({
-    'Jahr': [2018, 2019, 2020, 2021, 2022, 2023],
-    'Fake News Fälle': [500, 1500, 3000, 5000, 7000, 9000],
-    'Deepfake Fälle': [50, 120, 400, 1200, 3000, 6000]
-})
+df = pd.DataFrame(
+    {
+        "Jahr": [2018, 2019, 2020, 2021, 2022, 2023],
+        "Fake News Fälle": [500, 1500, 3000, 5000, 7000, 9000],
+        "Deepfake Fälle": [50, 120, 400, 1200, 3000, 6000],
+    }
+)
 
-metric = st.radio("Welche Kennzahl möchtest du sehen?", ["Fake News Fälle", "Deepfake Fälle"])
+metric = st.radio(
+    "Welche Kennzahl möchtest du sehen?", ["Fake News Fälle", "Deepfake Fälle"]
+)
 chart_type = st.selectbox("Darstellung wählen:", ["Linie", "Balken"])
 
 if chart_type == "Linie":
@@ -131,7 +161,7 @@ timeline_data = {
     "2016": "Fake News beeinflussen US-Wahlkampf stark",
     "2018": "Erste Fake News Gesetzgebung in Europa",
     "2020": "Pandemie führt zu Anstieg von Verschwörungstheorien",
-    "2022": "Algorithmen zur Fake News-Erkennung werden verbessert"
+    "2022": "Algorithmen zur Fake News-Erkennung werden verbessert",
 }
 for year, event in timeline_data.items():
     st.markdown(f"**{year}**: {event}")
@@ -144,15 +174,24 @@ st.write("Weil sie Vertrauen zerstören und die Gesellschaft spalten können.")
 st.header("Quiz: Teste dein Wissen")
 score = 0
 
-q1 = st.radio("1. Was ist ein typisches Zeichen für Deepfakes?", ["Klare Sprache", "Merkwürdige Mimik oder Blinzeln"])
+q1 = st.radio(
+    "1. Was ist ein typisches Zeichen für Deepfakes?",
+    ["Klare Sprache", "Merkwürdige Mimik oder Blinzeln"],
+)
 if q1 == "Merkwürdige Mimik oder Blinzeln":
     score += 1
 
-q2 = st.radio("2. Was sollte man tun, wenn man eine reißerische Schlagzeile liest?", ["Gleich teilen", "Quelle prüfen und vergleichen"])
+q2 = st.radio(
+    "2. Was sollte man tun, wenn man eine reißerische Schlagzeile liest?",
+    ["Gleich teilen", "Quelle prüfen und vergleichen"],
+)
 if q2 == "Quelle prüfen und vergleichen":
     score += 1
 
-q3 = st.radio("3. Was bedeutet 'Fake News'?", ["Technischer Fehler", "Bewusst verbreitete Falschmeldung"])
+q3 = st.radio(
+    "3. Was bedeutet 'Fake News'?",
+    ["Technischer Fehler", "Bewusst verbreitete Falschmeldung"],
+)
 if q3 == "Bewusst verbreitete Falschmeldung":
     score += 1
 
@@ -163,7 +202,9 @@ if st.button("Ergebnisse anzeigen"):
     elif score == 2:
         st.info("Fast perfekt – ein bisschen geht noch!")
     else:
-        st.warning("Kein Problem – scroll nochmal durch das Dashboard und versuch's erneut.")
+        st.warning(
+            "Kein Problem – scroll nochmal durch das Dashboard und versuch's erneut."
+        )
 
 # --- Kapitel: Interaktiver Bereich ---
 st.header("Interaktiver Bereich")
@@ -181,6 +222,10 @@ with col2:
 st.caption("Hinweis: Nur eins der Bilder ist gefälscht — welches wohl?")
 
 st.subheader("Deine eigene Fake News-Schlagzeile")
-fake_headline = st.text_area("Gib eine eigene Schlagzeile ein:", "Sensation: KI übernimmt das Parlament!")
+fake_headline = st.text_area(
+    "Gib eine eigene Schlagzeile ein:", "Sensation: KI übernimmt das Parlament!"
+)
 if st.button("Feedback anzeigen"):
-    st.markdown(f"Diese Schlagzeile klingt {'extrem übertrieben' if '!' in fake_headline else 'relativ harmlos'}.")
+    st.markdown(
+        f"Diese Schlagzeile klingt {'extrem übertrieben' if '!' in fake_headline else 'relativ harmlos'}."
+    )

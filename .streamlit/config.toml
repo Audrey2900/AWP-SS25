@@ -1,0 +1,7 @@
+# config.toml
+
+[client]
+toolbarMode = "minimal"  # Setzt die Toolbar auf minimal
+
+[ui]
+hideTopBar = true  # Versteckt die obere Leiste
