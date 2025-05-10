@@ -6,6 +6,14 @@ import plotly.express as px
 import networkx as nx
 import matplotlib.pyplot as plt
 import time
+import components.CharacterTest as CharacterTest
+import streamlit.components.v1 as components
+import mimetypes
+
+mimetypes.add_type("application/javascript", ".js")
+mimetypes.add_type("text/css", ".css")
+
+
 
 # Seiteneinstellungen
 st.set_page_config(
@@ -39,6 +47,16 @@ html, body, [class*="css"]  {
 
 # Header
 st.title("Lern-Dashboard: Fake News & Deepfakes")
+
+# Per Custom Component
+CharacterTest.CharacterTest()
+
+# Per Static File Serving
+with open("components/CharacterStatic/index.html", "r", encoding="utf-8") as f:
+    html_code = f.read()
+
+components.html(html_code, height=600)
+
 
 # --- Kapitel: Was sind Deepfakes ---
 st.header("Was sind Deepfakes")
@@ -209,23 +227,23 @@ if st.button("Ergebnisse anzeigen"):
 # --- Kapitel: Interaktiver Bereich ---
 st.header("Interaktiver Bereich")
 
-st.subheader("Erkennst du den Fake?")
-col1, col2 = st.columns(2)
-with col1:
-    if st.button("Bild A auswählen"):
-        st.error("Falsch! Das ist das echte Bild.")
-    st.image("/Users/audrey/Desktop/AWP/Waschbär.png", use_container_width=True)
-with col2:
-    if st.button("Bild B auswählen"):
-        st.success("Richtig! Das ist der Deepfake.")
-    st.image("/Users/audrey/Desktop/AWP/Waschbär_DF.jpg", use_container_width=True)
-st.caption("Hinweis: Nur eins der Bilder ist gefälscht — welches wohl?")
+# st.subheader("Erkennst du den Fake?")
+# col1, col2 = st.columns(2)
+# with col1:
+#     if st.button("Bild A auswählen"):
+#         st.error("Falsch! Das ist das echte Bild.")
+#     st.image("/Users/audrey/Desktop/AWP/Waschbär.png", use_container_width=True)
+# with col2:
+#     if st.button("Bild B auswählen"):
+#         st.success("Richtig! Das ist der Deepfake.")
+#     st.image("/Users/audrey/Desktop/AWP/Waschbär_DF.jpg", use_container_width=True)
+# st.caption("Hinweis: Nur eins der Bilder ist gefälscht — welches wohl?")
 
-st.subheader("Deine eigene Fake News-Schlagzeile")
-fake_headline = st.text_area(
-    "Gib eine eigene Schlagzeile ein:", "Sensation: KI übernimmt das Parlament!"
-)
-if st.button("Feedback anzeigen"):
-    st.markdown(
-        f"Diese Schlagzeile klingt {'extrem übertrieben' if '!' in fake_headline else 'relativ harmlos'}."
-    )
+# st.subheader("Deine eigene Fake News-Schlagzeile")
+# fake_headline = st.text_area(
+#     "Gib eine eigene Schlagzeile ein:", "Sensation: KI übernimmt das Parlament!"
+# )
+# if st.button("Feedback anzeigen"):
+#     st.markdown(
+#         f"Diese Schlagzeile klingt {'extrem übertrieben' if '!' in fake_headline else 'relativ harmlos'}."
+#     )
