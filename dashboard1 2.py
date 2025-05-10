@@ -1,5 +1,6 @@
 # streamlit run /Users/audrey/Desktop/dashboard1_2.py
 
+import pathlib
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -56,6 +57,35 @@ with open("components/CharacterStatic/index.html", "r", encoding="utf-8") as f:
     html_code = f.read()
 
 components.html(html_code, height=600)
+
+########################################## CSS ###################################################
+# Function to Load CSS from the 'styles' folder
+def load_css(file_path):
+    with open(file_path) as f:
+        st.html(f"<style>{f.read()}</style>")
+
+# Load external CSS
+css_path = pathlib.Path("static/styles/global.css")
+load_css(css_path)
+
+
+st.title("✨ Streamlit CSS Styling Demo")
+st.subheader(
+    "As of Streamlit **version 1.39**, you can now set CSS classes on elements via the `key` parameter! 🎉"
+)
+st.code("pip install streamlit --upgrade", language="bash")
+st.divider()
+
+# Sytled Button
+st.header("Buttons")
+st.button("I'm a blue button", key="custom-button")
+st.button("I'm a blue button", key="custom-button2")
+
+
+# Text Area with Custom Font
+st.header("Styled Text Area")
+st.text_area("Your thoughts:", key="custom-box")
+########################################## CSS ###################################################
 
 
 # --- Kapitel: Was sind Deepfakes ---
