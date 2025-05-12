@@ -15,7 +15,7 @@ Im Pfad ausführen:  .\.venv\Scripts\Activate
 
 Packages herunterladen mit: uv sync
 
-Nachdem alle Packages heruntergeladen wurden: streamlit run "dashboard1 2.py"
+Nachdem alle Packages heruntergeladen wurden: streamlit run "index.py"
 
 ## Venv
 
