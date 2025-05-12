@@ -88,6 +88,35 @@ st.text_area("Your thoughts:", key="custom-box")
 ########################################## CSS ###################################################
 
 
+
+# Sytled Button
+st.header("Buttons")
+st.button("I'm a green button", key="green")
+st.button("Click Me!", key="pulse")
+
+# Text Input with Custom Font and Color
+st.header("Styled Text Input")
+st.text_input("Some Text:", key="styledinput")
+
+
+# Text Area with Custom Font
+st.header("Custom Font")
+st.text_area("Some Text:", key="styledtextarea")
+
+# Radio Buttons with Custom Styles
+st.header("Radio Buttons")
+st.radio("Pick a choice:", ["Choice A", "Choice B", "Choice C"], key="styledradio")
+
+# Markdown with Custom Font and Color
+st.header("Markdown")
+st.markdown(
+    '<p class="custom-markdown">This is <strong>bold text</strong> with a custom font and color.</p>',
+    unsafe_allow_html=True,
+)
+
+
+
+
 # --- Kapitel: Was sind Deepfakes ---
 st.header("Was sind Deepfakes")
 st.write("Deepfakes sind durch KI erzeugte Medieninhalte, die täuschend echt wirken.")
