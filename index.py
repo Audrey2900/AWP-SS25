@@ -1,8 +1,6 @@
 # streamlit run index.py
 
 import streamlit as st
-import zones.jscsstest as JsCssTest
-import zones.dashboard1 as Dashboard1
 
 # Seiteneinstellungen
 st.set_page_config(
@@ -51,7 +49,20 @@ show_avatar = st.checkbox("Charakter anzeigen")
 show_bubble = st.checkbox("Sprechblase anzeigen")
 
 # Dynamischer Inhalt:
-bubble_text = "TEST TEST TEST TEST TEST TEST" if show_bubble else ""
+bubble_text = st.session_state.bubble_text if show_bubble else ""
+if "bubble_text" not in st.session_state:
+    st.session_state.bubble_text = "Standardtext der Blase"
+
+# fix, damit man nicht 2 mal klicken muss
+def update_bubble():
+    st.session_state.bubble_text = st.session_state.new_text
+
+st.text_input(
+    "Neuer Text für die Sprechblase",
+    key="new_text",
+    on_change=update_bubble
+)
+
 
 if show_avatar:
     st.markdown(
@@ -112,12 +123,20 @@ if show_avatar:
         unsafe_allow_html=True,
     )
 
-
 st.divider()
 
 # Header
 st.title("Lern-Dashboard: Fake News & Deepfakes")
 
+
+# anchors
+st.header("📌 Springziel", anchor="go-here")
+st.write("Hier soll hingesprungen werden!")
+
+
 ## Andere Dashboards:
+import zones.jscsstest as JsCssTest
+import zones.dashboard1 as Dashboard1
 JsCssTest.render()
+st.markdown('[ Springe nach oben](#go-here)', unsafe_allow_html=True)
 Dashboard1.render()

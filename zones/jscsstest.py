@@ -38,7 +38,6 @@ def render():
     st.button("I'm a blue button", key="custom-button")
     st.button("I'm a blue button", key="custom-button2")
 
-
     # Text Area with Custom Font
     st.header("Styled Text Area")
     st.text_area("Your thoughts:", key="custom-box")
@@ -51,7 +50,6 @@ def render():
     # Text Input with Custom Font and Color
     st.header("Styled Text Input")
     st.text_input("Some Text:", key="styledinput")
-
 
     # Text Area with Custom Font
     st.header("Custom Font")
@@ -68,4 +66,33 @@ def render():
         unsafe_allow_html=True,
     )
 
-########################################## CSS ###################################################
+    ########################################## CSS ###################################################
+
+    st.divider()
+
+    st.header("Verändere zweite Bubble")
+
+    # fix, damit man nicht 2 mal klicken muss
+    def update_bubble():
+        st.session_state.bubble_text = st.session_state.new_text_jscsstest
+
+    st.text_input(
+        "Neuer Text für die Sprechblase",
+        key="new_text_jscsstest",
+        on_change=update_bubble,
+    )
+
+    st.divider()
+    st.divider()
+    st.divider()
+    st.divider()
+    st.divider()
+    st.divider()
+    st.divider()
+    st.divider()
+    st.divider()
+    st.divider()
+    st.divider()
+    st.divider()
+    st.divider()
+    st.divider()
