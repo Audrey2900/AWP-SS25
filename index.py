@@ -64,34 +64,29 @@ st.text_input(
     on_change=update_bubble
 )
 
-# Index für aktuelle Textposition
+# Initialisiere den Textindex im Session State
 if "text_index" not in st.session_state:
     st.session_state.text_index = 0
 
-# Funktion für den Weiter-Button
+# Callback-Funktionen für die Buttons
 def next_text():
     if st.session_state.text_index < len(BUBBLE_TEXTS) - 1:
         st.session_state.text_index += 1
-    st.session_state.bubble_text = BUBBLE_TEXTS[st.session_state.text_index]
 
-# Funktion für den Zurück-Button
 def prev_text():
     if st.session_state.text_index > 0:
         st.session_state.text_index -= 1
-    st.session_state.bubble_text = BUBBLE_TEXTS[st.session_state.text_index]
 
-# Initialisiere den ersten Text
-if "bubble_text" not in st.session_state:
-    st.session_state.bubble_text = BUBBLE_TEXTS[0]
+# Anzeige des aktuellen Textes basierend auf dem Index
+bubble_text = BUBBLE_TEXTS[st.session_state.text_index]
 
-# Navigation Buttons (nebeneinander mit Columns)
+# Buttons mit Callbacks
 col1, col2 = st.columns(2)
 with col1:
-    if st.button("← Zurück", disabled=st.session_state.text_index == 0):
-        prev_text()
+    st.button("← Zurück", on_click=prev_text, disabled=st.session_state.text_index == 0)
 with col2:
-    if st.button("Weiter →", disabled=st.session_state.text_index == len(BUBBLE_TEXTS) - 1):
-        next_text()
+    st.button("Weiter →", on_click=next_text, disabled=st.session_state.text_index == len(BUBBLE_TEXTS) - 1)
+
 
 if show_avatar:
     st.markdown(
