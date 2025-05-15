@@ -5,6 +5,10 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import time
 
+# Initialisiere den ersten Text, falls nicht vorhanden
+if "bubble_text" not in st.session_state:
+    st.session_state.bubble_text = "Standardtext der Blase"
+
 def render():
 
     # --- Kapitel: Was sind Deepfakes ---
