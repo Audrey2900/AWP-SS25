@@ -85,11 +85,15 @@ if show_avatar:
         border-radius: 8px;
         border: 2px solid #333;
         margin-right: 40px;
-        max-width: 280px;
+        max-width: 280px;         /* Maximale Breite bleibt gleich */
+        width: 280px;             /* Feste Breite */
         font-family: sans-serif;
         font-size: 15px;
         color: #222;
         box-shadow: 2px 2px 6px rgba(0,0,0,0.25);
+        max-height: 150px;        /* Maximale Höhe */
+        overflow-y: auto;         /* Nur vertikal scrollen */
+        overflow-x: hidden;       /* Kein horizontaler Scrollbalken */
     }}
 
     #speech-bubble::after {{
