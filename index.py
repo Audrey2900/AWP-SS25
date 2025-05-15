@@ -44,6 +44,7 @@ st.write("Received", value)
 st.divider()
 
 import streamlit as st
+from data.bubble_texts import BUBBLE_TEXTS
 
 show_avatar = st.checkbox("Charakter anzeigen")
 show_bubble = st.checkbox("Sprechblase anzeigen")
@@ -63,6 +64,34 @@ st.text_input(
     on_change=update_bubble
 )
 
+# Index für aktuelle Textposition
+if "text_index" not in st.session_state:
+    st.session_state.text_index = 0
+
+# Funktion für den Weiter-Button
+def next_text():
+    if st.session_state.text_index < len(BUBBLE_TEXTS) - 1:
+        st.session_state.text_index += 1
+    st.session_state.bubble_text = BUBBLE_TEXTS[st.session_state.text_index]
+
+# Funktion für den Zurück-Button
+def prev_text():
+    if st.session_state.text_index > 0:
+        st.session_state.text_index -= 1
+    st.session_state.bubble_text = BUBBLE_TEXTS[st.session_state.text_index]
+
+# Initialisiere den ersten Text
+if "bubble_text" not in st.session_state:
+    st.session_state.bubble_text = BUBBLE_TEXTS[0]
+
+# Navigation Buttons (nebeneinander mit Columns)
+col1, col2 = st.columns(2)
+with col1:
+    if st.button("← Zurück", disabled=st.session_state.text_index == 0):
+        prev_text()
+with col2:
+    if st.button("Weiter →", disabled=st.session_state.text_index == len(BUBBLE_TEXTS) - 1):
+        next_text()
 
 if show_avatar:
     st.markdown(
@@ -71,9 +100,9 @@ if show_avatar:
     #avatar-container {{
         position: fixed;
         bottom: 20px;
-        right: 20px;
+        left: 20px;              
         display: flex;
-        flex-direction: row;
+        flex-direction: row-reverse;  
         align-items: flex-end;
         z-index: 9999;
     }}
@@ -84,28 +113,28 @@ if show_avatar:
         padding: 14px 20px;
         border-radius: 8px;
         border: 2px solid #333;
-        margin-right: 40px;
-        max-width: 280px;         /* Maximale Breite bleibt gleich */
-        width: 280px;             /* Feste Breite */
+        margin-left: 40px;        
+        max-width: 280px;
+        width: 280px;
         font-family: sans-serif;
         font-size: 15px;
         color: #222;
         box-shadow: 2px 2px 6px rgba(0,0,0,0.25);
-        max-height: 150px;        /* Maximale Höhe */
-        overflow-y: auto;         /* Nur vertikal scrollen */
-        overflow-x: hidden;       /* Kein horizontaler Scrollbalken */
+        max-height: 150px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }}
 
     #speech-bubble::after {{
         content: "";
         position: absolute;
         top: 10px;
-        right: -12px;
+        left: -12px;             
         width: 0;
         height: 0;
-        border-width: 10px 0 10px 12px;
+        border-width: 10px 12px 10px 0;  
         border-style: solid;
-        border-color: transparent transparent transparent #f5f5f5;
+        border-color: transparent #f5f5f5 transparent transparent;  
     }}
 
     #bubble-text {{
