@@ -1,4 +1,5 @@
 uv.lock
 .venv/
 **/__pycache__/
-static/FakeCovid_July2020.csv
+**/__pycache__
+

@@ -21,7 +21,7 @@ def render():
 
     components.html(html_code, height=600)
 
-    ########################################## CSS ###################################################
+    ########################################## CSS ##########################################
     # Function to Load CSS from the 'styles' folder
     def load_css(file_path):
         with open(file_path) as f:

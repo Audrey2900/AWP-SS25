@@ -1,5 +1,4 @@
 # streamlit run index.py
-
 import streamlit as st
 
 # Seiteneinstellungen
@@ -34,16 +33,9 @@ html, body, [class*="css"]  {
 )
 
 
-import streamlit as st
-from components.bubblecomp import mycomponent
-
-value = mycomponent(my_input_value="hello there")
-st.write("Received", value)
-
-
 st.divider()
 
-import streamlit as st
+############################## Charakter + Sprechblase ##############################
 from data.bubble_texts import BUBBLE_TEXTS
 
 show_avatar = st.checkbox("Charakter anzeigen")
@@ -150,6 +142,7 @@ if show_avatar:
     """,
         unsafe_allow_html=True,
     )
+############################## Charakter + Sprechblase ##############################
 
 st.divider()
 
@@ -157,14 +150,20 @@ st.divider()
 st.title("Lern-Dashboard: Fake News & Deepfakes")
 
 
-# anchors
-st.header("📌 Springziel", anchor="go-here")
-st.write("Hier soll hingesprungen werden!")
-
-
 ## Andere Dashboards:
-import zones.jscsstest as JsCssTest
+
+#import zones.jscsstest as JsCssTest
 import zones.dashboard1 as Dashboard1
-JsCssTest.render()
-st.markdown('[ Springe nach oben](#go-here)', unsafe_allow_html=True)
+#import zones.anchors as Anchors
+#import zones.html_to_python as HtmlToPython
+import zones.mission1 as Mission1
+
+#HtmlToPython.render()
+
+#Anchors.render()
+
+#JsCssTest.render()
+
 Dashboard1.render()
+
+Mission1.render()
