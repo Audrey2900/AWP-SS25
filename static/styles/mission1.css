@@ -1,0 +1,24 @@
+/* static/styles/mission1.css */
+
+.st-key-left-box {
+    border: 2px solid #999;
+    border-radius: 6px;
+    padding: 24px;
+    background-color: #f9f9f900;
+    height: 500px;
+    flex-direction: column;
+}
+
+.st-key-right-box {
+    border: 2px solid #999;
+    border-radius: 6px;
+    padding: 24px;
+    background-color: #f9f9f900;
+    height: 500px;
+    flex-direction: column;
+}
+
+/* Columns optisch direkt aneinander kleben */
+div[data-testid="stHorizontalBlock"] {
+    gap: 0 !important;  /* Abstand zwischen columns */
+}
