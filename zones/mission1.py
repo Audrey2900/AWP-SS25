@@ -1,6 +1,16 @@
 import components.CoronaMiniDashboard.minidashboard as MiniDashboard
+import components.PictureSelector as PictureSelector
+import streamlit as st
 
 def render():
+
+    #PictureSelector.PictureSelector()
+
+    selection = PictureSelector.PictureSelector()
+    st.write("Ausgewählt:", selection)
+
+
+    
 
     MiniDashboard.render()
 

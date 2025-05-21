@@ -1,0 +1,22 @@
+body {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+.image-row {
+  display: flex;
+  gap: 20px;
+}
+
+img.selectable {
+  cursor: pointer;
+  border: 4px solid transparent;
+  border-radius: 10px;
+  transition: border 0.2s ease;
+  width: 300px;
+}
+
+img.selectable.selected {
+  border: 4px solid orange;
+}
