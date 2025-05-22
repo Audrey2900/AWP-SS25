@@ -156,9 +156,9 @@ st.title("Lern-Dashboard: Fake News & Deepfakes")
 #import zones.dashboard1 as Dashboard1
 #import zones.anchors as Anchors
 #import zones.html_to_python as HtmlToPython
-import zones.mission1 as Mission1
+import zones.zone1 as Zone1
 
-Mission1.render()
+Zone1.render()
 
 #HtmlToPython.render()
 
@@ -167,4 +167,3 @@ Mission1.render()
 #JsCssTest.render()
 
 #Dashboard1.render()
-

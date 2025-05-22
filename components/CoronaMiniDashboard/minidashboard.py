@@ -47,12 +47,9 @@ def render():
             if st.button("Wordcloud"):
                 st.session_state.selected = "wordcloud"
 
-
-
     with col2:
         with st.container(key="right-box"):
             selected = st.session_state.get("selected", "countries")
-
             if selected == "countries":
                 show_country_chart(df)
             elif selected == "monthly":

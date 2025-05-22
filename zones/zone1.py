@@ -1,24 +1,48 @@
-import components.CoronaMiniDashboard.minidashboard as MiniDashboard
-import components.PictureSelector as PictureSelector
+import components.CoronaMiniDashboard.minidashboard as MiniDashboard # Normale python-page
+import components.PictureSelector as PictureSelector # Komponente mit __init__
+import components.AiHarmChart.aiharmchart as AiHarmChart
 import streamlit as st
 
 def render():
-
-    #PictureSelector.PictureSelector()
-
     selection = PictureSelector.PictureSelector()
     st.write("Ausgewählt:", selection)
 
-
-    
-
     MiniDashboard.render()
+
+
+    st.header("AI und FakeNews - Teil")
+    AiHarmChart.render()
+
+    st.divider()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # def render():
 #     # CSV einlesen
 #     df = pd.read_csv("static/FakeCovid_July2020.csv")
 
-#     st.title("🦠 Analyse von Fake News zu COVID-19 (Juli 2020)")
+#     st.title("Analyse von Fake News zu COVID-19 (Juli 2020)")
 
 #     # 1. Länderstatistik
 #     st.header("1. Verteilung nach Ländern")
