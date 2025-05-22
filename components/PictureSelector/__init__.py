@@ -6,5 +6,5 @@ _component_func = components.declare_component(
     path=os.path.join(os.path.dirname(__file__), "frontend")
 )
 
-def PictureSelector(height=400):
+def PictureSelector(height=700):
     return _component_func(height=height)

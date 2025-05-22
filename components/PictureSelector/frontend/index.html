@@ -5,12 +5,30 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="image-row">
-    <img src="Trump.png" class="selectable" data-name="Trump" />
-    <img src="Merz.png" class="selectable" data-name="Merz" />
-    <img src="Musk.png" class="selectable" data-name="Musk" />
-    <img src="Söder.png" class="selectable" data-name="Söder" />
+  <div id="image-container">
+    <div class="person">
+      <img class="selectable" data-name="Trump" src="Trump.png" alt="Trump" />
+      <div class="person-name">Trump</div>
+    </div>
+    <div class="person">
+      <img class="selectable" data-name="Merz" src="Merz.png" alt="Merz" />
+      <div class="person-name">Merz</div>
+    </div>
+    <div class="person">
+      <img class="selectable" data-name="Musk" src="Musk.png" alt="Musk" />
+      <div class="person-name">Musk</div>
+    </div>
+    <div class="person">
+      <img class="selectable" data-name="Söder" src="Söder.png" alt="Söder" />
+      <div class="person-name">Söder</div>
+    </div>
   </div>
+
+  <div id="action-container"></div> <!-- Container für die Buttons -->
+
+  <img id="action-image" style="display: none;" /> <!-- Bild für die Aktion -->
+  <div id="action-name" style="display: none;"></div> <!-- Name der Person und Aktion -->
+
   <script src="script.js"></script>
 </body>
 </html>

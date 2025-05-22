@@ -1,12 +1,20 @@
+/* Allgemeines Layout */
 body {
   font-family: sans-serif;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 20px;
+  background-color: #f9f9f9;
 }
 
-.image-row {
+/* Container für die Ursprungsbilder */
+#image-container {
   display: flex;
+  justify-content: center;
   gap: 20px;
+  margin-bottom: 20px;
 }
 
 img.selectable {
@@ -14,9 +22,71 @@ img.selectable {
   border: 4px solid transparent;
   border-radius: 10px;
   transition: border 0.2s ease;
-  width: 300px;
+  width: 150px; /* Einheitliche Größe für Ursprungsbilder */
+  height: auto; /* Beibehaltung des Seitenverhältnisses */
 }
 
 img.selectable.selected {
   border: 4px solid orange;
+}
+
+/* Container für die Buttons */
+#action-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.action-button {
+  padding: 10px 20px;
+  background-color: #f7941d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.action-button:hover {
+  background-color: #ffa733;
+}
+
+/* Container für das kombinierte Bild */
+#action-image {
+  display: block;
+  margin: 20px auto 0; /* Zentriert das Bild, kein zusätzlicher Abstand unter dem Bild */
+  max-width: 100%; /* Bild passt sich der Breite des Containers an */
+  min-height: 50vh; /* Mindesthöhe auf die gesamte Viewport-Höhe setzen */
+  max-height: 50vh; /* Begrenzung der maximalen Höhe auf 70% der Viewport-Höhe */
+  object-fit: contain; /* Beibehaltung des Seitenverhältnisses */
+  border: 2px solid #f7941d; /* Rahmen um das Bild */
+  border-radius: 10px; /* Abgerundete Ecken */
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Schatten */
+  background-color: white; /* Hintergrundfarbe für Transparenz */
+}
+
+/* Container für jede Person */
+.person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px; /* Abstand zwischen Bild und Name */
+}
+
+/* Styling für die Namen */
+.person-name {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+/* Styling für den zusammengesetzten Namen */
+#action-name {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px; /* Kein zusätzlicher Abstand */
+  color: #333;
 }
