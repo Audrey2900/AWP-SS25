@@ -4,11 +4,11 @@ import components.AiHarmChart.aiharmchart as AiHarmChart
 import streamlit as st
 
 def render():
-    selection = PictureSelector.PictureSelector()
-    st.write("Ausgewählt:", selection)
 
     MiniDashboard.render()
 
+    selection = PictureSelector.PictureSelector()
+    st.write("Ausgewählt:", selection)
 
     st.header("AI und FakeNews - Teil")
     AiHarmChart.render()

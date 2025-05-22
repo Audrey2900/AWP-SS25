@@ -142,6 +142,14 @@ if show_avatar:
     """,
         unsafe_allow_html=True,
     )
+
+############################## Timer ##############################
+import components.ResetTimer.resettimer as ResetTimer
+
+ResetTimer.render()
+
+############################## Timer ##############################
+
 ############################## Charakter + Sprechblase ##############################
 
 st.divider()
