@@ -44,18 +44,29 @@ window.addEventListener("DOMContentLoaded", () => {
           // Spinner anzeigen
           spinner.style.display = "block";
 
-          // Nach 10 Sekunden anzeigen
+          // Zufällige Zeit zwischen 5 und 10 Sekunden berechnen
+          const randomDelay = Math.floor(Math.random() * (10000 - 5000 + 1)) + 5000;
+
+          // Nach der zufälligen Zeit das Bild laden
           setTimeout(() => {
-            actionImage.src = actionImagePath;
-            actionImage.alt = `${selectedName} ${action.label}`;
-            actionImage.style.display = "block";
+            // Neues Bild laden
+            const tempImage = new Image();
+            tempImage.src = actionImagePath;
 
-            // Zeige zusammengesetzten Satz statt "und"
-            actionName.textContent = `${selectedName} ${action.label}`;
-            actionName.style.display = "block";
+            // Sobald das Bild vollständig geladen ist
+            tempImage.onload = () => {
+              actionImage.src = actionImagePath;
+              actionImage.alt = `${selectedName} ${action.label}`;
+              actionImage.style.display = "block";
 
-            spinner.style.display = "none";
-          }, 10000);
+              // Zeige zusammengesetzten Satz
+              actionName.textContent = `${selectedName} ${action.label}`;
+              actionName.style.display = "block";
+
+              // Spinner ausblenden
+              spinner.style.display = "none";
+            };
+          }, randomDelay);
         });
 
         actionContainer.appendChild(button);
