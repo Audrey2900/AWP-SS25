@@ -82,16 +82,17 @@ with col2:
 
 if show_avatar:
     st.markdown(
-        f"""
+    f"""
     <style>
     #avatar-container {{
         position: fixed;
         bottom: 20px;
-        left: 20px;              
+        left: 20px;
         display: flex;
-        flex-direction: row-reverse;  
+        flex-direction: row;
         align-items: flex-end;
         z-index: 9999;
+        gap: 10px;
     }}
     #speech-bubble {{
         position: relative;
@@ -100,7 +101,6 @@ if show_avatar:
         padding: 14px 20px;
         border-radius: 8px;
         border: 2px solid #333;
-        margin-left: 40px;        
         max-width: 280px;
         width: 280px;
         font-family: sans-serif;
@@ -111,19 +111,17 @@ if show_avatar:
         overflow-y: auto;
         overflow-x: hidden;
     }}
-
     #speech-bubble::after {{
         content: "";
         position: absolute;
         top: 10px;
-        left: -12px;             
+        left: -12px;
         width: 0;
         height: 0;
-        border-width: 10px 12px 10px 0;  
+        border-width: 10px 12px 10px 0;
         border-style: solid;
-        border-color: transparent #f5f5f5 transparent transparent;  
+        border-color: transparent #f5f5f5 transparent transparent;
     }}
-
     #bubble-text {{
         user-select: none;
         pointer-events: none;
@@ -131,17 +129,40 @@ if show_avatar:
     #floating-avatar {{
         height: 160px;
     }}
+    #eye-button {{
+        width: 50px;
+        height: 50px;
+        background-color: #f7941d;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 2px 2px 6px rgba(0,0,0,0.25);
+        text-decoration: none;
+    }}
+    #eye-button:hover {{
+        background-color: #ffa733;
+    }}
     </style>
 
     <div id="avatar-container">
+        <img id="floating-avatar" src="/app/static/PrototypeChar.png" />
         <div id="speech-bubble">
             <div id="bubble-text">{bubble_text}</div>
         </div>
-        <img id="floating-avatar" src="/app/static/PrototypeChar.png" />
+        <a href="#{st.session_state.current_zone}" id="eye-button">👁️</a>
     </div>
     """,
-        unsafe_allow_html=True,
-    )
+    unsafe_allow_html=True,
+)
+
+
+
+############################## Charakter + Sprechblase ##############################
 
 ############################## Timer ##############################
 import components.ResetTimer.resettimer as ResetTimer
@@ -150,7 +171,11 @@ ResetTimer.render()
 
 ############################## Timer ##############################
 
-############################## Charakter + Sprechblase ##############################
+############################## Current Position ##############################
+if "current_zone" not in st.session_state:
+    st.session_state.current_zone = "Zone1"
+
+############################## Current Position ##############################
 
 st.divider()
 
@@ -162,15 +187,15 @@ st.title("Lern-Dashboard: Fake News & Deepfakes")
 
 #import zones.jscsstest as JsCssTest
 #import zones.dashboard1 as Dashboard1
-#import zones.anchors as Anchors
+import zones.anchors as Anchors
 #import zones.html_to_python as HtmlToPython
 import zones.zone1 as Zone1
+
+Anchors.render()
 
 Zone1.render()
 
 #HtmlToPython.render()
-
-#Anchors.render()
 
 #JsCssTest.render()
 

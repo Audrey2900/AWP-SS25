@@ -18,7 +18,7 @@ def render():
     css_path = pathlib.Path("static/styles/mission1.css")
     load_css(css_path)
 
-    st.title("📊 Mini-Dashboard: Fake News Visualisierung")
+    st.title("📊 Mini-Dashboard: Fake News Visualisierung", anchor="zone1")
 
     @st.cache_data #Cachen der CSV, damit diese nicht jedes mal neu gezogen wird.
     def load_data():

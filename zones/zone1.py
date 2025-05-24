@@ -3,12 +3,16 @@ import components.PictureSelector as PictureSelector # Komponente mit __init__
 import components.AiHarmChart.aiharmchart as AiHarmChart
 import streamlit as st
 
+from data.zone_anchor import set_zone
+
+
 def render():
-
+    
     MiniDashboard.render()
-
     selection = PictureSelector.PictureSelector()
     st.write("Ausgewählt:", selection)
+
+    st.button("Springziel zu Zone1", on_click=set_zone, args=("zone1",))
 
     st.header("AI und FakeNews - Teil")
     AiHarmChart.render()
