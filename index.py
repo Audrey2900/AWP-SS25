@@ -171,11 +171,13 @@ ResetTimer.render()
 
 ############################## Timer ##############################
 
-############################## Current Position ##############################
-if "current_zone" not in st.session_state:
-    st.session_state.current_zone = "Zone1"
+############################## Init Zones ##############################
+from data.zone_anchor import init_zone_state
+import components.Sidebar.sidebar as Sidebar
 
-############################## Current Position ##############################
+init_zone_state()
+Sidebar.render()
+############################## Init Zones ##############################
 
 st.divider()
 
@@ -200,3 +202,4 @@ Zone1.render()
 #JsCssTest.render()
 
 #Dashboard1.render()
+
