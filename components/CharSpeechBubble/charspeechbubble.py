@@ -1,18 +1,14 @@
 import streamlit as st
 from streamlit.components.v1 import html
 import json
+from data.char_speech_state import init_char_speech_state, update_bubble, update_text
+from data.bubble_texts import BUBBLE_TEXTS
+
 
 def render():
-    from data.bubble_texts import BUBBLE_TEXTS
+    init_char_speech_state()
 
-    show_avatar = st.checkbox("Charakter anzeigen")
-    show_bubble = st.checkbox("Sprechblase anzeigen")
-
-    if "bubble_text" not in st.session_state:
-        st.session_state.bubble_text = "Standardtext der Blase"
-
-    def update_bubble():
-        st.session_state.bubble_text = st.session_state.new_text
+    show_avatar = st.checkbox("Charakter anzeigen + Sprechblase anzeigen")
 
     st.text_input(
         "Neuer Text für die Sprechblase",
@@ -20,26 +16,15 @@ def render():
         on_change=update_bubble
     )
 
-    if "text_index" not in st.session_state:
-        st.session_state.text_index = 0
-
-    def next_text():
-        if st.session_state.text_index < len(BUBBLE_TEXTS) - 1:
-            st.session_state.text_index += 1
-
-    def prev_text():
-        if st.session_state.text_index > 0:
-            st.session_state.text_index -= 1
-
     col1, col2 = st.columns(2)
     with col1:
-        st.button("← Zurück", on_click=prev_text, disabled=st.session_state.text_index == 0)
+        st.button("← Zurück", on_click=update_text, args=(-1,), disabled=st.session_state.text_index == 0)
     with col2:
-        st.button("Weiter →", on_click=next_text, disabled=st.session_state.text_index == len(BUBBLE_TEXTS) - 1)
+        st.button("Weiter →", on_click=update_text, args=(+1,), disabled=st.session_state.text_index == len(BUBBLE_TEXTS) - 1)
 
     bubble_text = BUBBLE_TEXTS[st.session_state.text_index]
 
-    if show_avatar and show_bubble:
+    if show_avatar:
         st.markdown(f"""
         <style>
         #avatar-container {{
