@@ -49,9 +49,11 @@ ResetTimer.render()
 
 ############################## Init Zones ##############################
 from data.zone_anchor import init_zone_state
+from data.corruption import init_corruption_state, update_corruption
 import components.Sidebar.sidebar as Sidebar
 
 init_zone_state()
+init_corruption_state()
 Sidebar.render()
 ############################## Init Zones ##############################
 
@@ -68,6 +70,7 @@ st.title("Lern-Dashboard: Fake News & Deepfakes")
 import zones.anchors as Anchors
 #import zones.html_to_python as HtmlToPython
 import zones.zone1 as Zone1
+import components.Corruption.corruption as Corruption
 
 Anchors.render()
 
@@ -79,3 +82,6 @@ Zone1.render()
 
 #Dashboard1.render()
 
+st.button(label="add corruption effect", on_click=update_corruption, args=("onboarding",))
+
+Corruption.render()
