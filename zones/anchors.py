@@ -37,10 +37,4 @@ def render():
             background-color: #ffa733;
         }}
         </style>
-
-        <div id="fixed-jump">
-            <a href="#{st.session_state.current_zone}">
-                <button>👁️ Springen</button>
-            </a>
-        </div>
     """, unsafe_allow_html=True)
