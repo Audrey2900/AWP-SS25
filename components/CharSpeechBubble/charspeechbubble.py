@@ -94,6 +94,7 @@ def render():
             border-radius: 8px;
             font-size: 26px;  
             font-weight: bold;
+            text-decoration: none;
             color: #666;
             cursor: pointer;
             z-index: 10;
@@ -129,7 +130,7 @@ def render():
             <img id="floating-avatar" src="/app/static/PrototypeChar.png" />
             <div id="speech-bubble">
                 <div id="bubble-text"></div>
-                <button id="js-next-button">&gt;</button>
+                <a id="js-next-button" href="#">➤</a>
             </div>
             <a href="#{st.session_state.get("current_zone", "")}" id="eye-button">👁️</a>
         </div>
