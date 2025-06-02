@@ -100,9 +100,18 @@ def render():
             display: flex;
             align-items: center;
             justify-content: center;
+            pointer-events: auto;
+        }}
+        #js-next-button:hover {{
+            background-color: #e6e6e6;
         }}
         .st-key-hidden_next_button {{
             opacity: 0;
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1
         }}
 
         @keyframes blink {{
@@ -132,7 +141,6 @@ def render():
         const text = {json.dumps(bubble_text)};
         const target = parent.document.getElementById("bubble-text");
         const trigger = parent.document.getElementById("js-next-button");
-        const bubble = parent.document.querySelector('.stMarkdown #speech-bubble');
         const hiddenbutton = parent.document.querySelector('.st-key-hidden_next_button button');
 
         const maxIndex = {len(BUBBLE_TEXTS) - 1};
@@ -169,14 +177,13 @@ def render():
             }}
         }}, 5000);
 
-        // Sprechblasentext fortsetzen
+        // Klick-Handler
         if (trigger && hiddenbutton) {{
-            trigger.addEventListener("click", () => {{
+            trigger.addEventListener("pointerup", (e) => {{
+                e.preventDefault();
                 hiddenbutton.click();
-            }});
-            bubble.addEventListener("click", () => {{
-                hiddenbutton.click();
-            }});
+            }}, {{ passive: false }});
+
         }}
         </script>
         """, height=0)
