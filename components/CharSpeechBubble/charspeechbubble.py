@@ -25,6 +25,8 @@ def render():
     bubble_text = BUBBLE_TEXTS[st.session_state.text_index]
 
     if show_avatar:
+        st.button("hidden_next", key="hidden_next_button", on_click=update_text, args=(+1,))
+
         st.markdown(f"""
         <style>
         #avatar-container {{
@@ -38,23 +40,27 @@ def render():
             gap: 10px;
         }}
         #speech-bubble {{
+            position: relative;
             background-color: #f5f5f5;
             padding: 14px 20px;
             border-radius: 8px;
             border: 2px solid #333;
-            max-width: 280px;
-            width: 280px;
+            max-width: 320px;
+            width: 320px;
             font-family: sans-serif;
             font-size: 15px;
             color: #222;
             box-shadow: 2px 2px 6px rgba(0,0,0,0.25);
             max-height: 150px;
-            overflow-y: auto;
-            overflow-x: hidden;
+            overflow: hidden;
         }}
         #bubble-text {{
-            user-select: none;
-            pointer-events: none;
+            max-height: 125px;
+            overflow-y: auto;
+            margin-right: 50px;     
+            width: calc(100% - 30px);            
+            scrollbar-width: thin;
+            scrollbar-color: #bbb transparent;
         }}
         #floating-avatar {{
             height: 160px;
@@ -77,33 +83,99 @@ def render():
         #eye-button:hover {{
             background-color: #ffa733;
         }}
+        #js-next-button {{
+            position: absolute;
+            bottom: 3px; 
+            right: 6px;
+            width: 44px;
+            height: 44px;
+            background-color: #f5f5f5;
+            border: none;
+            border-radius: 8px;
+            font-size: 26px;  
+            font-weight: bold;
+            color: #666;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }}
+        #js-next-button:hover {{
+            background-color: #e6e6e6;
+        }}
+        .st-key-hidden_next_button {{
+            opacity: 0;
+        }}
+
+        @keyframes blink {{
+        0%   {{ opacity: 1; }}
+        50%  {{ opacity: 0.5; }}
+        100% {{ opacity: 1; }}
+        }}
+
+        .blinking {{
+        animation: blink 1.2s infinite;
+        }}
         </style>
 
         <div id="avatar-container">
             <img id="floating-avatar" src="/app/static/PrototypeChar.png" />
             <div id="speech-bubble">
                 <div id="bubble-text"></div>
+                <button id="js-next-button">&gt;</button>
             </div>
             <a href="#{st.session_state.get("current_zone", "")}" id="eye-button">👁️</a>
         </div>
         """, unsafe_allow_html=True)
+        
 
-        text_js = json.dumps(bubble_text)
         html(f"""
         <script>
-        const text = {text_js};
+        const text = {json.dumps(bubble_text)};
         const target = parent.document.getElementById("bubble-text");
+        const trigger = parent.document.getElementById("js-next-button");
+        const hiddenbutton = parent.document.querySelector('.st-key-hidden_next_button button');
+
+        const maxIndex = {len(BUBBLE_TEXTS) - 1};
+        const currentIndex = {st.session_state.text_index};
+
+        if (trigger) {{
+            trigger.style.display = "none";
+        }}
+
+        // Typewriter-Effekt
         if (target) {{
             target.innerHTML = "";
             let i = 0;
             function typeWriter() {{
                 if (i < text.length) {{
                     target.innerHTML += text.charAt(i);
+                    target.scrollTop = target.scrollHeight;
                     i++;
                     setTimeout(typeWriter, 40);
+                }} else {{
+                    if (trigger && currentIndex < maxIndex) {{
+                        trigger.style.display = "flex";
+                        trigger.classList.add("blinking");
+                    }}
                 }}
             }}
             typeWriter();
+        }}
+
+        setTimeout(() => {{
+            if (trigger && currentIndex < maxIndex && trigger.style.display === "none") {{
+                trigger.style.display = "flex";
+                trigger.classList.add("blinking");
+            }}
+        }}, 5000);
+
+        // Sprechblasentext fortsetzen
+        if (trigger && hiddenbutton) {{
+            trigger.addEventListener("click", () => {{
+                hiddenbutton.click();
+            }});
         }}
         </script>
         """, height=0)
