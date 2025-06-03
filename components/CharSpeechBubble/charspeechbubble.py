@@ -1,28 +1,22 @@
 import streamlit as st
 from streamlit.components.v1 import html
 import json
-from data.char_speech_state import init_char_speech_state, update_bubble, update_text
+from data.char_speech_state import get_current_bubble_texts, init_char_speech_state, update_text
 from data.bubble_texts import BUBBLE_TEXTS
-
 
 def render():
     init_char_speech_state()
 
     show_avatar = st.checkbox("Charakter anzeigen + Sprechblase anzeigen")
 
-    st.text_input(
-        "Neuer Text für die Sprechblase",
-        key="new_text",
-        on_change=update_bubble
-    )
+    current_texts = get_current_bubble_texts()
+    bubble_text = current_texts[st.session_state.text_index]
 
     col1, col2 = st.columns(2)
     with col1:
         st.button("← Zurück", on_click=update_text, args=(-1,), disabled=st.session_state.text_index == 0)
     with col2:
         st.button("Weiter →", on_click=update_text, args=(+1,), disabled=st.session_state.text_index == len(BUBBLE_TEXTS) - 1)
-
-    bubble_text = BUBBLE_TEXTS[st.session_state.text_index]
 
     if show_avatar:
         st.button("hidden_next", key="hidden_next_button", on_click=update_text, args=(+1,))
@@ -144,7 +138,7 @@ def render():
         const trigger = parent.document.getElementById("js-next-button");
         const hiddenbutton = parent.document.querySelector('.st-key-hidden_next_button button');
 
-        const maxIndex = {len(BUBBLE_TEXTS) - 1};
+        const maxIndex = {len(current_texts) - 1};
         const currentIndex = {st.session_state.text_index};
 
         if (trigger) {{
@@ -160,7 +154,7 @@ def render():
                     target.innerHTML += text.charAt(i);
                     target.scrollTop = target.scrollHeight;
                     i++;
-                    setTimeout(typeWriter, 40);
+                    setTimeout(typeWriter, 50);
                 }} else {{
                     if (trigger && currentIndex < maxIndex) {{
                         trigger.style.display = "flex";
@@ -172,9 +166,12 @@ def render():
         }}
 
         setTimeout(() => {{
-            if (trigger && currentIndex < maxIndex && trigger.style.display === "none") {{
-                trigger.style.display = "flex";
-                trigger.classList.add("blinking");
+            if (trigger && currentIndex < maxIndex) {{
+                const style = window.getComputedStyle(trigger);
+                if (style.display === "none") {{
+                    trigger.style.display = "flex";
+                    trigger.classList.add("blinking");
+                }}
             }}
         }}, 5000);
 
