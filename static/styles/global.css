@@ -127,3 +127,29 @@ body {
     color: #DA70D6;
     font-size: 34px;
 }
+
+[class*="st-key-chat"] {
+    position: relative;
+    height: 80px; /* oder passend zur Button-Höhe */
+}
+
+
+[class*="st-key-chat"] button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 75px;
+    height: 75px;
+    background-color: white;
+    background-image: url("/app/static/chat_icon.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid black;
+    border-radius: 16px;
+    padding: 0;
+}
+
+[class*="st-key-chat"] button:hover {
+    background-color: #f0f0f0;
+}

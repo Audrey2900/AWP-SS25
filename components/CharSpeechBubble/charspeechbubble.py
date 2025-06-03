@@ -132,7 +132,7 @@ def render():
         
 
         html(f"""
-        <script>
+        <script id="typewriter-{st.session_state.get("typewriter_refresh", 0)}">
         const text = {json.dumps(bubble_text)};
         const target = parent.document.getElementById("bubble-text");
         const trigger = parent.document.getElementById("js-next-button");
@@ -151,10 +151,15 @@ def render():
             let i = 0;
             function typeWriter() {{
                 if (i < text.length) {{
-                    target.innerHTML += text.charAt(i);
+                    let delay = 40;
+                    const char = text.charAt(i);
+                    if (char === "." || char === "?" || char === "!") {{
+                        delay = 600;
+                    }}
+                    target.innerHTML += char;
                     target.scrollTop = target.scrollHeight;
                     i++;
-                    setTimeout(typeWriter, 50);
+                    setTimeout(typeWriter, delay);
                 }} else {{
                     if (trigger && currentIndex < maxIndex) {{
                         trigger.style.display = "flex";
@@ -173,7 +178,7 @@ def render():
                     trigger.classList.add("blinking");
                 }}
             }}
-        }}, 5000);
+        }}, 10000);
 
         // Klick-Handler
         if (trigger && hiddenbutton) {{
