@@ -106,3 +106,13 @@ img.selectable.selected {
 @keyframes spin {
   100% { transform: rotate(360deg); }
 }
+
+/* Styling für das animierte GIF */
+#animated-avatar {
+  display: block;
+  margin: 20px auto; /* Zentriert das GIF */
+  max-width: 150px; /* Begrenzung der Breite */
+  height: auto; /* Beibehaltung des Seitenverhältnisses */
+  border-radius: 50%; /* Optional: Rundes Avatar */
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Optional: Schatten */
+}

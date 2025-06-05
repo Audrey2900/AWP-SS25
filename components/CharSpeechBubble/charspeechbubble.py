@@ -121,7 +121,7 @@ def render():
         </style>
 
         <div id="avatar-container">
-            <img id="floating-avatar" src="/app/static/PrototypeChar.png" />
+            <img id="floating-avatar" src="/app/static/PrototypeChar.gif" />
             <div id="speech-bubble">
                 <div id="bubble-text"></div>
                 <a id="js-next-button" href="#">➤</a>
@@ -137,12 +137,18 @@ def render():
         const target = parent.document.getElementById("bubble-text");
         const trigger = parent.document.getElementById("js-next-button");
         const hiddenbutton = parent.document.querySelector('.st-key-hidden_next_button button');
+        const avatar = parent.document.getElementById("floating-avatar");
 
         const maxIndex = {len(current_texts) - 1};
         const currentIndex = {st.session_state.text_index};
 
         if (trigger) {{
             trigger.style.display = "none";
+        }}
+
+        // Start GIF Animation
+        if (avatar) {{
+            avatar.src = "/app/static/PrototypeChar.gif"; // Start Animation
         }}
 
         // Typewriter-Effekt
@@ -164,6 +170,10 @@ def render():
                     if (trigger && currentIndex < maxIndex) {{
                         trigger.style.display = "flex";
                         trigger.classList.add("blinking");
+                    }}
+                    // Pause/Stop GIF Animation
+                    if (avatar) {{
+                        avatar.src = "/app/static/PrototypeChar_still.png"; // Replace with static image
                     }}
                 }}
             }}
