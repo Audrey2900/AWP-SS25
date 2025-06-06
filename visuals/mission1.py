@@ -92,7 +92,6 @@ def show_monthly_chart(df):
     df['published_date'] = pd.to_datetime(df['published_date'], errors='coerce')
     df['month'] = df['published_date'].dt.to_period('M')
     monthly_counts = df['month'].value_counts().sort_index()
-    # Plotly-Liniendiagramm ohne Interaktivität
     import plotly.graph_objects as go
     fig = go.Figure()
     fig.add_trace(go.Scatter(
@@ -104,25 +103,45 @@ def show_monthly_chart(df):
         xaxis_title="Monat",
         yaxis_title="Anzahl Fake News",
         margin=dict(l=20, r=20, t=40, b=20),
-        height=350
+        height=350,
+        dragmode=False  # Deaktiviert Ziehen/Auswählen
     )
-    st.plotly_chart(fig, use_container_width=True, config={"staticPlot": True})
+    st.plotly_chart(
+        fig,
+        use_container_width=True,
+        config={
+            "staticPlot": False,
+            "scrollZoom": False,
+            "displayModeBar": False,
+            "editable": False,
+            "doubleClick": "reset"
+        }
+    )
 
 def show_category_chart(df):
     st.header("3. Häufigste Fake-News-Kategorien (in %)")
     category_counts = df['category'].value_counts(normalize=True).mul(100).round(1)
-    import plotly.express as px
     fig = px.bar(
         x=category_counts.index,
         y=category_counts.values,
         labels={'x': 'Kategorie', 'y': 'Prozent'},
-        text=category_counts.values
     )
     fig.update_layout(
         margin=dict(l=20, r=20, t=40, b=20),
-        height=350
+        height=350,
+        dragmode=False  # <-- Das deaktiviert das Ziehen/Auswählen wirklich!
     )
-    st.plotly_chart(fig, use_container_width=True, config={"staticPlot": True})
+    st.plotly_chart(
+        fig,
+        use_container_width=True,
+        config={
+            "staticPlot": False,
+            "scrollZoom": False,
+            "displayModeBar": False,
+            "editable": False,
+            "doubleClick": "reset"
+        }
+    )
 
 def show_language_chart(df):
     st.header("4. Sprachen der Artikel")
@@ -132,13 +151,23 @@ def show_language_chart(df):
         x=lang_counts.index,
         y=lang_counts.values,
         labels={'x': 'Sprache', 'y': 'Anzahl'},
-        text=lang_counts.values
     )
     fig.update_layout(
         margin=dict(l=20, r=20, t=40, b=20),
-        height=350
+        height=350,
+        dragmode=False  # Deaktiviert Ziehen/Auswählen
     )
-    st.plotly_chart(fig, use_container_width=True, config={"staticPlot": True})
+    st.plotly_chart(
+        fig,
+        use_container_width=True,
+        config={
+            "staticPlot": False,
+            "scrollZoom": False,
+            "displayModeBar": False,
+            "editable": False,
+            "doubleClick": "reset"
+        }
+    )
 
 def show_classification_chart(df):
     st.header("7. Klassifikation von Fake News")
@@ -155,9 +184,20 @@ def show_classification_chart(df):
     )
     fig.update_layout(
         margin=dict(l=20, r=20, t=40, b=20),
-        height=360
+        height=360,
+        dragmode=False  # Deaktiviert Ziehen/Auswählen
     )
-    st.plotly_chart(fig, use_container_width=True, config={"staticPlot": True})
+    st.plotly_chart(
+        fig,
+        use_container_width=True,
+        config={
+            "staticPlot": False,
+            "scrollZoom": False,
+            "displayModeBar": False,
+            "editable": False,
+            "doubleClick": "reset"
+        }
+    )
 
 def show_wordcloud(df, basis, lang):
     st.header("Wordcloud")
