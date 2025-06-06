@@ -129,7 +129,7 @@ def show_category_chart(df):
     fig.update_layout(
         margin=dict(l=20, r=20, t=40, b=20),
         height=350,
-        dragmode=False  # <-- Das deaktiviert das Ziehen/Auswählen wirklich!
+        dragmode=True  # <-- Wird alles ignoriert sobald man es animiert
     )
     st.plotly_chart(
         fig,

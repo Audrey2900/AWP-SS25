@@ -9,6 +9,7 @@ from visuals.mission1 import (
     show_classification_chart,
     show_wordcloud,
 )
+from components.chart_animation.chartanimation import show_category_chart_animated
 
 def load_css(file_path):
     with open(file_path) as f:
@@ -55,7 +56,7 @@ def render():
             elif selected == "monthly":
                 show_monthly_chart(df)
             elif selected == "categories":
-                show_category_chart(df)
+                show_category_chart_animated(df)
             elif selected == "languages":
                 show_language_chart(df)
             elif selected == "classification":
