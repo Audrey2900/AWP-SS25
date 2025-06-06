@@ -3,11 +3,89 @@ from matplotlib import pyplot as plt
 import streamlit as st
 import pandas as pd
 from wordcloud import STOPWORDS, WordCloud
+import plotly.express as px
+import plotly.graph_objects as go
 
 def show_country_chart(df):
-    st.header("1. Verteilung nach Ländern")
-    country_counts = df['country'].value_counts().head(10)
-    st.bar_chart(country_counts, use_container_width=True)
+    st.subheader("Fake News nach Ländern")
+    
+    # Ansichts-Optionen
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        if st.button("🌍 Europa", key="europe_view"):
+            st.session_state.globe_view = "europe"
+    with col2:
+        if st.button("🌎 Amerika", key="america_view"):
+            st.session_state.globe_view = "america"
+    with col3:
+        if st.button("🌏 Asien", key="asia_view"):
+            st.session_state.globe_view = "asia"
+    
+    # Daten vorbereiten
+    country_counts = df['country'].value_counts().reset_index()
+    country_counts.columns = ['Land', 'Anzahl']
+    
+    country_mapping = {
+        'USA': 'United States',
+        'UK': 'United Kingdom',
+        'Brasil': 'Brazil',
+    }
+    country_counts['Land'] = country_counts['Land'].replace(country_mapping)
+    
+    # Ensure Anzahl is numeric
+    country_counts['Anzahl'] = pd.to_numeric(country_counts['Anzahl'])
+        
+    # 3D-Weltkugel mit Farbskala je nach Anzahl
+    map_fig = px.choropleth(
+        country_counts,
+        locations="Land",
+        locationmode="country names",
+        color="Anzahl",
+        color_continuous_scale="Reds",
+        range_color=(country_counts['Anzahl'].min(), country_counts['Anzahl'].max()),  # Uncommented to set color range
+        labels={"Anzahl": "Anzahl Fake News"},
+        hover_name="Land"
+    )
+    
+    # Ansicht basierend auf Auswahl anpassen
+    view = st.session_state.get("globe_view", "world")
+    if view == "europe":
+        rotation_lon, rotation_lat = 10, 50
+    elif view == "america":
+        rotation_lon, rotation_lat = -90, 20
+    elif view == "asia":
+        rotation_lon, rotation_lat = 100, 30
+    else:
+        rotation_lon, rotation_lat = 0, 0
+    
+    map_fig.update_geos(
+        showcoastlines=True,
+        projection_type="orthographic",
+        showcountries=True,
+        landcolor="lightgray",
+        oceancolor="lightblue",
+        showocean=True,
+        showland=True,
+        projection_rotation_lon=rotation_lon,
+        projection_rotation_lat=rotation_lat
+    )
+    
+    map_fig.update_layout(
+        title="Fake News Verteilung weltweit",
+        margin={"r": 0, "t": 50, "l": 0, "b": 0},
+        height=250
+    )
+    
+    st.plotly_chart(map_fig, use_container_width=True)
+    
+    # Optional: Zusätzliche Statistiken anzeigen
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Länder gesamt", len(country_counts))
+    with col2:
+        st.metric("Land mit meisten Fakes", country_counts.iloc[0]['Land'])
+    with col3:
+        st.metric("Höchste Anzahl", country_counts.iloc[0]['Anzahl'])
 
 def show_monthly_chart(df):
     st.header("2. Anzahl der Fake-News pro Monat")
@@ -80,4 +158,3 @@ def show_wordcloud(df, basis, lang):
 
 ## Weitere Beispiele:
 # Top Faktenchecker (muss erstmals überprüft werden) (vielleicht auch mit Dropdown für Land)
-# 
