@@ -21,7 +21,7 @@ def render():
         
     with col2:
         st.markdown("""
-            <img src="/app/static/factcheckersintro.png"
+            <img src="/app/static/factcheckersintro.webp"
             alt="400 Faktenchecker visualisiert"
             style="width: 100%; border-radius: 8px;" />""", 
         unsafe_allow_html=True)    
@@ -88,7 +88,7 @@ Ein Vorteil von GADMO ist, dass Redaktionen nicht doppelt an derselben Sache arb
 
     with col2:
         st.markdown("""
-    	    <img src="/app/static/400factcheckingteams.png"
+    	    <img src="/app/static/400factcheckingteams.webp"
             alt="400 Faktenchecker visualisiert"
             style="margin-top: 80px; width: 100%; border-radius: 8px;" />""", 
         unsafe_allow_html=True)
