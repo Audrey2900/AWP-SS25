@@ -72,6 +72,9 @@ st.title("Lern-Dashboard: Fake News & Deepfakes")
 import zones.zone1 as Zone1
 import zones.factcheckers as FactCheckers
 import components.Corruption.corruption as Corruption
+import zones.corona as Corona
+
+Corona.render()
 
 #Anchors.render()
 
