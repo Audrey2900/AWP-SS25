@@ -1,16 +1,7 @@
-import pathlib
 import streamlit as st
 from data.char_speech_state import set_text_key
 
 def render():
-
-    def load_css(file_path):
-            with open(file_path) as f:
-                st.html(f"<style>{f.read()}</style>")
-
-    css_path = pathlib.Path("static/styles/global.css")
-    load_css(css_path)
-
     col1, col2 = st.columns([3, 1])
     with col1:
         st.title("Faktenchecker in Deutschland – Wer prüft die Wahrheit?")
@@ -95,7 +86,7 @@ Ein Vorteil von GADMO ist, dass Redaktionen nicht doppelt an derselben Sache arb
 
     st.components.v1.html("""
         <div style="text-align: center;">
-            <img src="/app/static/IFCNcerts.png" style="border-radius: 8px; width: 1000px; height: auto; display: block; margin: 20px auto 0 auto;;" />
+            <img src="/app/static/IFCNcerts.png" style="border-radius: 8px; width: 800px; height: auto; display: block; margin: 20px auto 0 auto;;" />
         </div>
     """, height=360)
 

@@ -1,0 +1,64 @@
+<html>
+  <body style="margin: 0; padding: 0; background: transparent; color: white; font-family: system-ui, 'Segoe UI', sans-serif;">
+    <div style="text-align: center; padding: 0 16px;">
+      <h2 id="display" style="font-size: 64px;">0</h2>
+      <input
+        id="slider"
+        type="range"
+        min="0"
+        max="10000"
+        step="100"
+        value="0"
+        style="width: 100%; margin-top: 16px;"
+      />
+    </div>
+
+    <script>
+      function sendMessageToStreamlitClient(type, data) {
+        var outData = Object.assign({
+          isStreamlitMessage: true,
+          type: type,
+        }, data);
+        window.parent.postMessage(outData, "*");
+      }
+
+      function init() {
+        sendMessageToStreamlitClient("streamlit:componentReady", {apiVersion: 1});
+      }
+
+      function setFrameHeight(height) {
+        sendMessageToStreamlitClient("streamlit:setFrameHeight", {height: height});
+      }
+
+      function sendDataToPython(data) {
+        sendMessageToStreamlitClient("streamlit:setComponentValue", data);
+      }
+
+      const slider = document.getElementById("slider");
+      const display = document.getElementById("display");
+
+      slider.addEventListener("input", function () {
+        const val = parseInt(slider.value);
+        display.textContent = val;
+      });
+
+      slider.addEventListener("change", function () {
+        const val = parseInt(slider.value);
+        sendDataToPython({ value: val });
+      });
+
+
+      window.addEventListener("message", function (event) {
+        if (event.data.type !== "streamlit:render") return;
+        const value = event.data.args.value ?? 0;
+        slider.value = value;
+        display.textContent = value;
+      });
+
+      init();
+      window.addEventListener("load", () => {
+        setTimeout(() => setFrameHeight(document.body.scrollHeight), 0);
+      });
+    </script>
+  </body>
+</html>

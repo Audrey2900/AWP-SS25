@@ -1,4 +1,5 @@
 # streamlit run index.py
+import pathlib
 import streamlit as st
 
 # Seiteneinstellungen
@@ -38,10 +39,40 @@ div[data-testid="stMainBlockContainer"] {
     margin-left: auto;
     margin-right: auto;
 }
+.corrupt {
+    display: inline-block;
+    background: repeating-linear-gradient(
+        -45deg,
+        red,
+        red 2px,
+        black 2px,
+        black 4px
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: glitch 1s infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-1px, 1px); }
+    40% { transform: translate(1px, -1px); }
+    60% { transform: translate(-1px, -2px); }
+    80% { transform: translate(1px, 2px); }
+    100% { transform: translate(0); }
+}
 </style>
 """,
     unsafe_allow_html=True,
 )
+
+def load_css(file_path):
+        with open(file_path) as f:
+            st.html(f"<style>{f.read()}</style>")
+
+css_path = pathlib.Path("static/styles/global.css")
+load_css(css_path)
 
 
 st.divider()

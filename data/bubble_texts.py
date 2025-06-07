@@ -10,6 +10,13 @@ BUBBLE_TEXTS = {
     "onboarding": [],
     ######### Corona #########
     "corona": [],
+    "6000": [
+        "Warte mal, mit dem Text hier scheint etwas nicht zu passen. Außerdem ist der weitere Teil des Artikels noch beschädigt. Wir müssen das reparieren!",
+        "Die Zahl für die Einlieferungen ist beschädigt. Leider habe ich die Daten nicht mehr.",
+        "In meinen Entwicklertools sehe ich aber, dass es eine Zahl zwischen 0 und 10.000 sein muss.",
+        "Möglicherweise können wir das schätzen und ich sage dir, ob wir nahe dran sind, oder nicht. Ich schicke dir mal einen Slider und du sagst mir deine Antwort.",
+        "Probieren wir's aus.",
+    ],
     "transitionFactcheckers" :[
         "Da stimmt doch etwas nicht. Nur einen Faktenchecker?!",
         "Außerdem scheint es so, dass wir den Defekten Bereich, trotz deiner Antworten, nicht schmälern können. Eigentlich sollten hier mehrere Faktenchecker auftauchen. Sind irgendwo die Daten für Deutschland kaputt gegangen?",
@@ -20,7 +27,7 @@ BUBBLE_TEXTS = {
     ],
     ######### FactCheckers #########
     "FCwerprüftde": [
-        "Na also! Hier sind die Faktenchecker in Deutschland. Gleich solltest du auch sehen können, dass viele Davon bereits international zertifiziert sind.",
+        "Na also! Hier sind die Faktenchecker in Deutschland. Gleich solltest du auch sehen können, dass viele davon bereits international zertifiziert sind.",
     ],
     "FCgadmo" : [
         "Wurde von der EU mitfinanziert, läuft seit Anfang 2023.",
