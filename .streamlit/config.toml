@@ -8,3 +8,6 @@ hideTopBar = true  # Versteckt die obere Leiste
 
 [server]
 enableStaticServing = true
+
+[theme]
+base = "dark"
