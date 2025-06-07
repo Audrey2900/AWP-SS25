@@ -27,6 +27,17 @@ html, body, [class*="css"]  {
 .stButton>button:hover {
     background-color: #ffa733;
 }
+div[data-testid="stMainBlockContainer"] {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.element-container:has(.stMarkdown) {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
 </style>
 """,
     unsafe_allow_html=True,
