@@ -53,7 +53,6 @@ div[data-testid="stMainBlockContainer"] {
     color: transparent;
     animation: glitch 1s infinite;
 }
-
 @keyframes glitch {
     0% { transform: translate(0); }
     20% { transform: translate(-1px, 1px); }
@@ -61,6 +60,29 @@ div[data-testid="stMainBlockContainer"] {
     60% { transform: translate(-1px, -2px); }
     80% { transform: translate(1px, 2px); }
     100% { transform: translate(0); }
+}
+@keyframes subtle-glitch {
+  0%   { transform: translate(0px, 0px); opacity: 0.9; }
+  25%  { transform: translate(0.3px, -0.3px); opacity: 0.88; }
+  50%  { transform: translate(-0.3px, 0.3px); opacity: 0.91; }
+  75%  { transform: translate(0.2px, 0px); opacity: 0.89; }
+  100% { transform: translate(0px, 0px); opacity: 0.9; }
+}
+.falsetext {
+    color: #d67474;
+    font-style: italic;
+    text-decoration: underline dashed;
+    text-decoration-color: #ff1a1a;
+    text-underline-offset: 2px;
+    opacity: 0.9;
+    animation: subtle-glitch 1.6s infinite ease-in-out;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+.falsetext:hover {
+    color: #ff6666;
+    text-shadow: 0 0 2px rgba(255, 100, 100, 0.4);
+    cursor: help;
 }
 </style>
 """,
@@ -92,10 +114,12 @@ ResetTimer.render()
 ############################## Init Zones ##############################
 from data.zone_anchor import init_zone_state
 from data.corruption import init_corruption_state, update_corruption
+from data.ui_states import init_ui_state
 import components.Sidebar.sidebar as Sidebar
 
 init_zone_state()
 init_corruption_state()
+init_ui_state()
 Sidebar.render()
 ############################## Init Zones ##############################
 

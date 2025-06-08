@@ -9,7 +9,24 @@ BUBBLE_TEXTS = {
     ######### Onboarding #########
     "onboarding": [],
     ######### Corona #########
-    "corona": [],
+    "coronadone": [
+        "Mit diesem Bereich scheint alles zu passen. Suchen wir unten nach weiteren Beschädigungen."
+    ],
+    "dragpuzzle": [
+        "Oh Nein! Hier ist etwas während der Reparatur gewaltig schief gegangen. Einige Texte sind auf der falschen Stelle.",
+        "Das dürfen und können wir so nicht lassen. Hier im Code sind mir leider die Hände gebunden, ich finde keine Möglichkeit das zu bereinigen.",
+        "AHA! Möglicherweise kann ich den falschen Text extrahieren und in den Vordergrund packen. Du könntest dann in der Theorie die Texte richtig biegen und diese mir wieder zuschicken.",
+        "Wenn ich das So mache und So... Möglicherweise das hier auch? JETZT HAB ICH'S!",
+        "Du solltest jetzt die Texte im Vordergrund haben. Versuche mal die Texte mit Klicks an die richtigen Stellen zu schieben."
+    ],
+    "dragpuzzlecorrect": [
+        "Super gemacht! Das muss die richtige Lösung sein.",
+        "Wenn ich das jetzt so mache, dann sollte ich die Website aktualisieren können...",
+        "So! Jetzt ist der Text dank dir wieder korrekt. Der Beschädigte Bereich unten konnte verschoben werden, also weiter geht's.",
+    ],
+    "dragpuzzlefalse": [
+        "Hmmm... Da stimmt noch etwas nicht. Leider kann ich mit deinen Lösungen den Text noch nicht reparieren.",
+    ],
     "6000": [
         "Warte mal, mit dem Text hier scheint etwas nicht zu passen. Außerdem ist der weitere Teil des Artikels noch beschädigt. Wir müssen das reparieren!",
         "Die Zahl für die Einlieferungen ist beschädigt. Leider habe ich die Daten nicht mehr.",

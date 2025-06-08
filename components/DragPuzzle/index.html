@@ -1,0 +1,273 @@
+<html>
+  <head>
+    <style>
+      body {
+        background-color: transparent;
+        color: black;
+        font-family: system-ui, sans-serif;
+        margin: 0;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .wrapper {
+        max-width: 900px;
+        width: 100%;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .drop-zone, .drag-item {
+        border-radius: 6px;
+        padding: 8px 10px;
+        min-height: 20px;
+        font-size: 15px;
+        line-height: 1.4;
+      }
+
+      .drop-zone {
+        border: 2px dashed #666;
+        background: #333;
+        color: white;
+      }
+
+      .drag-item {
+        background-color: #f0f0f0;
+        border: 1px solid #bbb;
+        cursor: grab;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: relative;
+        padding-left: 28px;
+      }
+
+      .drag-item::before {
+        content: "≡";
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 16px;
+        color: #888;
+      }
+
+      .draggables {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 24px;
+        gap: 10px;
+      }
+
+      .placeholder {
+        color: #7287ff;
+        letter-spacing: 2px;
+      }
+
+      .dragging {
+        opacity: 0.6;
+        transform: scale(0.98);
+      }
+
+      .drop-zone.active-target {
+        animation: blink-border 1s infinite;
+        border-color: #ff5252;
+      }
+
+      @keyframes blink-border {
+        0%   { border-color: #ff5252; }
+        50%  { border-color: #fff; }
+        100% { border-color: #ff5252; }
+      }
+
+        .button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 24px;
+        }
+
+        .reset-btn {
+        margin-bottom: 16px;
+        padding: 12px 24px;
+        background-color: #7287ff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 600;
+        }
+
+        .reset-btn:hover {
+        background-color: #5c6bd1;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="button-container">
+        <button class="reset-btn" onclick="resetAllFields()">🔄 Zurücksetzen</button>
+      </div>
+      <div class="grid">
+        <div class="drop-zone" data-slot="0">Doch neben dem Virus selbst verbreitete sich noch etwas anderes rasend schnell: <span class="placeholder">________</span></div>
+        <div class="drop-zone" data-slot="1">Sie kamen über <span class="placeholder">________</span> direkt aufs Handy, also mitten in unseren Alltag.</div>
+        <div class="drop-zone" data-slot="2">Schon früh warnte <span class="placeholder">________</span> vor einer Infodemie.</div>
+        <div class="drop-zone" data-slot="3">In Deutschland sahen 68% der <span class="placeholder">________</span> Fake News zur Corona-Pandemie.</div>
+        <div class="drop-zone" data-slot="4">Bei <span class="placeholder">________</span> waren es sogar 76%, die mindestens einmal pro Woche auf Falschnachrichten stießen</div>
+      </div>
+
+      <div class="draggables" id="draggables-container">
+        <!-- Initiale Draggables per JS -->
+      </div>
+    </div>
+
+<script>
+  let dragged = null;
+  let isManualDrag = false;
+
+  const originalDraggables = [
+    "Social-Media-Nutzer",
+    "die Weltgesundheitsorganisation (WHO)",
+    "Falschinformationen, Gerüchte und wilde Verschwörungstheorien",
+    "WhatsApp, TikTok, Instagram und YouTube",
+    "Jugendlichen zwischen 14 und 24 Jahren",
+  ];
+
+  function createDraggable(text) {
+    const div = document.createElement("div");
+    div.className = "drag-item";
+    div.draggable = true;
+    div.textContent = text;
+    initDragEvents(div);
+    return div;
+  }
+
+  function resetAll() {
+    document.querySelectorAll('.drag-item').forEach(i => i.classList.remove("dragging"));
+    document.querySelectorAll('.drop-zone').forEach(zone => zone.classList.remove("active-target"));
+    dragged = null;
+    isManualDrag = false;
+  }
+
+  function activateBlinking() {
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+      const placeholder = zone.querySelector('.placeholder');
+      if (placeholder && placeholder.textContent.trim() === "________") {
+        zone.classList.add("active-target");
+      }
+    });
+  }
+
+  function collectCurrentAnswers() {
+    const result = [];
+
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+      const placeholder = zone.querySelector('.placeholder');
+      result.push(placeholder ? placeholder.textContent.trim() : "________");
+    });
+
+    sendDataToPython({ value: result });
+  }
+
+  function initDragEvents(item) {
+    item.addEventListener('dragstart', e => {
+      dragged = item;
+      isManualDrag = false;
+      setTimeout(() => item.style.display = "none", 0);
+      activateBlinking();
+    });
+
+    item.addEventListener('dragend', e => {
+      item.style.display = "inline-block";
+      resetAll();
+    });
+
+    const selectItem = () => {
+      resetAll();
+      dragged = item;
+      isManualDrag = true;
+      item.classList.add("dragging");
+      activateBlinking();
+    };
+
+    item.addEventListener('click', selectItem);
+    item.addEventListener('touchstart', selectItem);
+  }
+
+  document.querySelectorAll('.drop-zone').forEach(zone => {
+    zone.addEventListener('dragover', e => e.preventDefault());
+
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      const placeholder = zone.querySelector('.placeholder');
+      if (dragged && placeholder && placeholder.textContent.trim() === "________") {
+        placeholder.textContent = dragged.textContent;
+        dragged.remove();
+        resetAll();
+        collectCurrentAnswers();
+      }
+    });
+
+    zone.addEventListener('click', e => {
+      const placeholder = zone.querySelector('.placeholder');
+      if (dragged && isManualDrag && placeholder && placeholder.textContent.trim() === "________") {
+        placeholder.textContent = dragged.textContent;
+        dragged.remove();
+        resetAll();
+        collectCurrentAnswers();
+      }
+    });
+  });
+
+  function resetAllFields() {
+    document.querySelectorAll('.placeholder').forEach(ph => {
+      ph.textContent = "________";
+    });
+
+    const container = document.getElementById("draggables-container");
+    container.innerHTML = "";
+    originalDraggables.forEach(text => {
+      container.appendChild(createDraggable(text));
+    });
+
+    resetAll();
+    sendDataToPython({ value: null });
+  }
+
+  function postHeight() {
+    const height = document.body.scrollHeight;
+    const outData = {
+      isStreamlitMessage: true,
+      type: "streamlit:setFrameHeight",
+      height: height,
+    };
+    window.parent.postMessage(outData, "*");
+  }
+
+  function sendMessageToStreamlitClient(type, data) {
+    const outData = Object.assign({ isStreamlitMessage: true, type: type }, data);
+    window.parent.postMessage(outData, "*");
+  }
+
+  function init() {
+    sendMessageToStreamlitClient("streamlit:componentReady", { apiVersion: 1 });
+  }
+
+  function sendDataToPython(data) {
+    sendMessageToStreamlitClient("streamlit:setComponentValue", data);
+  }
+
+  window.addEventListener("load", () => {
+    postHeight();
+    setTimeout(postHeight, 100);
+    init();
+    sendDataToPython({ value: null });
+    resetAllFields();
+  });
+</script>
+
+  </body>
+</html>

@@ -1,17 +1,14 @@
 import streamlit as st
 import components.CoronaExpanders.coronaexpanders as CoronaExpanders
 import components.CoronaSliderLogic.coronasliderlogic as CoronaSliderLogic
+import components.CoronaDragPuzzle.coronadragpuzzle as CoronaDragPuzzle
 from data.char_speech_state import set_text_key
 
 def render():
     st.title("Corona und Fake News: Wie ein Virus die Wahrheit infizierte")
-    st.markdown("""
-    Als das Coronavirus im Jahr 2020 um die Welt ging, veränderte sich unser Alltag schlagartig: Schulen wurden geschlossen, der Unterricht fand online statt, Masken wurden Pflicht, und plötzlich wusste niemand mehr so genau, was eigentlich stimmt. Doch neben dem Virus selbst verbreitete sich noch etwas anderes rasend schnell: Falschinformationen, Gerüchte und wilde Verschwörungstheorien. Fake News rund um Corona waren überall. Sie kamen über WhatsApp, TikTok, Instagram und YouTube direkt aufs Handy, also mitten in unseren Alltag.
 
-    Gerade Jugendliche sind besonders oft mit Fake News konfrontiert. Gleichzeitig fühlen sich viele unsicher, wie sie erkennen können, ob etwas wahr ist oder nicht. Fast ein Drittel der jungen Menschen in Deutschland gab an, sich nicht fit im Umgang mit Desinformation zu fühlen. Dabei ist genau das heute wichtiger denn je.
-
-    Schon früh warnte die Weltgesundheitsorganisation (WHO) vor einer **"Infodemie"**, einer Welle an falschen Nachrichten, die sich schneller verbreitet als das Virus selbst. Und tatsächlich: Studien zeigen, dass ein Großteil der Menschen während der Pandemie mit Desinformation in Kontakt kam. In Deutschland sahen **68 %** der Social-Media-Nutzer Fake News zur Corona-Pandemie. Bei Jugendlichen zwischen 14 und 24 Jahren waren es sogar **76 %**, die mindestens einmal pro Woche auf Falschnachrichten stießen.
-    """)
+    CoronaDragPuzzle.render()
+    st.markdown("<div style='height: 500px;'></div>", unsafe_allow_html=True) #TODO Corruption-Effekt anstatt normaler Abstand
 
     st.markdown("""
     **Das Problem:** Viele dieser Gerüchte waren nicht nur falsch, sondern gefährlich.  
@@ -21,8 +18,12 @@ def render():
 
     st.button("", on_click=set_text_key, args=("6000",), key="chatcorona6000")
 
-    if st.session_state.text_key == "6000" and st.session_state.text_index == 4:
+    if (
+        st.session_state.text_key == "6000" and st.session_state.text_index == 4
+    ) or st.session_state.ui_state["CoronaSlider"]:
+        st.session_state.ui_state["CoronaSlider"] = True
         CoronaSliderLogic.render()
+
 
 
 
