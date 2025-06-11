@@ -51,4 +51,4 @@ def render():
 
         inactivityTime();
         </script>
-    """, height=80)
+    """, height=0)

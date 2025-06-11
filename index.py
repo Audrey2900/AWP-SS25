@@ -115,12 +115,10 @@ ResetTimer.render()
 from data.zone_anchor import init_zone_state
 from data.corruption import init_corruption_state, update_corruption
 from data.ui_states import init_ui_state
-import components.Sidebar.sidebar as Sidebar
 
 init_zone_state()
 init_corruption_state()
 init_ui_state()
-Sidebar.render()
 ############################## Init Zones ##############################
 
 st.divider()
