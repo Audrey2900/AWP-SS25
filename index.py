@@ -152,6 +152,4 @@ FactCheckers.render()
 
 #Dashboard1.render()
 
-st.button(label="add corruption effect", on_click=update_corruption, args=("onboarding",))
-
 Corruption.render()

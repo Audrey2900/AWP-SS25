@@ -28,5 +28,5 @@ def render():
         and not st.session_state.ui_state["DragPuzzleDone"]
     ):
         set_ui_state("DragPuzzleDone", True)
-        set_ui_state("DragPuzzleDone", True)
+        set_ui_state("NoCorruptionDragPuzzle", True)
         st.rerun()

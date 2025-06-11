@@ -1,40 +1,23 @@
 import streamlit as st
 import components.CoronaExpanders.coronaexpanders as CoronaExpanders
-import components.CoronaSliderLogic.coronasliderlogic as CoronaSliderLogic
 import components.CoronaDragPuzzle.coronadragpuzzle as CoronaDragPuzzle
-from data.char_speech_state import set_text_key
+import components.Corruption.corruption as Corruption
+import components.CoronaSlider.coronaslider as CoronaSlider
 
 def render():
     st.title("Corona und Fake News: Wie ein Virus die Wahrheit infizierte")
 
+    # Puzzle
     CoronaDragPuzzle.render()
-    st.markdown("<div style='height: 500px;'></div>", unsafe_allow_html=True) #TODO Corruption-Effekt anstatt normaler Abstand
 
-    st.markdown("""
-    **Das Problem:** Viele dieser Gerüchte waren nicht nur falsch, sondern gefährlich.  
-    Manche Menschen glaubten, Desinfektionsmittel zu trinken oder heißes Wasser zu inhalieren würde gegen Corona helfen.  
-    In den ersten drei Monaten der Pandemie wurden weltweit etwa <span class="corrupt">[MissingNumber]</span> Menschen wegen solcher Falschinfos ins Krankenhaus eingeliefert.
-    """, unsafe_allow_html=True)
+    if st.session_state.ui_state["NoCorruptionDragPuzzle"] == False:
+        Corruption.render()
 
-    st.button("", on_click=set_text_key, args=("6000",), key="chatcorona6000")
+    # Slider
+    CoronaSlider.render()
 
-    if (
-        st.session_state.text_key == "6000" and st.session_state.text_index == 4
-    ) or st.session_state.ui_state["CoronaSlider"]:
-        st.session_state.ui_state["CoronaSlider"] = True
-        CoronaSliderLogic.render()
-
-
-
-
-    #TODO: Lösung. Diese wird eingefügt, sobald man die Slider-Aufgabe geschafft hat
-    st.markdown("<div style='height: 500px;'></div>", unsafe_allow_html=True)
-    st.markdown("""
-        **Das Problem:** Viele dieser Gerüchte waren nicht nur falsch, sondern gefährlich.  
-        Manche Menschen glaubten, Desinfektionsmittel zu trinken oder heißes Wasser zu inhalieren würde gegen Corona helfen.  
-        In den ersten drei Monaten der Pandemie wurden weltweit etwa **6.000 Menschen** wegen solcher Falschinfos ins Krankenhaus eingeliefert.
-        """, unsafe_allow_html=True)
-
+    if st.session_state.ui_state["NoCorruptionCoronaSlider"] == False:
+        Corruption.render()
 
     st.markdown("""
 **800 Menschen starben**. Andere wiederum hielten das Virus für harmlos oder gar für erfunden, was dazu führte, dass sie sich nicht mehr schützten und damit sich und andere in Gefahr brachten.

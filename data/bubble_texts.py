@@ -10,7 +10,7 @@ BUBBLE_TEXTS = {
     "onboarding": [],
     ######### Corona #########
     "coronadone": [
-        "Mit diesem Bereich scheint alles zu passen. Suchen wir unten nach weiteren Beschädigungen."
+        "Mit diesem Bereich scheint alles zu passen. Suchen wir unten weiter."
     ],
     "dragpuzzle": [
         "Oh Nein! Hier ist etwas während der Reparatur gewaltig schief gegangen. Einige Texte sind auf der falschen Stelle.",
@@ -33,6 +33,10 @@ BUBBLE_TEXTS = {
         "In meinen Entwicklertools sehe ich aber, dass es eine Zahl zwischen 0 und 10.000 sein muss.",
         "Möglicherweise können wir das schätzen und ich sage dir, ob wir nahe dran sind, oder nicht. Ich schicke dir mal einen Slider und du sagst mir deine Antwort.",
         "Probieren wir's aus.",
+    ],
+    "slidercorrect" :[
+        "Platzhaltertext",
+        "Platzhalter",
     ],
     "transitionFactcheckers" :[
         "Da stimmt doch etwas nicht. Nur einen Faktenchecker?!",

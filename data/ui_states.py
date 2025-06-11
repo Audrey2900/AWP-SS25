@@ -5,6 +5,15 @@ _UI_KEYS = [
     "DragPuzzle",
     "DragPuzzleDone",
     "CoronaSlider",
+    "CoronaSliderDone",
+
+    
+
+
+
+    # Corruptions:
+    "NoCorruptionDragPuzzle",
+    "NoCorruptionCoronaSlider",
 ]
 
 def init_ui_state():
