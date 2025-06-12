@@ -30,7 +30,6 @@ def render():
 
     df = load_data()
 
-
     col1, col2 = st.columns([1, 3], gap="small")
 
     with col1:

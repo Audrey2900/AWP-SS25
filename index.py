@@ -133,18 +133,18 @@ st.title("Lern-Dashboard: Fake News & Deepfakes")
 #import zones.dashboard1 as Dashboard1
 #import zones.anchors as Anchors
 #import zones.html_to_python as HtmlToPython
-import zones.zone1 as Zone1
-import zones.factcheckers as FactCheckers
+#import zones.zone1 as Zone1
+#import zones.factcheckers as FactCheckers
 import components.Corruption.corruption as Corruption
-import zones.corona as Corona
+#import zones.corona as Corona
 
-Corona.render()
+#Corona.render()
 
 #Anchors.render()
 
-Zone1.render()
+#Zone1.render()
 
-FactCheckers.render()
+#FactCheckers.render()
 
 #HtmlToPython.render()
 

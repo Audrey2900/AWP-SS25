@@ -4,7 +4,7 @@ from data.char_speech_state import set_text_key
 def render():
     col1, col2 = st.columns([3, 1])
     with col1:
-        st.title("Faktenchecker in Deutschland – Wer prüft die Wahrheit?")
+        st.title("Faktenchecker in Deutschland – Wer prüft die Wahrheit?", anchor="factcheckers")
         st.markdown("""
         Falschinformationen verbreiten sich im Netz oft schneller als echte Nachrichten. Besonders in Krisenzeiten – wie während der Corona-Pandemie – reicht ein viraler Post, und schon glauben tausende Menschen an erfundene Fakten. Doch wer zieht die Notbremse?  
         **Die Antwort lautet: Faktenchecker.**
@@ -39,7 +39,7 @@ Die **Deutsche Presseagentur (dpa)** hat ebenfalls ein spezialisiertes Team aufg
 Einige dieser Redaktionen arbeiten inzwischen eng zusammen, zum Beispiel im Projekt **GADMO**.
 """)
     
-    st.button("", on_click=set_text_key, args=("FCwerprüftde",), key="chat")
+    st.button("", on_click=set_text_key, args=("FCwerprüftde", "factcheckers"), key="chat")
 
     st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
 

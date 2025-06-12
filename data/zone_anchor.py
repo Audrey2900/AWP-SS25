@@ -7,6 +7,6 @@ def init_zone_state():
         st.session_state.current_zone = "zone1"
 
 def set_zone(name: str):
-    st.session_state.current_zone = name
-    st.session_state.visited_zones.add(name)
-
+    if name not in st.session_state.visited_zones:
+        st.session_state.current_zone = name
+        st.session_state.visited_zones.add(name)

@@ -1,5 +1,6 @@
 import streamlit as st
 from data.bubble_texts import BUBBLE_TEXTS
+from data.zone_anchor import set_zone
 
 def init_char_speech_state():
     if "bubble_text" not in st.session_state:
@@ -20,8 +21,10 @@ def update_text(delta: int):
     if 0 <= new_index < len(texts):
         st.session_state.text_index = new_index
 
-def set_text_key(key: str):
+def set_text_key(key: str, zone: None):
     if st.session_state.get("text_key") != key:
         st.session_state.text_key = key
     st.session_state.typewriter_refresh = st.session_state.get("typewriter_refresh", 0) + 1
     st.session_state.text_index = 0
+    if zone:
+        set_zone(zone)

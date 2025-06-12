@@ -4,8 +4,6 @@ from data.char_speech_state import set_text_key
 
 def render():
 
-    st.markdown("### Wie viele Menschen wurden in den ersten 3 Monaten wegen gefährlicher Corona-Falschinformationen und falscher ""Heilmittel"" ins Krankenhaus eingeliefert?")    
-
     if st.session_state.ui_state["CoronaSliderDone"] == False:
         st.markdown("""
         **Das Problem:** Viele dieser Gerüchte waren nicht nur falsch, sondern gefährlich.  
@@ -28,4 +26,5 @@ def render():
         st.session_state.text_key == "6000" and st.session_state.text_index == 4
     ) or st.session_state.ui_state["CoronaSlider"]:
         st.session_state.ui_state["CoronaSlider"] = True
+        st.markdown("### Wie viele Menschen wurden in den ersten 3 Monaten wegen gefährlicher Corona-Falschinformationen und falscher ""Heilmittel"" ins Krankenhaus eingeliefert?")    
         CoronasliderLogic.render()
