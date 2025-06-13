@@ -6,8 +6,41 @@ BUBBLE_TEXTS = {
         "Fake News sind bewusst erstellte Falschinformationen, die sich besonders in sozialen Medien schnell verbreiten.",
         "Deepfakes sind KI-manipulierte Medien, die täuschend echt aussehen können.",
     ],
-    ######### Onboarding #########
-    "onboarding": [],
+    ######### Onboarding + Offboarding #########
+    "onboarding": [
+        "Hey! Schön, dass du da bist.",
+        "Ich bin Sam – Reporter bei unserer Schülerzeitung.",
+        "Nach einem ziemlich fiesen Hack wurden Teile meines Artikels gelöscht… oder schlimmer: manipuliert!",
+        "Ich muss herausfinden, was noch stimmt – und was nicht.",
+        "Aber ich kann nicht jedem trauen. Gib mir bitte deinen Namen, damit ich weiß, dass du kein Hacker bist."
+    ],
+    "onboarding2": [
+        "Alles klar – ich weiß Bescheid. Ich kann dir vertrauen.",
+        "Bevor wir loslegen können, musst du dich allerdings noch mit den Funktionen dieser Website vertraut machen.",
+        "Schau dir kurz an, wie du durch die Anwendung navigierst.",
+        "Und was du machen kannst, wenn du mal nicht weiterkommst."
+    ],
+
+    "onboarding3": [
+        "Super, jetzt weißt du Bescheid.",
+        "Dir steht nichts mehr im Wege, um mir zu helfen, die verlorenen Infos wiederzufinden und den Artikel zu reparieren.",
+        "Aber was sind Fake News überhaupt?",
+        "Lies dir diesen kurzen Text durch – danach geht's richtig los!"
+    ],
+    "onboarding4": [
+        "Alles klar – du bist startbereit."
+    ],
+    "offboarding": [
+        "Puh... was für eine Reise!",
+        "Du hast dich durch Deepfakes, Fake News und digitale Täuschungen gekämpft.",
+        "Manche Stellen waren knifflig – aber du hast einen kühlen Kopf bewahrt.",
+        "Wichtig ist nicht, alles zu wissen – sondern zu hinterfragen und bewusst hinzuschauen.",
+        "Das Internet bleibt laut, bunt und manchmal irreführend.",
+        "Aber jetzt gehörst du zu denen, die wissen, worauf es ankommt.",
+        "Bleib kritisch, wachsam – und hilf anderen, nicht in die Desinfo-Falle zu tappen.",
+        "🎓 Und hey: Du hast dir dein Zertifikat wirklich verdient!",
+        "Mach dir ’nen Tee. Oder besser: Druck es dir aus und häng es auf. 😉",
+    ],
     ######### Corona #########
     "coronadone": [
         "Mit diesem Bereich scheint alles zu passen. Suchen wir unten weiter."

@@ -113,7 +113,7 @@ ResetTimer.render()
 
 ############################## Init Zones ##############################
 from data.zone_anchor import init_zone_state
-from data.corruption import init_corruption_state, update_corruption
+from data.corruption import init_corruption_state
 from data.ui_states import init_ui_state
 
 init_zone_state()
@@ -135,8 +135,12 @@ st.title("Lern-Dashboard: Fake News & Deepfakes")
 #import zones.html_to_python as HtmlToPython
 #import zones.zone1 as Zone1
 #import zones.factcheckers as FactCheckers
-import components.Corruption.corruption as Corruption
+#import components.Corruption.corruption as Corruption
 #import zones.corona as Corona
+#import zones.onboarding as Onboarding
+#import zones.offboarding as Offboarding
+
+#Onboarding.render()
 
 #Corona.render()
 
@@ -152,4 +156,6 @@ import components.Corruption.corruption as Corruption
 
 #Dashboard1.render()
 
-Corruption.render()
+#Offboarding.render()
+
+#Corruption.render()

@@ -10,6 +10,7 @@ dependencies = [
     "matplotlib>=3.10.1",
     "wordcloud>=1.9.3",
     "pycountry>=23.12.11",
-    "black>=24.3.0"
+    "black>=24.3.0",
+    "fpdf>=1.7.2",
 ]
 

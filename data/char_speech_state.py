@@ -21,7 +21,7 @@ def update_text(delta: int):
     if 0 <= new_index < len(texts):
         st.session_state.text_index = new_index
 
-def set_text_key(key: str, zone: None):
+def set_text_key(key: str, zone: str = None):
     if st.session_state.get("text_key") != key:
         st.session_state.text_key = key
     st.session_state.typewriter_refresh = st.session_state.get("typewriter_refresh", 0) + 1
