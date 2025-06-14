@@ -138,9 +138,9 @@ body {
     position: absolute;
     right: 0;
     top: 0;
-    width: 75px;
-    height: 75px;
-    background-color: white;
+    width: 60px;
+    height: 60px;
+    /* background-color: white; */
     background-image: url("/app/static/chat_icon.png");
     background-size: contain;
     background-repeat: no-repeat;
@@ -150,6 +150,6 @@ body {
     padding: 0;
 }
 
-[class*="st-key-chat"] button:hover {
-    background-color: #f0f0f0;
-}
+/* [class*="st-key-chat"] button:hover {
+    /* background-color: #f0f0f0; 
+} */
