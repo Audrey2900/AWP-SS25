@@ -9,10 +9,13 @@ def render():
         st.markdown("""
         In dieser Mission geht es darum, die Unterschiede zwischen Fake-News- und Real-News-Artikeln zu erkennen.  
         Du siehst zwei Wordclouds: Eine zeigt die häufigsten Wörter in Fake-News-Artikeln, die andere die aus Real-News-Artikeln.  
+        """)
+
+        st.markdown(""" 
         **Schau sie dir genau an und wähle die mit den Fake News aus.**
         """)
 
-    st.markdown("<div style='height: 40px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
     with col1:
@@ -24,7 +27,7 @@ def render():
             st.session_state["chosen_option"] = "B"
         st.image("static/false.png")
 
-    st.markdown("<div style='height: 40px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
     if "chosen_option" in st.session_state:
         choice = st.session_state["chosen_option"]
@@ -35,7 +38,7 @@ def render():
         else:
             st.success("Richtig! Aber Achtung: Fake News und echte News können sich stark ähneln.")
 
-        st.markdown("<div style='height: 40px;'></div>", unsafe_allow_html=True)
+        st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
         st.markdown("""
         ### Auflösung: So ähnlich sehen Fake News und echte News aus
