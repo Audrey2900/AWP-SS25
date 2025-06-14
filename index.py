@@ -138,8 +138,9 @@ import components.Corruption.corruption as Corruption
 import zones.corona as Corona
 import zones.onboarding as Onboarding
 import zones.offboarding as Offboarding
+import zones.Mission_2 as mission2
 
-Onboarding.render()
+#Onboarding.render()
 
 #Corona.render()
 
@@ -153,6 +154,8 @@ Onboarding.render()
 
 #Dashboard1.render()
 
-Offboarding.render()
+#Offboarding.render()
 
 #Corruption.render()
+
+mission2.render()
