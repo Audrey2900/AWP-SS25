@@ -129,18 +129,17 @@ st.title("Lern-Dashboard: Fake News & Deepfakes")
 
 ## Andere Dashboards:
 
-#import zones.jscsstest as JsCssTest
-#import zones.dashboard1 as Dashboard1
-#import zones.anchors as Anchors
-#import zones.html_to_python as HtmlToPython
-#import zones.zone1 as Zone1
-#import zones.factcheckers as FactCheckers
-#import components.Corruption.corruption as Corruption
-#import zones.corona as Corona
-#import zones.onboarding as Onboarding
-#import zones.offboarding as Offboarding
+import zones.jscsstest as JsCssTest
+import zones.dashboard1 as Dashboard1
+import zones.anchors as Anchors
+import zones.zone1 as Zone1
+import zones.factcheckers as FactCheckers
+import components.Corruption.corruption as Corruption
+import zones.corona as Corona
+import zones.onboarding as Onboarding
+import zones.offboarding as Offboarding
 
-#Onboarding.render()
+Onboarding.render()
 
 #Corona.render()
 
@@ -150,12 +149,10 @@ st.title("Lern-Dashboard: Fake News & Deepfakes")
 
 #FactCheckers.render()
 
-#HtmlToPython.render()
-
 #JsCssTest.render()
 
 #Dashboard1.render()
 
-#Offboarding.render()
+Offboarding.render()
 
 #Corruption.render()
