@@ -121,7 +121,7 @@ def render():
         </style>
 
         <div id="avatar-container">
-            <img id="floating-avatar" src="/app/static/PrototypeChar.gif" />
+            <img id="floating-avatar" src="/app/static/PrototypeChar2.gif" />
             <div id="speech-bubble">
                 <div id="bubble-text"></div>
                 <a id="js-next-button" href="#">➤</a>
@@ -148,7 +148,7 @@ def render():
 
         // Start GIF Animation
         if (avatar) {{
-            avatar.src = "/app/static/PrototypeChar.gif"; // Start Animation
+            avatar.src = "/app/static/PrototypeChar2.gif"; // Start Animation
         }}
 
         // Typewriter-Effekt
