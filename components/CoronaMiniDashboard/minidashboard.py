@@ -4,7 +4,6 @@ import pandas as pd
 from visuals.mission1 import (
     show_country_chart,
     show_monthly_chart,
-    show_category_chart,
     show_language_chart,
     show_classification_chart,
     show_wordcloud,

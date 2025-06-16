@@ -1,4 +1,5 @@
 import streamlit as st
+import components.OnboardingLogic.onboardinglogic as OnboardingLogic
 from data.char_speech_state import set_text_key
 
 # 💬 Onboarding-Darstellung als Funktion
@@ -48,3 +49,5 @@ def render():
             """)
 
             st.button("", on_click=set_text_key, args=("onboarding4",), key="chat4")
+
+    OnboardingLogic.render()

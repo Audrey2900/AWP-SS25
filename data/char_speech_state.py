@@ -8,8 +8,8 @@ def init_char_speech_state():
     if "text_index" not in st.session_state:
         st.session_state.text_index = 0
     if "text_key" not in st.session_state:
-        st.session_state.text_key = "test"   # TODO: Muss nach dem Testen in Onboarding gestellt werden
-
+        st.session_state.text_key = "onboarding"  
+        
 def get_current_bubble_texts():
     key = st.session_state.get("text_key", "intro")
     return BUBBLE_TEXTS.get(key, ["Kein Text gefunden."])

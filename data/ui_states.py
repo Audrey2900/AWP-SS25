@@ -2,6 +2,7 @@ import streamlit as st
 
 # Simplere Variante. 
 _UI_KEYS = [
+    "OnboardingDone"
     "DragPuzzle",
     "DragPuzzleDone",
     "CoronaSlider",

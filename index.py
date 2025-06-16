@@ -129,9 +129,7 @@ st.title("Lern-Dashboard: Fake News & Deepfakes")
 
 ## Andere Dashboards:
 
-import zones.jscsstest as JsCssTest
 import zones.dashboard1 as Dashboard1
-import zones.anchors as Anchors
 import zones.zone1 as Zone1
 import zones.factcheckers as FactCheckers
 import components.Corruption.corruption as Corruption
@@ -148,9 +146,7 @@ import zones.Mission_2 as mission2
 
 #Zone1.render()
 
-#FactCheckers.render()
-
-#JsCssTest.render()
+FactCheckers.render()
 
 #Dashboard1.render()
 
@@ -158,4 +154,4 @@ import zones.Mission_2 as mission2
 
 #Corruption.render()
 
-mission2.render()
+#mission2.render()
