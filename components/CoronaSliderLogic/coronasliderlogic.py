@@ -5,23 +5,29 @@ from data.ui_states import set_ui_state
 
 def render():
     def sliderauswertung():
-        set_text_key("slidercorrect")
+        if value < 6000:
+            if value >= 5000:
+                set_text_key("sliderlowclose")
+            else:
+                set_text_key("sliderlow")
+        elif value > 6000:
+            if value <= 7000:
+                set_text_key("sliderhighclose")
+            else:
+                set_text_key("sliderhigh")
+        else:
+            set_text_key("slidercorrect")
 
-    if st.session_state.ui_state["CoronaSliderDone"] == False:
-        coronasliderjs(value=0)
+    if not st.session_state.ui_state["CoronaSliderDone"]:
+        st.markdown("### Wie viele Menschen wurden in den ersten 3 Monaten wegen gefährlicher Corona-Falschinformationen und falscher ""Heilmittel"" ins Krankenhaus eingeliefert?")    
+        value = coronasliderjs(value=0)
         st.button("Auswertung", on_click=sliderauswertung)
 
-
     if (
-        st.session_state.text_key == "slidercorrect"
-        and st.session_state.text_index == 1
+        st.session_state.text_key in ["slidercorrect", "sliderlow", "sliderhigh"]
+        and st.session_state.text_index == 2
         and not st.session_state.ui_state["CoronaSliderDone"]
     ):
         set_ui_state("CoronaSliderDone", True)
         set_ui_state("NoCorruptionCoronaSlider", True)
         st.rerun()
-
-    #möglicherweise nicht mehr benötigt:
-    #st.success("Tatsächlich: Etwa **6.000 Menschen** wurden wegen falscher Corona-Heilmittel ins Krankenhaus eingeliefert.")
-    #st.info(f"Deine Schätzung: {guess}")
-    #st.progress(min(guess, 6000) / 6000)

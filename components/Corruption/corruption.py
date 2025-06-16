@@ -1,7 +1,7 @@
 import streamlit as st
 
 def render():
-    st.markdown("<div style='height: 150px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
     st.markdown("""
         <style>
         html, body {

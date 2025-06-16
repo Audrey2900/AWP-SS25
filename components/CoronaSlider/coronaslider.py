@@ -26,5 +26,4 @@ def render():
         st.session_state.text_key == "6000" and st.session_state.text_index == 4
     ) or st.session_state.ui_state["CoronaSlider"]:
         st.session_state.ui_state["CoronaSlider"] = True
-        st.markdown("### Wie viele Menschen wurden in den ersten 3 Monaten wegen gefährlicher Corona-Falschinformationen und falscher ""Heilmittel"" ins Krankenhaus eingeliefert?")    
         CoronasliderLogic.render()

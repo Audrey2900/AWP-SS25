@@ -140,13 +140,13 @@ import zones.Mission_2 as mission2
 
 #Onboarding.render()
 
-#Corona.render()
+Corona.render()
 
 #Anchors.render()
 
 #Zone1.render()
 
-FactCheckers.render()
+#FactCheckers.render()
 
 #Dashboard1.render()
 

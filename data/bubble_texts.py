@@ -67,9 +67,22 @@ BUBBLE_TEXTS = {
         "Möglicherweise können wir das schätzen und ich sage dir, ob wir nahe dran sind, oder nicht. Ich schicke dir mal einen Slider und du sagst mir deine Antwort.",
         "Probieren wir's aus.",
     ],
+    "sliderlow" :[
+        "Hmmm, die Zahl ist zu niedrig. In meinem Code kann ich deine Zahl nicht in die beschädigte Stelle einfügen, da diese scheinbar zu klein ist."
+    ],
+    "sliderlowclose" :[
+        "Ich kann sehen, dass wir ganz nahe an der richtigen Zahl sind. Nur noch eine etwas größere Zahl schätzen."
+    ],
+    "sliderhigh": [
+        "Die Zahl ist etwas zu groß. Ich kann sie nicht in die beschädigte Stelle einfügen."
+    ],
+    "sliderhighclose" :[
+        "Wir sind ganz nahe an der richtigen Zahl. Die jetzige Zahl ist nur noch ein kleines bisschen zu hoch"
+    ],
     "slidercorrect" :[
-        "Platzhaltertext",
-        "Platzhalter",
+        "Perfekt, die Zahl passt in die Stelle!",
+        "Einen Moment, ich aktualisiere den Artikel für dich.",
+        "So können wir im Nu den Artikel reparieren. Aber genug gefeiert, der restliche Artikel wartet auf weitere reparaturen.",
     ],
     "transitionFactcheckers" :[
         "Da stimmt doch etwas nicht. Nur einen Faktenchecker?!",
