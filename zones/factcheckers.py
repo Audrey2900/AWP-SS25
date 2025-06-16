@@ -1,4 +1,5 @@
 import streamlit as st
+import components.FactCheckersGraph.factcheckersgraph as FactCheckersGraph
 from data.char_speech_state import set_text_key
 
 def render():
@@ -64,7 +65,8 @@ Ein Vorteil von GADMO ist, dass Redaktionen nicht doppelt an derselben Sache arb
 
         Im Internet gibt es viele, die sich als Faktenchecker bezeichnen. Manche meinen es ernst, andere verbreiten unter diesem Namen ihre eigene Meinung oder politische Agenda. Deshalb ist es wichtig zu wissen, woran man seriöse Faktencheck-Redaktionen erkennen kann.
 
-        Ein gutes Zeichen ist die Mitgliedschaft im **International Fact Checking Network (IFCN)**. Das ist ein weltweites Netzwerk, das Mindeststandards für journalistisches Arbeiten im Faktencheck festgelegt hat.
+        Allgemein gibt es über 400 seriöse Fact-Checking-Projekte, jedoch ist ein gutes Zeichen die 
+        Mitgliedschaft im **International Fact Checking Network (IFCN)**. Das ist ein weltweites Netzwerk, das Mindeststandards für journalistisches Arbeiten im Faktencheck festgelegt hat.
 
         Wer Mitglied im IFCN ist, verpflichtet sich unter anderem zu:
         - Unparteilichkeit und Transparenz  
@@ -74,7 +76,9 @@ Ein Vorteil von GADMO ist, dass Redaktionen nicht doppelt an derselben Sache arb
 
         👉 [Zur Liste der IFCN-Mitglieder](https://ifcncodeofprinciples.poynter.org/signatories)
 
-        Zertifiziert sind über 400 Faktenchecker – darunter auch CORRECTIV, AFP Deutschland, dpa und Deutsche Welle.
+        Zertifiziert sind über 150 Faktenchecker – darunter auch CORRECTIV, AFP Deutschland, dpa und Deutsche Welle. 
+                    
+    
         """)
 
     with col2:
@@ -83,6 +87,8 @@ Ein Vorteil von GADMO ist, dass Redaktionen nicht doppelt an derselben Sache arb
             alt="400 Faktenchecker visualisiert"
             style="margin-top: 80px; width: 100%; border-radius: 8px;" />""", 
         unsafe_allow_html=True)
+    
+    st.button("", on_click=set_text_key, args=("FCifcn",), key="chat3")
 
     st.components.v1.html("""
         <div style="text-align: center;">
@@ -90,8 +96,7 @@ Ein Vorteil von GADMO ist, dass Redaktionen nicht doppelt an derselben Sache arb
         </div>
     """, height=360)
 
-    
-    st.button("", on_click=set_text_key, args=("FCifcn",), key="chat3")
+    FactCheckersGraph.render()
 
     st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
 
