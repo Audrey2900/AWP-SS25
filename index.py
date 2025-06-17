@@ -146,7 +146,7 @@ import zones.Mission_2 as mission2
 
 #Zone1.render()
 
-FactCheckers.render()
+#FactCheckers.render()
 
 #Dashboard1.render()
 

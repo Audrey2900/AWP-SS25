@@ -30,19 +30,40 @@ def show_category_chart_animated(df):
     fig.update_layout(
         margin=dict(l=20, r=20, t=40, b=20),
         height=350,
-        showlegend=False
+        showlegend=False,
+        dragmode=False,
     )
     fig.update_traces(texttemplate='%{text:.1f}', textposition='outside')
 
+    config = {
+        "displayModeBar": False,
+        "displaylogo": False,
+        "staticPlot": False,  
+        "scrollZoom": False,
+        "editable": False,
+        "doubleClick": False,
+    }
+
     # Automatische Animation per JavaScript
-    plotly_html = fig.to_html(full_html=False, include_plotlyjs='cdn', auto_play=True)
+    plotly_html = fig.to_html(full_html=False, include_plotlyjs='cdn', auto_play=True, config=config)
     # auto_play=True sorgt für automatischen Start
 
     hide_controls_css = """
-    <style>
-    /* Play/Pause Button und Slider ausblenden */
-    .plotly-frame-controls, .slider-container, .plotly .slider, .plotly .slider-label {display: none !important;}
-    </style>
+        <style>
+        /* Alles unterhalb der .menulayer (Animation Buttons, Dropdowns etc.) ausblenden */
+        .plotly .menulayer,
+        g.updatemenu-container,
+        g.updatemenu-header-group,
+        g.updatemenu-button,
+        g.updatemenu-dropdown-button-group {
+            display: none !important;
+        }
+        g.slider-container {
+            display: none !important;
+        }
+        </style>
     """
+
+
 
     components.html(hide_controls_css + plotly_html, height=400)

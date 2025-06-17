@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import plotly.graph_objects as go
 
 @st.cache_data
 def load_ifcn_data():
@@ -13,45 +12,37 @@ def load_ifcn_data():
 
 def render():
     df = load_ifcn_data()
-    df["Verified_orig"] = df["Verified"].dt.strftime("%d.%m.%Y")
-    df["dup_count"] = df.groupby(["Verified", "Country"]).cumcount()
-    df["Verified_shifted"] = df["Verified"] + pd.to_timedelta(df["dup_count"] * 7, unit="d")
-    df["opacity"] = 1 - df["dup_count"] * 0.3
-    df["opacity"] = df["opacity"].clip(lower=0.3)
-    df["Country"] = df["Country"].astype(str)
+    df["Verifiziert am"] = df["Verified"].dt.strftime("%d.%m.%Y")
+    df["Organisation"] = df["Name"]
+    country_order = sorted(df["Country"].astype(str).unique().tolist())
 
-    country_order = sorted(df["Country"].unique().tolist())
-
-    fig = go.Figure()
-
-    for country in country_order:
-        sub = df[df["Country"] == country]
-        fig.add_trace(go.Scatter(
-            x=sub["Verified_shifted"],
-            y=sub["Country"],
-            mode="markers",
-            name=country,
-            marker=dict(size=20, opacity=sub["opacity"]),
-            text=sub["Name"],
-            hovertemplate="<b>%{text}</b><br>Land: %{y}<br>Datum: %{x|%d.%m.%Y}<extra></extra>"
-        ))
-
-    fig.update_layout(
-        title="IFCN-zertifizierte Faktencheck-Organisationen weltweit",
-        height=max(1750, 15 * len(country_order)),
-        width=1200,
-        xaxis_title="Verifizierungsdatum",
-        yaxis_title=None,
-        margin=dict(l=20, r=20, t=30, b=0),
-        showlegend=False,
-        dragmode=False,
-        xaxis=dict(fixedrange=True),
-        yaxis=dict(
-            fixedrange=True,
-            categoryorder="array",
-            categoryarray=country_order,
-            domain=[0.05, 1.0],
-        ),
+    st.markdown("IFCN-zertifizierte Faktencheck-Organisationen weltweit")
+    
+    selected_country = st.selectbox(
+        "Land auswählen",
+        country_order,
+        index=country_order.index("Germany") if "Germany" in country_order else 0
     )
 
-    st.plotly_chart(fig, use_container_width=False, config={"displayModeBar": False})
+    filtered = df[df["Country"] == selected_country][["Organisation", "Verifiziert am"]].sort_values("Verifiziert am")
+
+    st.markdown("""
+        <style>
+            [data-testid="stElementToolbarButtonContainer"] {
+                display: none !important;
+            }
+        </style>
+    """, unsafe_allow_html=True)
+
+    # CSS zum Ausblenden der UI-Elemente (Fullscreen, Download, Spaltenauswahl)
+    st.markdown("""
+        <style>
+            [data-testid="stDataFrameFullscreenButton"],
+            [data-testid="stDataFrameDownloadButton"],
+            [data-testid="stDataFrameViewDropdown"] {
+                display: none !important;
+            }
+        </style>
+    """, unsafe_allow_html=True)
+
+    st.dataframe(filtered, use_container_width=True, hide_index=True)
