@@ -7,6 +7,8 @@ _UI_KEYS = [
     "DragPuzzleDone",
     "CoronaSlider",
     "CoronaSliderDone",
+    "SentimentSlider",
+    "SentimentSliderDone",
 
     
 

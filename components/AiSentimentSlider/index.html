@@ -1,0 +1,145 @@
+<html>
+  <body style="margin: 0; padding: 0; background: transparent; color: white; font-family: system-ui, 'Segoe UI', sans-serif;">
+    <style>
+    /* Grundstil des Sliders */
+    input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 8px;
+        background: #2196f3; /* Blau */
+        border-radius: 4px;
+        outline: none;
+    }
+
+    /* WebKit (Chrome, Edge, Safari) Thumb */
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 28px;
+        width: 28px;
+        border-radius: 50%;
+        background: white;
+        border: 3px solid #2196f3;
+        cursor: pointer;
+        margin-top: -8px;
+    }
+
+    /* Firefox Thumb */
+    input[type="range"]::-moz-range-thumb {
+        height: 28px;
+        width: 28px;
+        border-radius: 50%;
+        background: white;
+        border: 3px solid #2196f3;
+        cursor: pointer;
+    }
+
+    /* IE / Edge Legacy */
+    input[type="range"]::-ms-thumb {
+        height: 28px;
+        width: 28px;
+        border-radius: 50%;
+        background: white;
+        border: 3px solid #2196f3;
+        cursor: pointer;
+    }
+    </style>
+    <div style="text-align: center; padding: 0 16px;">
+        <img id="smiley" src="" alt="Stimmung" style="height: 112px; margin-bottom: 8px;" />
+        <h2 id="display" style="font-size: 32px; margin: 0 0 16px 0;">–</h2>
+        <input
+        id="slider"
+        type="range"
+        min="0"
+        max="100"
+        step="1"
+        value="50"
+        style="width: 100%; margin-top: 16px; padding-top: 2px; appearance: none; height: 8px; background: #ccc; border-radius: 4px;"
+        />
+    </div>
+
+    <script>
+      let values = [0, 0, 0];
+      let percentages = [0.0, 0.0, 0.0];
+      const labels = ["Positive", "Neutral", "Negative"];
+      const thresholds = [0.25, 0.75];
+      const smileyUrls = [
+        "/app/static/smiley_positive.png",
+        "/app/static/smiley_neutral.png",
+        "/app/static/smiley_negative.png"
+    ];
+
+    function init() {
+        window.parent.postMessage({
+          isStreamlitMessage: true,
+          type: "streamlit:componentReady",
+          apiVersion: 1,
+        }, "*");
+      }
+
+      function setFrameHeight(height) {
+        window.parent.postMessage({
+          isStreamlitMessage: true,
+          type: "streamlit:setFrameHeight",
+          height: height,
+        }, "*");
+      }
+
+      const slider = document.getElementById("slider");
+      const display = document.getElementById("display");
+      const label = document.getElementById("label");
+
+      function updateDisplayZone(pos) {
+        let zone;
+        if (pos < thresholds[0] * 100) zone = 0;
+        else if (pos > thresholds[1] * 100) zone = 2;
+        else zone = 1;
+
+        display.textContent = `Fälle: ${values[zone]}  |  Anteil: ${percentages[zone]}%`;
+        document.getElementById("smiley").src = smileyUrls[zone];
+      }
+
+      slider.addEventListener("input", () => {
+        let val = Number(slider.value);
+
+        if (val < 15) val = 0;
+        else if (val > 85) val = 100;
+        else if (val >= 40 && val <= 60) val = 50;
+
+        slider.value = val;
+        updateDisplayZone(val);
+      });
+
+      slider.addEventListener("change", () => {
+        let val = Number(slider.value);
+
+        if (val < 30) val = 0;
+        else if (val > 60) val = 100;
+        else if (val >= 30 && val <= 60) val = 50;
+
+        slider.value = val;
+        updateDisplayZone(val);
+    });
+
+      window.addEventListener("message", function (event) {
+        if (event.data.type !== "streamlit:render") return;
+
+        const args = event.data.args || {};
+        values = args.values ?? [0, 0, 0];
+        percentages = args.percentages ?? [0.0, 0.0, 0.0];
+
+        const value = args.value ?? 1;
+        const snapValues = [0, 50, 100];
+        slider.value = snapValues[value];
+
+        updateDisplayZone(snapValues[value]);
+      });
+
+      init();
+      window.addEventListener("load", () => {
+        setTimeout(() => setFrameHeight(document.body.scrollHeight), 0);
+      });
+    </script>
+  </body>
+</html>

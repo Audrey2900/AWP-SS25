@@ -120,6 +120,17 @@ BUBBLE_TEXTS = {
     ],
     ######### FakeNews and Ai #########
     "test1": [],
+    "manipulationsentiment": [
+        "So... bei welchem Teil sind wir jetzt gelandet.",
+        "Ah, hier ging es um die Wirkung von FakeNews.",
+        "Der originale Slider, welcher hier erscheinen sollte, scheint funktionsfähig zu sein. Der Text für die Schlussfolgerungen ist aber leider beschädigt",
+        "Ich glaube wir müssen wieder auf die originalen Schlussfolgerungen kommen. Aber zuerst schicke ich dir mal kurz den Slider nach vorne. ",
+        "Hier der Slider und ein paar Fragen."
+    ],
+    "aisentiment": [
+        "Die Daten für den Slider kamen aus einem Datensatz, in welchem über 1200 FakeNews Fälle gespeichert wurden.",
+        "Wie wir durch den Slider schließen können, verfolgen FakeNews verschiedene Ziele.",
+    ],
     ######### Mission 1 + 2 + ... #########
     "test2": [],
     "test3": [],

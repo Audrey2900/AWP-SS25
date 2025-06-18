@@ -155,3 +155,8 @@ import zones.Mission_2 as mission2
 #Corruption.render()
 
 #mission2.render()
+
+
+# Test: Entfernen, wenn AiFakeNews fertig zusammengebaut.
+#import components.AiSentiment.aisentiment as AiSentiment
+#AiSentiment.render()
