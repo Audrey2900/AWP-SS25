@@ -1,13 +1,20 @@
 import streamlit as st
-import components.OnboardingLogic.onboardinglogic as OnboardingLogic
 from data.char_speech_state import set_text_key
 
-# 💬 Onboarding-Darstellung als Funktion
 def render():
     st.header("Willkommen bei InfoGuard – der interaktiven Lernplattform für aufmerksame Internet-Detektive.")
 
-    # 1. Chat-Button zur Begrüßung
-    st.button("", on_click=set_text_key, args=("onboarding",), key="chat1")
+    # Button mit Hinweistext direkt links daneben (eine Zeile)
+    col1, col2 = st.columns([10, 1])
+    with col1:
+        st.markdown("""
+        <div style='display: flex; flex-direction: row; align-items: center; justify-content: flex-end;'>
+            <span style='font-size: 28px; margin-right: 8px;'>Drücken</span>
+            <span style='font-size: 30px;'>➡️</span>
+        </div>
+        """, unsafe_allow_html=True)
+    with col2:
+        st.button("", on_click=set_text_key, args=("onboarding",), key="chat1")
 
     # Namenseingabe
     st.markdown("#### Wie heißt du? Gib deinen Vor- und Nachnamen ein:")
@@ -17,21 +24,25 @@ def render():
     if vorname and nachname:
         st.session_state.user_name = f"{vorname} {nachname}"
 
-        # 2. Chat zur Erklärung der Mission und Einführung
         st.button("", on_click=set_text_key, args=("onboarding2",), key="chat2")
 
-        # Platzhalter für spätere Funktionsübersicht
         st.markdown("""
         ---
-        #### 🔍 Überblick über die Funktionen dieser Plattform:
-        *(Hinweis: Kommt später)*
-        ---
+        #### 🧭 Überblick über die Funktionen dieser Plattform:
+
+        💬 **Sprechblasen & Charaktere**: Lies dir aufmerksam durch, was unser Charakter dir sagt. Über die Buttons mit dem Chat-Icon kannst du jederzeit neue Hinweise abrufen.
+
+        🎯 **Interaktive Aufgaben**: Du wirst Texte verschieben, Zahlen schätzen oder Webseiten rekonstruieren müssen – nutze deinen Verstand und deine Intuition.
+
+        🛠️ **Defekte Zonen**: Manche Bereiche wirken kaputt oder unvollständig – genau da musst du helfen, Fake News oder Deepfakes zu entlarven.
+
+        👁️ **Kommst du nicht weiter?** Dieser Button hilft dir dabei an die Stelle zu springen an deer du dich befinden zu dem Zeitpunkt befinden solltest.
+
+        🏆 **Zertifikat**: Am Ende bekommst du ein persönliches Zertifikat als echter Faktenchecker.
         """)
 
-        # 3. Abschlusssatz & Übergang zur inhaltlichen Einführung
         st.button("", on_click=set_text_key, args=("onboarding3",), key="chat3")
 
-        # Text + Chat4 nur wenn der letzte Dialog aktiv ist
         if st.session_state.get("text_key") == "onboarding3":
             st.markdown("""
             ---
@@ -43,11 +54,9 @@ def render():
 
             Wer Fake News erkennt, schützt nicht nur sich selbst – sondern auch andere.
 
-            👁️ Frage dich immer: Wer sagt das? Warum? Und kann ich das irgendwo nachprüfen?
+            Frage dich immer: Wer sagt das? Warum? Und kann ich das irgendwo nachprüfen?
 
             Gleich wirst du einige dieser Täuschungen selbst entlarven – bist du bereit?
             """)
 
             st.button("", on_click=set_text_key, args=("onboarding4",), key="chat4")
-
-    OnboardingLogic.render()
