@@ -4,18 +4,6 @@ from data.char_speech_state import set_text_key
 def render():
     st.header("Willkommen bei InfoGuard – der interaktiven Lernplattform für aufmerksame Internet-Detektive.")
 
-    # Button mit Hinweistext direkt links daneben (eine Zeile)
-    col1, col2 = st.columns([10, 1])
-    with col1:
-        st.markdown("""
-        <div style='display: flex; flex-direction: row; align-items: center; justify-content: flex-end;'>
-            <span style='font-size: 28px; margin-right: 8px;'>Drücken</span>
-            <span style='font-size: 30px;'>➡️</span>
-        </div>
-        """, unsafe_allow_html=True)
-    with col2:
-        st.button("", on_click=set_text_key, args=("onboarding",), key="chat1")
-
     # Namenseingabe
     st.markdown("#### Wie heißt du? Gib deinen Vor- und Nachnamen ein:")
     vorname = st.text_input("Vorname", key="input_vorname")
@@ -23,6 +11,13 @@ def render():
 
     if vorname and nachname:
         st.session_state.user_name = f"{vorname} {nachname}"
+
+        # Automatisch den ersten Button "drücken", wenn Namen eingegeben wurden
+        if "auto_pressed_chat2" not in st.session_state:
+            st.session_state.auto_pressed_chat2 = True
+            set_text_key("onboarding2")
+            st.session_state.text_index = 0  # Text-Index zurücksetzen
+            st.rerun()  # Seite neu laden, damit der neue Text angezeigt wird
 
         st.button("", on_click=set_text_key, args=("onboarding2",), key="chat2")
 

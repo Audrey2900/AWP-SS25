@@ -138,7 +138,7 @@ import zones.onboarding as Onboarding
 import zones.offboarding as Offboarding
 import zones.Mission_2 as mission2
 
-#Onboarding.render()
+Onboarding.render()
 
 #Corona.render()
 
