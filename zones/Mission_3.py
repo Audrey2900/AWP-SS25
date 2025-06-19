@@ -1,6 +1,7 @@
 import streamlit as st
 from PIL import Image
 import os
+from io import BytesIO
 
 def render():
     col1, col2 = st.columns([3, 1])
@@ -139,29 +140,32 @@ def render():
     </style>
     """, unsafe_allow_html=True)
 
-    # Bilder einmalig laden und cachen
+    # Bilder einmalig laden, verkleinern und als Bytes cachen
     @st.cache_data
-    def load_images():
+    def load_and_cache_images():
         base_path = os.path.join(os.getcwd(), "static")
         original_ordner = os.path.join(base_path, "Original_Bilder")
         fake_ordner = os.path.join(base_path, "KI_Bilder")
-        
-        original_bilder = []
-        fake_bilder = []
-        
-        # Original Bilder laden
-        if os.path.exists(original_ordner):
-            for f in sorted(os.listdir(original_ordner)):
-                if f.lower().endswith(('.jpg', '.png', '.jpeg')):
-                    original_bilder.append((os.path.join(original_ordner, f), False, f))
-        
-        # Fake Bilder laden
-        if os.path.exists(fake_ordner):
-            for f in sorted(os.listdir(fake_ordner)):
-                if f.lower().endswith(('.jpg', '.png', '.jpeg')):
-                    fake_bilder.append((os.path.join(fake_ordner, f), True, f))
-        
-        return original_bilder + fake_bilder
+
+        def process_folder(folder, is_fake):
+            images = []
+            if os.path.exists(folder):
+                for f in sorted(os.listdir(folder)):
+                    if f.lower().endswith(('.jpg', '.png', '.jpeg')):
+                        path = os.path.join(folder, f)
+                        try:
+                            img = Image.open(path)
+                            img.thumbnail((400, 400))
+                            buf = BytesIO()
+                            img.save(buf, format="JPEG", quality=85)
+                            images.append((buf.getvalue(), is_fake, f))
+                        except Exception as e:
+                            st.error(f"Fehler beim Laden von {f}: {e}")
+            return images
+
+        originals = process_folder(original_ordner, False)
+        fakes = process_folder(fake_ordner, True)
+        return originals + fakes
 
     # Session State einmalig initialisieren
     if "deepfake_antworten" not in st.session_state:
@@ -170,72 +174,54 @@ def render():
     if "deepfake_abgegeben" not in st.session_state:
         st.session_state.deepfake_abgegeben = False
 
-    # Bilder laden
-    alle_bilder = load_images()
+    # Bilder laden (jetzt als Bytes)
+    alle_bilder = load_and_cache_images()
     
     if not alle_bilder:
         st.error("Keine Bilder gefunden. Überprüfe die Ordnerstruktur in 'static/Original_Bilder' und 'static/KI_Bilder'.")
-        return
+        st.stop()
 
     # Hilfsfunktion für Bildanzeige in Reihen
     def display_images_in_rows(bilder_liste, images_per_row=3, show_results=False):
         for row_start in range(0, len(bilder_liste), images_per_row):
             row_images = bilder_liste[row_start:row_start + images_per_row]
             cols = st.columns(images_per_row)
-            
-            # Zuerst alle Bilder der Reihe anzeigen
-            for col_idx, (bildpfad, ist_fake, filename) in enumerate(row_images):
+            # Bilder anzeigen
+            for col_idx, (img_bytes, ist_fake, filename) in enumerate(row_images):
                 with cols[col_idx]:
-                    try:
-                        image = Image.open(bildpfad)
-                        st.image(image, use_container_width=True)
-                    except Exception as e:
-                        st.error(f"Fehler beim Laden von {filename}: {str(e)}")
-            
-            # Dann alle Radio-Buttons/Ergebnisse der Reihe auf einer Höhe
+                    st.image(img_bytes, use_container_width=True)
+            # Radio/Ergebnis auf gleicher Höhe
             cols2 = st.columns(images_per_row)
-            for col_idx, (bildpfad, ist_fake, filename) in enumerate(row_images):
+            for col_idx, (img_bytes, ist_fake, filename) in enumerate(row_images):
                 with cols2[col_idx]:
-                    # Container für einheitliche Höhe der Auswahlbereich
                     with st.container():
                         if not show_results:
-                            # Auswahl-Modus
                             current_answer = st.session_state.deepfake_antworten.get(filename, "Unentschieden")
-                            
                             antwort = st.radio(
                                 f"Ist dies ein Deepfake?",
                                 ["Unentschieden", "Ja", "Nein"],
                                 index=["Unentschieden", "Ja", "Nein"].index(current_answer),
                                 key=f"radio_{row_start + col_idx}_{filename}"
                             )
-                            
                             st.session_state.deepfake_antworten[filename] = antwort
-                            
                         else:
-                            # Ergebnis-Modus
                             antwort = st.session_state.deepfake_antworten.get(filename, "Unentschieden")
                             richtige_antwort = "Ja" if ist_fake else "Nein"
-                            
                             st.markdown(f"**Deine Antwort:** {antwort}")
                             st.markdown(f"**Richtige Antwort:** {richtige_antwort}")
-                            
                             if antwort == "Unentschieden":
                                 st.warning("Keine Antwort")
                             elif antwort == richtige_antwort:
                                 st.success("Richtig!")
                             else:
                                 st.error("Falsch!")
-                        
-                        # Platzhalter für einheitliche Höhe
-                        st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-            
-            # Abstand zwischen Reihen
-            st.markdown("<div style='height: 30px;'></div>", unsafe_allow_html=True)
+                st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+        st.markdown("<div style='height: 30px;'></div>", unsafe_allow_html=True)
 
     # Formular für alle Antworten (nur wenn noch nicht abgegeben)
     if not st.session_state.deepfake_abgegeben:
         with st.form("deepfake_form"):
-            st.markdown("### Bewerte die Bilder:")
+            st.markdown('<div style="font-size:2em; font-weight:bold;">Bewerte die Bilder:</div>', unsafe_allow_html=True)
             
             # Bilder in Reihen anzeigen
             display_images_in_rows(alle_bilder, images_per_row=3, show_results=False)
@@ -252,7 +238,7 @@ def render():
     # Auswertung anzeigen
     if st.session_state.deepfake_abgegeben:
         st.markdown("<div style='height: 40px;'></div>", unsafe_allow_html=True)
-        st.markdown("### Auswertung:")
+        st.markdown('<div style="font-size:2em; font-weight:bold;">Auswertung:</div>', unsafe_allow_html=True)
         
         # Bilder mit Ergebnissen in Reihen anzeigen
         display_images_in_rows(alle_bilder, images_per_row=3, show_results=True)
@@ -315,8 +301,8 @@ def render():
             </div>
             """
             
-            st.markdown(progress_html, unsafe_allow_html=True)
-            st.markdown(f"**Erfolgsquote: {prozent_richtig:.1f}%**")
+            st.markdown(f"<div style='font-size: 1.5em; font-weight: margin-top: 10px;'>{progress_html}</div>", unsafe_allow_html=True)
+            st.markdown(f"<div style='font-size: 2em;'>Erfolgsquote: {prozent_richtig:.1f}%</div>", unsafe_allow_html=True)
         
         # Restart Button
         if st.button("Neu starten", use_container_width=True):
@@ -341,11 +327,10 @@ def render():
         **Zusätzlicher Tipp:**  
         Prüfe, woher das Bild oder Video stammt. Fehlende Metadaten oder unbekannte Quellen können ein Warnsignal sein.
 
-        ---
-
         Wenn dir etwas seltsam vorkommt: **Frag nach, schau genau hin – und vertraue deinem Bauchgefühl.**  
         Ein kritischer Blick ist der beste Schutz gegen Deepfakes.
-        """)
+        
+        ---""")
 
 if __name__ == "__main__":
     render()
