@@ -30,6 +30,49 @@ def render():
 
     st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
+    # Custom CSS für einheitliche Bildgrößen und Layout
+    st.markdown("""
+    <style>
+    .image-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        min-height: 450px;
+    }
+    .fixed-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 2px solid #ddd;
+        margin-bottom: 10px;
+    }
+    .image-row {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 30px;
+        align-items: flex-start;
+    }
+    .image-item {
+        flex: 1;
+        min-height: 500px;
+        padding: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.05);
+        display: flex;
+        flex-direction: column;
+    }
+    .radio-container {
+        min-height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
     # Bilder einmalig laden und cachen
     @st.cache_data
     def load_images():
@@ -68,86 +111,103 @@ def render():
         st.error("Keine Bilder gefunden. Überprüfe die Ordnerstruktur in 'static/Original_Bilder' und 'static/KI_Bilder'.")
         return
 
-    # Formular für alle Antworten
-    with st.form("deepfake_form"):
-        st.markdown("### Bewerte die Bilder:")
-        
-        # Rasteranzeige
-        cols = st.columns(3)  # 3 Spalten für bessere Übersicht
-        
-        for idx, (bildpfad, ist_fake, filename) in enumerate(alle_bilder):
-            col = cols[idx % 3]
+    # Hilfsfunktion für Bildanzeige in Reihen
+    def display_images_in_rows(bilder_liste, images_per_row=3, show_results=False):
+        for row_start in range(0, len(bilder_liste), images_per_row):
+            row_images = bilder_liste[row_start:row_start + images_per_row]
+            cols = st.columns(images_per_row)
             
-            with col:
-                try:
-                    image = Image.open(bildpfad)
-                    st.image(image, caption=f"Bild {idx + 1}", use_container_width=True)
-                    
-                    # Radio-Button für jedes Bild
-                    current_answer = st.session_state.deepfake_antworten.get(filename, "Unentschieden")
-                    
-                    antwort = st.radio(
-                        f"Ist Bild {idx + 1} ein Deepfake?",
-                        ["Unentschieden", "Ja", "Nein"],
-                        index=["Unentschieden", "Ja", "Nein"].index(current_answer),
-                        key=f"radio_{idx}_{filename}"
-                    )
-                    
-                    # Antwort in Session State speichern
-                    st.session_state.deepfake_antworten[filename] = antwort
-                    
-                except Exception as e:
-                    st.error(f"Fehler beim Laden von {filename}: {str(e)}")
-        
-        st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-        
-        # Submit Button
-        submitted = st.form_submit_button("Antworten abgeben")
-        
-        if submitted:
-            st.session_state.deepfake_abgegeben = True
-            st.rerun()
+            # Zuerst alle Bilder der Reihe anzeigen
+            for col_idx, (bildpfad, ist_fake, filename) in enumerate(row_images):
+                with cols[col_idx]:
+                    try:
+                        image = Image.open(bildpfad)
+                        st.image(image, use_container_width=True)
+                    except Exception as e:
+                        st.error(f"Fehler beim Laden von {filename}: {str(e)}")
+            
+            # Dann alle Radio-Buttons/Ergebnisse der Reihe auf einer Höhe
+            cols2 = st.columns(images_per_row)
+            for col_idx, (bildpfad, ist_fake, filename) in enumerate(row_images):
+                with cols2[col_idx]:
+                    # Container für einheitliche Höhe der Auswahlbereich
+                    with st.container():
+                        if not show_results:
+                            # Auswahl-Modus
+                            current_answer = st.session_state.deepfake_antworten.get(filename, "Unentschieden")
+                            
+                            antwort = st.radio(
+                                f"Ist dies ein Deepfake?",
+                                ["Unentschieden", "Ja", "Nein"],
+                                index=["Unentschieden", "Ja", "Nein"].index(current_answer),
+                                key=f"radio_{row_start + col_idx}_{filename}"
+                            )
+                            
+                            st.session_state.deepfake_antworten[filename] = antwort
+                            
+                        else:
+                            # Ergebnis-Modus
+                            antwort = st.session_state.deepfake_antworten.get(filename, "Unentschieden")
+                            richtige_antwort = "Ja" if ist_fake else "Nein"
+                            
+                            st.markdown(f"**Deine Antwort:** {antwort}")
+                            st.markdown(f"**Richtige Antwort:** {richtige_antwort}")
+                            
+                            if antwort == "Unentschieden":
+                                st.warning("Keine Antwort")
+                            elif antwort == richtige_antwort:
+                                st.success("Richtig!")
+                            else:
+                                st.error("Falsch!")
+                        
+                        # Platzhalter für einheitliche Höhe
+                        st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+            
+            # Abstand zwischen Reihen
+            st.markdown("<div style='height: 30px;'></div>", unsafe_allow_html=True)
+
+    # Formular für alle Antworten (nur wenn noch nicht abgegeben)
+    if not st.session_state.deepfake_abgegeben:
+        with st.form("deepfake_form"):
+            st.markdown("### Bewerte die Bilder:")
+            
+            # Bilder in Reihen anzeigen
+            display_images_in_rows(alle_bilder, images_per_row=3, show_results=False)
+            
+            st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+            
+            # Submit Button
+            submitted = st.form_submit_button("Antworten abgeben", use_container_width=True)
+            
+            if submitted:
+                st.session_state.deepfake_abgegeben = True
+                st.rerun()
 
     # Auswertung anzeigen
     if st.session_state.deepfake_abgegeben:
         st.markdown("<div style='height: 40px;'></div>", unsafe_allow_html=True)
         st.markdown("### Auswertung:")
         
+        # Bilder mit Ergebnissen in Reihen anzeigen
+        display_images_in_rows(alle_bilder, images_per_row=3, show_results=True)
+        
+        # Gesamtstatistik berechnen
         richtig = 0
         falsch = 0
         nicht_beantwortet = 0
         
-        # Ergebnisse in Spalten anzeigen
-        result_cols = st.columns(3)
-        
-        for idx, (bildpfad, ist_fake, filename) in enumerate(alle_bilder):
-            col = result_cols[idx % 3]
+        for bildpfad, ist_fake, filename in alle_bilder:
+            antwort = st.session_state.deepfake_antworten.get(filename, "Unentschieden")
+            richtige_antwort = "Ja" if ist_fake else "Nein"
             
-            with col:
-                try:
-                    image = Image.open(bildpfad)
-                    st.image(image, caption=f"Bild {idx + 1}", use_container_width=True)
-                    
-                    antwort = st.session_state.deepfake_antworten.get(filename, "Unentschieden")
-                    richtige_antwort = "Ja" if ist_fake else "Nein"
-                    
-                    st.markdown(f"**Deine Antwort:** {antwort}")
-                    st.markdown(f"**Richtige Antwort:** {richtige_antwort}")
-                    
-                    if antwort == "Unentschieden":
-                        st.warning("Keine Antwort")
-                        nicht_beantwortet += 1
-                    elif antwort == richtige_antwort:
-                        st.success("Richtig!")
-                        richtig += 1
-                    else:
-                        st.error("Falsch!")
-                        falsch += 1
-                        
-                except Exception as e:
-                    st.error(f"Fehler: {str(e)}")
+            if antwort == "Unentschieden":
+                nicht_beantwortet += 1
+            elif antwort == richtige_antwort:
+                richtig += 1
+            else:
+                falsch += 1
         
-        # Gesamtstatistik
+        # Gesamtstatistik anzeigen
         st.markdown("<div style='height: 40px;'></div>", unsafe_allow_html=True)
         st.markdown("### Gesamtergebnis:")
         
@@ -164,7 +224,7 @@ def render():
         st.markdown(f"**Erfolgsquote: {prozent_richtig:.1f}%**")
         
         # Restart Button
-        if st.button("Neu starten"):
+        if st.button("Neu starten", use_container_width=True):
             st.session_state.deepfake_antworten = {}
             st.session_state.deepfake_abgegeben = False
             st.rerun()
