@@ -139,7 +139,7 @@ import zones.offboarding as Offboarding
 import zones.Mission_2 as mission2
 import zones.Mission_3 as Mission3
 
-#Onboarding.render()
+Onboarding.render()
 
 #Corona.render()
 
@@ -151,13 +151,13 @@ import zones.Mission_3 as Mission3
 
 #Dashboard1.render()
 
-#Offboarding.render()
+Offboarding.render()
 
 #Corruption.render()
 
 #mission2.render()
 
-Mission3.render()
+#Mission3.render()
 
 
 # Test: Entfernen, wenn AiFakeNews fertig zusammengebaut.

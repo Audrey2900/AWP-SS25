@@ -7,8 +7,7 @@ import random
 from data.char_speech_state import set_text_key
 from data.zone_anchor import set_zone
 
-# Zone aktivieren
-#set_zone("offboarding")
+set_zone("offboarding")
 
 def generate_certificate(name: str) -> bytes:
     pdf = FPDF(orientation='L', unit='mm', format='A4')
@@ -38,15 +37,15 @@ def generate_certificate(name: str) -> bytes:
     pdf.ln(10)
     pdf.multi_cell(0, 10,
         "für die erfolgreiche Teilnahme am interaktiven Lernprogramm\n"
-        "\"Fake News & Deepfakes erkennen und entlarven\"", 
+        "\"Fake News & Deepfakes erkennen und bewerten\"", 
         align='C')
 
     cert_id = f"ZERT-{random.randint(100000,999999)}"
     pdf.ln(5)
     pdf.set_font("Helvetica", 'I', 10)
-    pdf.cell(0, 10, f"Zertifikatsnummer: {cert_id}", ln=True, align='C')
+    #pdf.cell(0, 10, f"Zertifikatsnummer: {cert_id}", ln=True, align='C')
 
-    pdf.image("static/InfoGuard_UP.jpeg", x=85, y=115, w=120)
+    pdf.image("static/InfoGuard_UP.png", x=85, y=115, w=120)
 
     pdf.ln(30)
     pdf.set_font("Helvetica", 'I', 12)
@@ -60,14 +59,37 @@ def generate_certificate(name: str) -> bytes:
 def render():
     name = st.session_state.get("user_name", "Teilnehmer*in")
 
-    st.header("🏁 Du hast es geschafft!")
+    # prechblasen-Button ganz oben
+    st.button("", on_click=set_text_key, args=("offboarding",), key="chat12")
+
+    # Überschrift
+    st.markdown("<h1 style='text-align: center; margin-top: 30px;'>🏁 Fertig! Du hast es geschafft! 🥳</h1>", unsafe_allow_html=True)
+    
+    # 🎓 Info-Text zentriert
     st.markdown(f"""
-### 🎓 {name}, du bist jetzt ein zertifizierter **Faktenchecker**!
+        <div style="text-align: center; margin-top: 50px; margin-bottom: 30px;">
+            <h3>🎓 {name}, du bist jetzt ein zertifizierter <strong>Faktenchecker</strong>!</h3>
+        </div>
+        <div style="text-align: center; margin-bottom: 30px;">
+            <p style="font-size: 18px;">
+  Dein offizielles Zertifikat wartet auf dich.<br>
+  Klicke, um es herunterzuladen:<br>
+  <span style="font-size: 50px;">⬇️</span>
+</p>
+    """, unsafe_allow_html=True)
 
-Dein offizielles Zertifikat wartet auf dich:
-""")
-
+    # Zertifikat erzeugen
     pdf_bytes = generate_certificate(name)
+
+    # Button zentrieren mit CSS
+    st.markdown("""
+        <style>
+        div.stDownloadButton {
+            display: flex;
+            justify-content: center;
+        }
+        </style>
+    """, unsafe_allow_html=True)
 
     st.download_button(
         label="📥 Zertifikat herunterladen",
@@ -77,31 +99,30 @@ Dein offizielles Zertifikat wartet auf dich:
         key="download_button"
     )
 
+    # Ballon-Effekt beim Klick
     st.markdown("""
-<script>
-const dlButton = parent.document.querySelector('button[data-testid="baseButton-download_button"]');
-if (dlButton) {
-    dlButton.addEventListener('click', function() {
-        const balloons = document.createElement('div');
-        balloons.innerHTML = "🎈🎉🎈";
-        balloons.style.position = "fixed";
-        balloons.style.top = "20px";
-        balloons.style.left = "50%";
-        balloons.style.transform = "translateX(-50%)";
-        balloons.style.fontSize = "3rem";
-        balloons.style.zIndex = "9999";
-        balloons.style.animation = "fadeout 3s ease-out forwards";
-        document.body.appendChild(balloons);
-        setTimeout(() => balloons.remove(), 3000);
-    });
-}
-</script>
-<style>
-@keyframes fadeout {
-    0% { opacity: 1; }
-    100% { opacity: 0; transform: translateY(80px); }
-}
-</style>
-""", unsafe_allow_html=True)
-
-    st.button("", on_click=set_text_key, args=("offboarding",), key="chat12")
+    <script>
+    const dlButton = parent.document.querySelector('button[data-testid="baseButton-download_button"]');
+    if (dlButton) {
+        dlButton.addEventListener('click', function() {
+            const balloons = document.createElement('div');
+            balloons.innerHTML = "🎈🎉🎈";
+            balloons.style.position = "fixed";
+            balloons.style.top = "20px";
+            balloons.style.left = "50%";
+            balloons.style.transform = "translateX(-50%)";
+            balloons.style.fontSize = "3rem";
+            balloons.style.zIndex = "9999";
+            balloons.style.animation = "fadeout 3s ease-out forwards";
+            document.body.appendChild(balloons);
+            setTimeout(() => balloons.remove(), 3000);
+        });
+    }
+    </script>
+    <style>
+    @keyframes fadeout {
+        0% { opacity: 1; }
+        100% { opacity: 0; transform: translateY(80px); }
+    }
+    </style>
+    """, unsafe_allow_html=True)
