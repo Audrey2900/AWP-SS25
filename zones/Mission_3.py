@@ -30,7 +30,7 @@ def render():
 
     st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
-    # Custom CSS für einheitliche Bildgrößen und Layout
+    # Custom CSS für einheitliche Bildgrößen, Layout und farbige Progress Bars
     st.markdown("""
     <style>
     .image-container {
@@ -69,6 +69,72 @@ def render():
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+    
+    /* Custom Progress Bar Styles */
+    .progress-bar-container {
+        width: 100%;
+        height: 25px;
+        background-color: #e0e0e0;
+        border-radius: 12px;
+        overflow: hidden;
+        margin: 10px 0;
+        position: relative;
+    }
+    
+    .progress-segment {
+        height: 100%;
+        float: left;
+        transition: width 0.5s ease;
+    }
+    
+    .progress-correct {
+        background-color: #28a745;
+    }
+    
+    .progress-wrong {
+        background-color: #dc3545;
+    }
+    
+    .progress-unanswered {
+        background-color: #6c757d;
+    }
+    
+    .progress-legend {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 5px;
+        font-size: 0.9em;
+    }
+    
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .legend-color {
+        width: 15px;
+        height: 15px;
+        border-radius: 3px;
+    }
+    
+    /* Form Submit Button Styling */
+    .stFormSubmitButton > button {
+        background-color: #f7941d !important;
+        border-color: #f7941d !important;
+        color: white !important;
+    }
+    
+    .stFormSubmitButton > button:hover {
+        background-color: #e6831a !important;
+        border-color: #e6831a !important;
+    }
+    
+    .stFormSubmitButton > button:focus {
+        background-color: #f7941d !important;
+        border-color: #f7941d !important;
+        box-shadow: 0 0 0 0.2rem rgba(247, 148, 29, 0.25) !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -219,9 +285,38 @@ def render():
         with col3:
             st.metric("Nicht beantwortet", nicht_beantwortet)
         
-        prozent_richtig = (richtig / len(alle_bilder)) * 100 if len(alle_bilder) > 0 else 0
-        st.progress(prozent_richtig / 100)
-        st.markdown(f"**Erfolgsquote: {prozent_richtig:.1f}%**")
+        # Custom Progress Bar mit Farben
+        total_images = len(alle_bilder)
+        if total_images > 0:
+            prozent_richtig = (richtig / total_images) * 100
+            prozent_falsch = (falsch / total_images) * 100
+            prozent_unbeantwortet = (nicht_beantwortet / total_images) * 100
+            
+            # Custom HTML Progress Bar
+            progress_html = f"""
+            <div class="progress-bar-container">
+                <div class="progress-segment progress-correct" style="width: {prozent_richtig}%;"></div>
+                <div class="progress-segment progress-wrong" style="width: {prozent_falsch}%;"></div>
+                <div class="progress-segment progress-unanswered" style="width: {prozent_unbeantwortet}%;"></div>
+            </div>
+            <div class="progress-legend">
+                <div class="legend-item">
+                    <div class="legend-color progress-correct"></div>
+                    <span>Richtig ({richtig}/{total_images})</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color progress-wrong"></div>
+                    <span>Falsch ({falsch}/{total_images})</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color progress-unanswered"></div>
+                    <span>Unbeantwortet ({nicht_beantwortet}/{total_images})</span>
+                </div>
+            </div>
+            """
+            
+            st.markdown(progress_html, unsafe_allow_html=True)
+            st.markdown(f"**Erfolgsquote: {prozent_richtig:.1f}%**")
         
         # Restart Button
         if st.button("Neu starten", use_container_width=True):
