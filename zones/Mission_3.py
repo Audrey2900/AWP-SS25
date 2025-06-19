@@ -2,11 +2,6 @@ import streamlit as st
 from PIL import Image
 import os
 
-# Ordnerpfade
-base_path = os.path.join(os.getcwd(), "static")
-original_ordner = os.path.join(base_path, "Original_Bilder")
-fake_ordner = os.path.join(base_path, "KI_Bilder")
-
 def render():
     col1, col2 = st.columns([3, 1])
     with col1:
@@ -35,92 +30,147 @@ def render():
 
     st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
-    # Bilder laden
-    original_bilder = [(os.path.join(original_ordner, f), False) for f in sorted(os.listdir(original_ordner)) if f.lower().endswith(('.jpg', '.png'))]
-    fake_bilder = [(os.path.join(fake_ordner, f), True) for f in sorted(os.listdir(fake_ordner)) if f.lower().endswith(('.jpg', '.png'))]
+    # Bilder einmalig laden und cachen
+    @st.cache_data
+    def load_images():
+        base_path = os.path.join(os.getcwd(), "static")
+        original_ordner = os.path.join(base_path, "Original_Bilder")
+        fake_ordner = os.path.join(base_path, "KI_Bilder")
+        
+        original_bilder = []
+        fake_bilder = []
+        
+        # Original Bilder laden
+        if os.path.exists(original_ordner):
+            for f in sorted(os.listdir(original_ordner)):
+                if f.lower().endswith(('.jpg', '.png', '.jpeg')):
+                    original_bilder.append((os.path.join(original_ordner, f), False, f))
+        
+        # Fake Bilder laden
+        if os.path.exists(fake_ordner):
+            for f in sorted(os.listdir(fake_ordner)):
+                if f.lower().endswith(('.jpg', '.png', '.jpeg')):
+                    fake_bilder.append((os.path.join(fake_ordner, f), True, f))
+        
+        return original_bilder + fake_bilder
 
-    # Feste Reihenfolge
-    alle_bilder = original_bilder + fake_bilder
-
-    # Session State initialisieren
-    if "antworten" not in st.session_state:
-        st.session_state.antworten = {}
-
-    if "abgegeben" not in st.session_state:
-        st.session_state.abgegeben = False
-
-    # Rasteranzeige
-    cols = st.columns(4)
-    for idx, (bildpfad, ist_fake) in enumerate(alle_bilder):
-        col = cols[idx % 4]
-        with col:
-            image = Image.open(bildpfad)
-            st.image(image, use_container_width=True)
-
-            name = os.path.basename(bildpfad)
-
-            if not st.session_state.abgegeben:
-                antwort = st.radio(
-                    "Deepfake?",
-                    ["Unentschieden", "Ja", "Nein"],
-                    index=0,
-                    key=f"radio_{idx}"
-                )
-                st.session_state.antworten[bildpfad] = antwort
-            else:
-                antwort = st.session_state.antworten.get(bildpfad, "Unentschieden")
-
-                st.markdown(f"**Deine Antwort:** `{antwort}`")
-
-                richtige_antwort = "Ja" if ist_fake else "Nein"
-                st.markdown(f"**Richtige Antwort:** `{richtige_antwort}`")
-
-                if antwort == "Unentschieden":
-                    st.warning("Keine Antwort gegeben.")
-                elif antwort == richtige_antwort:
-                    st.success("Richtig erkannt!")
-                else:
-                    st.error("Falsch eingeschätzt.")
-
-    # Abgabe-Button
-    st.markdown("<div style='height: 40px;'></div>", unsafe_allow_html=True)
+    # Session State einmalig initialisieren
+    if "deepfake_antworten" not in st.session_state:
+        st.session_state.deepfake_antworten = {}
     
-    if not st.session_state.abgegeben:
-        if st.button("Antworten abgeben"):
-            st.session_state.abgegeben = True
+    if "deepfake_abgegeben" not in st.session_state:
+        st.session_state.deepfake_abgegeben = False
+
+    # Bilder laden
+    alle_bilder = load_images()
+    
+    if not alle_bilder:
+        st.error("Keine Bilder gefunden. Überprüfe die Ordnerstruktur in 'static/Original_Bilder' und 'static/KI_Bilder'.")
+        return
+
+    # Formular für alle Antworten
+    with st.form("deepfake_form"):
+        st.markdown("### Bewerte die Bilder:")
+        
+        # Rasteranzeige
+        cols = st.columns(3)  # 3 Spalten für bessere Übersicht
+        
+        for idx, (bildpfad, ist_fake, filename) in enumerate(alle_bilder):
+            col = cols[idx % 3]
+            
+            with col:
+                try:
+                    image = Image.open(bildpfad)
+                    st.image(image, caption=f"Bild {idx + 1}", use_container_width=True)
+                    
+                    # Radio-Button für jedes Bild
+                    current_answer = st.session_state.deepfake_antworten.get(filename, "Unentschieden")
+                    
+                    antwort = st.radio(
+                        f"Ist Bild {idx + 1} ein Deepfake?",
+                        ["Unentschieden", "Ja", "Nein"],
+                        index=["Unentschieden", "Ja", "Nein"].index(current_answer),
+                        key=f"radio_{idx}_{filename}"
+                    )
+                    
+                    # Antwort in Session State speichern
+                    st.session_state.deepfake_antworten[filename] = antwort
+                    
+                except Exception as e:
+                    st.error(f"Fehler beim Laden von {filename}: {str(e)}")
+        
+        st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+        
+        # Submit Button
+        submitted = st.form_submit_button("Antworten abgeben")
+        
+        if submitted:
+            st.session_state.deepfake_abgegeben = True
             st.rerun()
 
-    # Gesamtauswertung
-    if st.session_state.abgegeben:
+    # Auswertung anzeigen
+    if st.session_state.deepfake_abgegeben:
+        st.markdown("<div style='height: 40px;'></div>", unsafe_allow_html=True)
+        st.markdown("### Auswertung:")
+        
         richtig = 0
         falsch = 0
         nicht_beantwortet = 0
-
-        for bildpfad, ist_fake in alle_bilder:
-            antwort = st.session_state.antworten.get(bildpfad, "Unentschieden")
-            richtige_antwort = "Ja" if ist_fake else "Nein"
-
-            if antwort == "Unentschieden":
-                nicht_beantwortet += 1
-            elif antwort == richtige_antwort:
-                richtig += 1
-            else:
-                falsch += 1
-
-        st.markdown("<div style='height: 40px;'></div>", unsafe_allow_html=True)
         
-        st.markdown("### Gesamtauswertung")
-        st.info(f"""
-    **Richtige Einschätzungen:** {richtig}  
-    **Falsche Einschätzungen:** {falsch}  
-    **Unbeantwortet:** {nicht_beantwortet}
-    """)
-
+        # Ergebnisse in Spalten anzeigen
+        result_cols = st.columns(3)
+        
+        for idx, (bildpfad, ist_fake, filename) in enumerate(alle_bilder):
+            col = result_cols[idx % 3]
+            
+            with col:
+                try:
+                    image = Image.open(bildpfad)
+                    st.image(image, caption=f"Bild {idx + 1}", use_container_width=True)
+                    
+                    antwort = st.session_state.deepfake_antworten.get(filename, "Unentschieden")
+                    richtige_antwort = "Ja" if ist_fake else "Nein"
+                    
+                    st.markdown(f"**Deine Antwort:** {antwort}")
+                    st.markdown(f"**Richtige Antwort:** {richtige_antwort}")
+                    
+                    if antwort == "Unentschieden":
+                        st.warning("Keine Antwort")
+                        nicht_beantwortet += 1
+                    elif antwort == richtige_antwort:
+                        st.success("Richtig!")
+                        richtig += 1
+                    else:
+                        st.error("Falsch!")
+                        falsch += 1
+                        
+                except Exception as e:
+                    st.error(f"Fehler: {str(e)}")
+        
+        # Gesamtstatistik
+        st.markdown("<div style='height: 40px;'></div>", unsafe_allow_html=True)
+        st.markdown("### Gesamtergebnis:")
+        
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric("Richtig", richtig)
+        with col2:
+            st.metric("Falsch", falsch)
+        with col3:
+            st.metric("Nicht beantwortet", nicht_beantwortet)
+        
+        prozent_richtig = (richtig / len(alle_bilder)) * 100 if len(alle_bilder) > 0 else 0
+        st.progress(prozent_richtig / 100)
+        st.markdown(f"**Erfolgsquote: {prozent_richtig:.1f}%**")
+        
+        # Restart Button
         if st.button("Neu starten"):
-            del st.session_state.antworten
-            del st.session_state.abgegeben
+            st.session_state.deepfake_antworten = {}
+            st.session_state.deepfake_abgegeben = False
             st.rerun()
 
+        # Fazit
+        st.markdown("<div style='height: 40px;'></div>", unsafe_allow_html=True)
         st.markdown("""
         ### Fazit: So erkennst du Deepfakes
 
