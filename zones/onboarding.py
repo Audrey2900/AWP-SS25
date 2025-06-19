@@ -4,6 +4,9 @@ from data.char_speech_state import set_text_key
 def render():
     st.header("Willkommen bei InfoGuard – der interaktiven Lernplattform für aufmerksame Internet-Detektive.")
 
+    st.write("")  # Pufferplatz
+    st.write("")  # Noch mehr Pufferplatz
+    
     # Namenseingabe
     st.markdown("#### Wie heißt du? Gib deinen Vor- und Nachnamen ein:")
     vorname = st.text_input("Vorname", key="input_vorname")
