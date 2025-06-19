@@ -8,7 +8,7 @@ BUBBLE_TEXTS = {
     ],
     ######### Onboarding + Offboarding #########
     "onboarding": [
-        "Hey! Schön, dass du da bist.",
+        "Hey! Schön, dass du da bist.AAA AAA AAAAA AAAAA AAA AAA AA AAAAAA AAAAA AAAA AAAAAA AAAAA AAAAA  AAAAA AAAA AAAAA AAAAAAAAAA AAAAAAAA AAAAAAA AAAAAA AAAAAAAAA AAAAAAA AAAAA AAAAAAAAAAA AAAAAAAAAA AAAAAAAA AAAAAA AA AAAA AAAAAA AAAAAA  AAAAAA",
         "Ich bin Sam – Reporter bei unserer Schülerzeitung.",
         "Nach einem ziemlich fiesen Hack wurden Teile meines Artikels gelöscht… oder schlimmer: manipuliert!",
         "Ich muss herausfinden, was noch stimmt – und was nicht.",

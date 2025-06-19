@@ -5,7 +5,7 @@ from data.char_speech_state import set_text_key
 
 def render():
     st.markdown("""
-    ## Welche Wirkung Fake News anstreben
+    ## Welche Wirkung Ki in Kombination mit Fake News anstreben
     """)
 
     if st.session_state.ui_state["SentimentSlider"] == False:

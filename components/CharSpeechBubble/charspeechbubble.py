@@ -22,13 +22,19 @@ def render():
     <style>
     #avatar-container {{
         position: fixed;
-        bottom: 20px;
+        bottom: 10px;
         left: 20px;
         display: flex;
         flex-direction: row;
         align-items: flex-end;
         z-index: 9999;
         gap: 10px;
+        pointer-events: none;
+    }}
+    #speech-bubble,
+    #js-next-button,
+    #eye-button {{
+    pointer-events: auto; /* erlaubt wieder Interaktion */
     }}
     #speech-bubble {{
         position: relative;
@@ -45,6 +51,29 @@ def render():
         max-height: 150px;
         overflow: hidden;
     }}
+    #speech-tail {{
+        position: absolute;
+        left: -20px;
+        bottom: 14px;
+        width: 0;
+        height: 0;
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        border-right: 20px solid #333;
+        z-index: 1;
+        pointer-events: none;
+    }}
+    #speech-tail::after {{
+        content: "";
+        position: absolute;
+        left: 4px;
+        top: -11px;
+        border-top: 11px solid transparent;
+        border-bottom: 11px solid transparent;
+        border-right: 18px solid #f5f5f5;
+        z-index: 2;
+        pointer-events: none;
+    }}
     #bubble-text {{
         max-height: 125px;
         overflow-y: auto;
@@ -54,7 +83,9 @@ def render():
         scrollbar-color: #bbb transparent;
     }}
     #floating-avatar {{
-        height: 160px;
+        height: 210px;
+        margin-bottom: -10px;
+        pointer-events: none;
     }}
     #eye-button {{
         width: 50px;
@@ -119,9 +150,12 @@ def render():
 
     <div id="avatar-container">
         <img id="floating-avatar" src="/app/static/PrototypeChar2.gif" />
-        <div id="speech-bubble">
-            <div id="bubble-text"></div>
-            <a id="js-next-button" href="#">➤</a>
+        <div style="position: relative;">
+            <div id="speech-tail"></div>  <!-- NEU -->
+            <div id="speech-bubble">
+                <div id="bubble-text"></div>
+                <a id="js-next-button" href="#">➤</a>
+            </div>
         </div>
         <a href="#{st.session_state.get("current_zone", "")}" id="eye-button">👁️</a>
     </div>
