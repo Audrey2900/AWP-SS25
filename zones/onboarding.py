@@ -34,7 +34,7 @@ def render():
 
         🛠️ **Defekte Zonen**: Manche Bereiche wirken kaputt oder unvollständig – genau da musst du helfen, Fake News oder Deepfakes zu entlarven.
 
-        👁️ **Kommst du nicht weiter?** Dieser Button hilft dir dabei an die Stelle zu springen an deer du dich befinden zu dem Zeitpunkt befinden solltest.
+        👁️ **Kommst du nicht weiter?** Dieser Button hilft dir dabei, an die Stelle zu springen, an der du dich zu diesem Zeitpunkt befinden solltest.
 
         🏆 **Zertifikat**: Am Ende bekommst du ein persönliches Zertifikat als echter Faktenchecker.
         """)

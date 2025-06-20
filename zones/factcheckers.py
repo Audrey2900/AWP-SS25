@@ -103,7 +103,7 @@ Ein Vorteil von GADMO ist, dass Redaktionen nicht doppelt an derselben Sache arb
     st.markdown("""
 ### Faktenchecker und Deepfakes
 
-Auch bei gefälschten Videos kommen Faktenchecker zum Einsatz. Sie analysieren Aufnahmen, bei denen der Verdacht besteht, dass sie manipuliert wurden. Dafür verwenden sie forensische Werkzeuge, mit denen sich z. B. Bildartefakte, Schat4tenverläufe oder Tonspuren untersuchen lassen.
+Auch bei gefälschten Videos kommen Faktenchecker zum Einsatz. Sie analysieren Aufnahmen, bei denen der Verdacht besteht, dass sie manipuliert wurden. Dafür verwenden sie forensische Werkzeuge, mit denen sich z. B. Bildartefakte, Schattenverläufe oder Tonspuren untersuchen lassen.
 
 Trotzdem: Je besser die Technik, desto schwerer die Erkennung. Deswegen ist Aufklärung so wichtig – also zu wissen, dass es solche Fälschungen überhaupt gibt und wie sie aussehen können.
 """)

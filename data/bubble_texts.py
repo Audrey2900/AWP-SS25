@@ -113,8 +113,8 @@ BUBBLE_TEXTS = {
         "2016… erst seit dann ist das Thema Faktenchecks ein Alltagsthema. Ziemlich spät für Deutschland, oder? Aber wenn man an Trump und Brexit denkt, macht das schon Sinn.",
     ],
     "FCaufgabe" : [
-        "Ab hier beginnt wieder der beschäfigte Teil der Website. In meine Web-Engine kann ich sehen, dass die Basisdaten weiterhin im Hintergrund beschädigt sind.",
-        "Dadurch kann ich leider nicht den nächsten Abschnitt vom Artikel ziehen. Wenn wir aber so vorgenen, wie vorhin, sollten wir ganz einfach die beschädigten Daten korrigieren können.",
+        "Ab hier beginnt wieder der beschädigte Teil der Website. In meine Web-Engine kann ich sehen, dass die Basisdaten weiterhin im Hintergrund beschädigt sind.",
+        "Dadurch kann ich leider nicht den nächsten Abschnitt vom Artikel ziehen. Wenn wir aber so vorgehen, wie vorhin, sollten wir ganz einfach die beschädigten Daten korrigieren können.",
         "Ist dies geschehen, sollten bei mir im Code keine Fehlermeldungen kommen, wenn ich versuche den neuen Abschnitt zu laden.",
         "Einen Moment, ich schicke dir mal kurz einige Fragen in den Vordergrund. Wenn du durch bist, kannst du mir wieder die Lösung zuschicken."
     ],
