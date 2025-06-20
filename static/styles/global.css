@@ -150,6 +150,23 @@ body {
     padding: 0;
 }
 
-/* [class*="st-key-chat"] button:hover {
-    /* background-color: #f0f0f0; 
-} */
+[class*="st-key-done"] {
+    height: 80px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block;
+}
+[class*="st-key-done"] button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background-image: url("/app/static/done_icon.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid black;
+    border-radius: 16px;
+    padding: 0;
+}

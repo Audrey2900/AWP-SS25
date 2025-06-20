@@ -29,4 +29,8 @@ def render():
         Schon früh warnte die Weltgesundheitsorganisation (WHO) vor einer Infodemie, einer Welle an falschen Nachrichten, die sich schneller verbreitet als das Virus selbst. Und tatsächlich: Studien zeigen, dass ein Großteil der Menschen während der Pandemie mit Desinformation in Kontakt kam. In Deutschland sahen **68%** der Social-Media-Nutzer Fake News zur Corona-Pandemie. Bei Jugendlichen zwischen 14 und 24 Jahren waren es sogar **76%**, die mindestens einmal pro Woche auf Falschnachrichten stießen.
         """, unsafe_allow_html=True)
 
-        st.button("", on_click=set_text_key, args=("coronadone",), key="chatcoronadonepuzzle")
+        st.button("", on_click=set_text_key, args=("coronadone",), key="donecoronapuzzle")
+
+
+
+

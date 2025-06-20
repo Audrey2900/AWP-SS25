@@ -20,7 +20,7 @@ def render():
         In den ersten drei Monaten der Pandemie wurden weltweit etwa **6.000 Menschen** wegen solcher Falschinfos ins Krankenhaus eingeliefert.
         """, unsafe_allow_html=True)
 
-        st.button("", on_click=set_text_key, args=("coronadone",), key="chatcoronadoneslider")
+        st.button("", on_click=set_text_key, args=("coronadone",), key="donecoronalider")
 
     if (
         st.session_state.text_key == "6000" and st.session_state.text_index == 4

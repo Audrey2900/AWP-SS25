@@ -108,16 +108,13 @@ CharSpeechBubble.render()
 import components.ResetTimer.resettimer as ResetTimer
 
 ResetTimer.render()
-
 ############################## Timer ##############################
 
 ############################## Init Zones ##############################
 from data.zone_anchor import init_zone_state
-from data.corruption import init_corruption_state
 from data.ui_states import init_ui_state
 
 init_zone_state()
-init_corruption_state()
 init_ui_state()
 ############################## Init Zones ##############################
 
@@ -129,11 +126,9 @@ st.title("Lern-Dashboard: Fake News & Deepfakes")
 
 ## Andere Dashboards:
 
-#import zones.dashboard1 as Dashboard1
-import zones.zone1 as Zone1
 import zones.factcheckers as FactCheckers
-import components.Corruption.corruption as Corruption
 import zones.corona as Corona
+import zones.aifakenews as AiFakeNews
 import zones.onboarding as Onboarding
 import zones.offboarding as Offboarding
 import zones.Mission_2 as mission2
@@ -141,25 +136,18 @@ import zones.Mission_3 as Mission3
 
 #Onboarding.render()
 
-#Corona.render()
-
-#Anchors.render()
-
-#Zone1.render()
+Corona.render()
 
 #FactCheckers.render()
 
-#Dashboard1.render()
+#AiFakeNews.render()
 
 #Offboarding.render()
-
-#Corruption.render()
 
 #mission2.render()
 
 #Mission3.render()
 
-
 # Test: Entfernen, wenn AiFakeNews fertig zusammengebaut.
-import components.AiSentiment.aisentiment as AiSentiment
-AiSentiment.render()
+#import components.AiSentiment.aisentiment as AiSentiment
+#AiSentiment.render()
