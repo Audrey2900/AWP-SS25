@@ -136,18 +136,14 @@ import zones.Mission_3 as Mission3
 
 #Onboarding.render()
 
-Corona.render()
+#Corona.render()
 
 #FactCheckers.render()
 
-#AiFakeNews.render()
+AiFakeNews.render()
 
 #Offboarding.render()
 
 #mission2.render()
 
 #Mission3.render()
-
-# Test: Entfernen, wenn AiFakeNews fertig zusammengebaut.
-#import components.AiSentiment.aisentiment as AiSentiment
-#AiSentiment.render()
