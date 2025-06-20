@@ -122,9 +122,9 @@ BUBBLE_TEXTS = {
     "test1": [],
     "manipulationsentiment": [
         "So... bei welchem Teil sind wir jetzt gelandet.",
-        "Ah, hier ging es um die Wirkung von FakeNews.",
+        "Ah, hier ging es um die Wirkung von FakeNews. Dafür sollte hier eine Grafik stehen, welche die möglichen Stimmungen von Ki und Fakenews darstellt.",
         "Der originale Slider, welcher hier erscheinen sollte, scheint funktionsfähig zu sein. Der Text für die Schlussfolgerungen ist aber leider beschädigt",
-        "Ich glaube wir müssen wieder auf die originalen Schlussfolgerungen kommen. Aber zuerst schicke ich dir mal kurz den Slider nach vorne. ",
+        "Wir müssen wieder auf die originalen Schlussfolgerungen kommen. Aber zuerst schicke ich dir mal kurz den Slider nach vorne. ",
         "Hier der Slider und ein paar Fragen."
     ],
     "aisentiment": [

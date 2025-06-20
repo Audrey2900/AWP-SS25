@@ -3,6 +3,7 @@ import components.CoronaExpanders.coronaexpanders as CoronaExpanders
 import components.CoronaDragPuzzle.coronadragpuzzle as CoronaDragPuzzle
 import components.Corruption.corruption as Corruption
 import components.CoronaSlider.coronaslider as CoronaSlider
+import components.CoronaMiniDashboard.minidashboard as MiniDashboard
 
 def render():
     st.title("Corona und Fake News: Wie ein Virus die Wahrheit infizierte")
@@ -34,4 +35,7 @@ Aber wie konnten sich solche Falschinfos so schnell verbreiten? Die Antwort ist 
 
 Das Gefährliche daran ist, dass Fake News oft sehr überzeugend aussehen. Manche basieren auf echten Infos, die dann verdreht oder aus dem Zusammenhang gerissen wurden. Wenn ein TikTok-Video sagt, Vitamin C schützt vor Corona, klingt das vielleicht plausibel, aber es stimmt nicht.
 """)
+    
+    MiniDashboard.render()
+
 

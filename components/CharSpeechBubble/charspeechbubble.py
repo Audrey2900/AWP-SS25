@@ -34,7 +34,7 @@ def render():
     #speech-bubble,
     #js-next-button,
     #eye-button {{
-    pointer-events: auto; /* erlaubt wieder Interaktion */
+    pointer-events: auto;
     }}
     #speech-bubble {{
         position: relative;
@@ -151,7 +151,7 @@ def render():
     <div id="avatar-container">
         <img id="floating-avatar" src="/app/static/PrototypeChar2.gif" />
         <div style="position: relative;">
-            <div id="speech-tail"></div>  <!-- NEU -->
+            <div id="speech-tail"></div>
             <div id="speech-bubble">
                 <div id="bubble-text"></div>
                 <a id="js-next-button" href="#">➤</a>
