@@ -15,3 +15,6 @@ def render():
     PictureSelector.PictureSelector() #TODO Korruptionen
 
 
+# Quellen 
+# https://incidentdatabase.ai/taxonomies/
+# https://airtable.com/appOU03dlKuBdbmty/shrEkrIYINbrcKQ3z/tbleGYjNLn2D4Xfzs

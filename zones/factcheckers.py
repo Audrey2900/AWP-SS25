@@ -140,3 +140,14 @@ In Deutschland wurde das Thema ab dem Jahr **2016** präsenter. Vor allem durch 
     st.button("", on_click=set_text_key, args=("FCwann",), key="chat6")
 
     st.button("", on_click=set_text_key, args=("FCaufgabe",), key="chat7")
+
+
+#Quellen
+# https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Informationen-und-Empfehlungen/Kuenstliche-Intelligenz/Deepfakes/deepfakes_node.html#doc1009562bodyText6
+# https://www.bundesregierung.de/breg-de/aktuelles/desinformation-erkennen-1750146
+# https://www.bundesregierung.de/breg-de/service/archiv/die-arbeit-der-faktenchecker-2081802
+# https://euvsdisinfo.eu/de/
+# https://ifcncodeofprinciples.poynter.org/signatories
+# https://gadmo.eu/
+# https://en.wikipedia.org/wiki/FactCheck.org
+# https://de.wikipedia.org/wiki/Correctiv

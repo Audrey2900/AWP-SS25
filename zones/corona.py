@@ -39,3 +39,13 @@ Das Gefährliche daran ist, dass Fake News oft sehr überzeugend aussehen. Manch
     MiniDashboard.render()
 
 
+
+# Quellen:
+#https://www.stiftungen.org/aktuelles/news-aus-stiftungen/detail/studie-zu-desinformation-von-jungen-menschen-in-der-coronakrise-4986.html
+#https://www.bitkom.org/Presse/Presseinformation/Mehr-als-50-Millionen-Deutsche-nutzen-soziale-Medien
+#https://www.who.int/news-room/feature-stories/detail/fighting-misinformation-in-the-time-of-covid-19-one-click-at-a-time
+#https://blog.digimind.com/de/covid-die-am-weitesten-verbreiteten-fake-news-in-den-sozialen-medien-in-deutschland
+#https://de.statista.com/statistik/daten/studie/1237979/umfrage/glaubwuerdigkeit-von-falschnachrichten-beim-thema-corona-pandemie
+#https://pmc.ncbi.nlm.nih.gov/articles/PMC8985560
+#https://www.kff.org/health-information-trust/press-release/covid-19-misinformation-is-ubiquitous-78-of-the-public-believes-or-is-unsure-about-at-least-one-false-statement-and-nearly-at-third-believe-at-least-four-of-eight-false-statements-tested
+#https://zenodo.org/records/3965871

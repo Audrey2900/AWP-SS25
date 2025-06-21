@@ -78,7 +78,7 @@ def render():
 
 #https://www.fr.de/verbraucher/sexismus-rassismus-ki-diskriminierung-unsichtbar-benachteiligung-frauen-forschung-92861297.html
 #https://www.vox.com/future-perfect/22672414/ai-artificial-intelligence-gpt-3-bias-muslim
-#https://www.hsbi.de/presse/pressemitteilungen/diskriminierung-von-menschen-mit-behinderungserfahrung-durch-chatgpt-und-co-hsbi-workshop-bringt-neue-erkenntnisse#:~:text=Gro%C3%9Fe%20Sprachmodelle%20wie%20ChatGPT%20verwenden,von%20KI%20als%20interdisziplin%C3%A4res%20Workshopthema
+#https://www.hsbi.de/presse/pressemitteilungen/diskriminierung-von-menschen-mit-behinderungserfahrung-durch-chatgpt-und-co-hsbi-workshop-bringt-neue-erkenntnisse
 #https://www.businessinsider.com/zuckerbergs-wife-chinese-american-metas-ai-image-generator-cant-cope-2024-4
 #https://www.sciencedaily.com/releases/2023/01/230131101910.htm
-#https://netzpolitik.org/2021/kindergeldaffaere-niederlande-zahlen-millionenstrafe-wegen-datendiskriminierung/#:~:text=f%C3%A4lschlicherweise%20Nachzahlungsforderungen%20an%20Empf%C3%A4nger%3Ainnen%20staatlicher,Frauen%20und%20alte%20Menschen%20benachteiligt
+#https://netzpolitik.org/2021/kindergeldaffaere-niederlande-zahlen-millionenstrafe-wegen-datendiskriminierung

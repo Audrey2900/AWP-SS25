@@ -140,7 +140,7 @@ import zones.Mission_3 as Mission3
 
 #FactCheckers.render()
 
-AiFakeNews.render()
+#AiFakeNews.render()
 
 #Offboarding.render()
 

@@ -20,7 +20,7 @@ def render():
 
     if not st.session_state.ui_state["CoronaSliderDone"]:
         st.markdown("### Wie viele Menschen wurden in den ersten 3 Monaten wegen gefährlicher Corona-Falschinformationen und falscher ""Heilmittel"" ins Krankenhaus eingeliefert?")    
-        value = coronasliderjs(value=0)
+        value = coronasliderjs(value=0) or 0
         st.button("Auswertung", on_click=sliderauswertung)
 
     if (
