@@ -6,7 +6,7 @@ from visuals.mission1 import (
     show_classification_chart,
     show_wordcloud,
 )
-from components.chart_animation.chartanimation import show_category_chart_animated
+from components.chart_animation.chartanimation import show_category_chart_animated, show_classification_chart_animated
 
 def load_css(file_path):
     with open(file_path) as f:
@@ -15,23 +15,6 @@ def load_css(file_path):
 def render():
     css_path = pathlib.Path("static/styles/mission1.css")
     load_css(css_path)
-
-    # CSS für gleichmäßig verteilte Buttons
-    st.markdown("""
-    <style>
-    [data-testid="column"]:first-child div[data-testkey="left-box"] {
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-evenly !important;
-        height: 70vh !important;
-        min-height: 400px !important;
-    }
-    
-    [data-testid="column"]:first-child div[data-testkey="left-box"] .stButton {
-        margin: 0 !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
 
     st.title("📊 Mini-Dashboard: Fake News Visualisierung", anchor="zone1")
 
@@ -65,7 +48,7 @@ def render():
             elif selected == "categories":
                 show_category_chart_animated(df)
             elif selected == "classification":
-                show_classification_chart(df)
+                show_classification_chart_animated(df)
             elif selected == "wordcloud":
                 col_wc1, col_wc2 = st.columns(2)
                 with col_wc1:

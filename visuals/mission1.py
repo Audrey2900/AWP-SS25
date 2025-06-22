@@ -45,7 +45,8 @@ def show_country_chart(df):
         color="Anzahl",
         color_continuous_scale="Reds",
         labels={"Anzahl": "Anzahl Fake News"},
-        hover_name="Land"
+        hover_name="Land",
+        template="plotly_dark"  # Dark theme hinzufügen
     )
 
     # Ansicht basierend auf Auswahl anpassen
