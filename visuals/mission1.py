@@ -183,11 +183,21 @@ def show_wordcloud(df, basis, lang):
 
     if lang == "de":
         stopwords = set(STOPWORDS).union({
-            "dass", "die", "der", "und", "mit", "ist", "ein", "eine", "im", "den",
-            "des", "für", "auf", "sich", "nicht", "wie", "auch", "es", "das", "zu", "von", "am"
+            "dass", "die", "der", "und", "mit", "ist", "ein", "eine", "im", "den", "Video", "sind", "ja",
+            "des", "für", "auf", "sich", "nicht", "wie", "auch", "es", "das", "zu", "von", "am", "Prozent", "Irreführende",
+            "wurden", "man", "Keine Belege", " "
         })
     else:
-        stopwords = set(STOPWORDS)
+        stopwords = set(STOPWORDS).union({
+            "False", "Misleading", "Fake", " "
+        })
+    
+    wörter = ["Bill Gates", "Vitamin C", "5G", "Microchip", "Microchips"]
+
+    if lang != "de":
+        for wort in wörter:
+            if f" {wort.lower()} " in f" {text.lower()} ":
+                text += (" " + wort) * 100
 
     wordcloud = WordCloud(
         width=800,
@@ -202,8 +212,6 @@ def show_wordcloud(df, basis, lang):
     ax.imshow(wordcloud, interpolation='bilinear')
     ax.axis("off")
     st.pyplot(fig)
-
-
 
 ## Weitere Beispiele:
 # Top Faktenchecker (muss erstmals überprüft werden) (vielleicht auch mit Dropdown für Land)

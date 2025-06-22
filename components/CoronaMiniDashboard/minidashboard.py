@@ -54,9 +54,9 @@ def render():
                 with col_wc1:
                     lang_choice = st.selectbox("Sprache", ["", "Englisch", "Deutsch"], key="wc_lang")
                 with col_wc2:
-                    basis = st.selectbox("Worauf basiert die Wordcloud?", ["", "Verbreiter", "Faktenchecker"], key="wc_basis")
+                    basis = st.selectbox("Worauf basiert die Wordcloud?", ["", "Inhalte", "Faktenchecker"], key="wc_basis")
                 if basis and lang_choice:
-                    basis_key = "source_title" if "Verbreiter" in basis else "verifiedby"
+                    basis_key = "source_title" if "Inhalte" in basis else "verifiedby"
                     lang_code = "en" if lang_choice == "Englisch" else "de"
                     show_wordcloud(df, basis=basis_key, lang=lang_code)
 
