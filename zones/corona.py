@@ -9,16 +9,16 @@ def render():
     st.title("Corona und Fake News: Wie ein Virus die Wahrheit infizierte")
 
     # Puzzle
-    #CoronaDragPuzzle.render()
+    CoronaDragPuzzle.render()
 
-    #if st.session_state.ui_state["NoCorruptionDragPuzzle"] == False:
-       # Corruption.render()
+    if st.session_state.ui_state["NoCorruptionDragPuzzle"] == False:
+       Corruption.render()
 
     # Slider
-    #CoronaSlider.render()
+    CoronaSlider.render()
 
-    #if st.session_state.ui_state["NoCorruptionCoronaSlider"] == False:
-        #Corruption.render()
+    if st.session_state.ui_state["NoCorruptionCoronaSlider"] == False:
+        Corruption.render()
 
     st.markdown("""
 **800 Menschen starben**. Andere wiederum hielten das Virus für harmlos oder gar für erfunden, was dazu führte, dass sie sich nicht mehr schützten und damit sich und andere in Gefahr brachten.
@@ -26,7 +26,7 @@ def render():
 **Besonders beliebt waren Verschwörungstheorien. Die bekanntesten Verschwörungstheorien während der Coronazeit waren:**
 """)
 
-    #CoronaExpanders.render()
+    CoronaExpanders.render()
 
     st.markdown("""
 Was diese Theorien gemeinsam haben? Sie sind komplett frei erfunden. Und trotzdem glaubten Millionen Menschen daran. In den USA hielten **78 %** mindestens eine verbreitete Corona-Falschaussage für möglich oder wahr.
