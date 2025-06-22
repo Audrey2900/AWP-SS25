@@ -155,9 +155,16 @@ def render():
                         path = os.path.join(folder, f)
                         try:
                             img = Image.open(path)
-                            img.thumbnail((400, 400))
+                            target_size = (350, 250)  # Breite, Höhe
+
+                            # Bild auf Zielgröße einpassen 
+                            img = img.convert("RGB")
+                            img.thumbnail(target_size, Image.LANCZOS)
+                            background = Image.new("RGB", target_size, (14, 17, 23))
+                            offset = ((target_size[0] - img.width) // 2, (target_size[1] - img.height) // 2)
+                            background.paste(img, offset)
                             buf = BytesIO()
-                            img.save(buf, format="JPEG", quality=85)
+                            background.save(buf, format="JPEG", quality=85)
                             images.append((buf.getvalue(), is_fake, f))
                         except Exception as e:
                             st.error(f"Fehler beim Laden von {f}: {e}")
