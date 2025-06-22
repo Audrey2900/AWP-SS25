@@ -97,36 +97,7 @@ def show_country_chart(df):
         </style>
     """, unsafe_allow_html=True)
 
-def show_monthly_chart(df):
-    st.header("2. Anzahl der Fake-News pro Monat")
-    df['published_date'] = pd.to_datetime(df['published_date'], errors='coerce')
-    df['month'] = df['published_date'].dt.to_period('M')
-    monthly_counts = df['month'].value_counts().sort_index()
-    import plotly.graph_objects as go
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(
-        x=monthly_counts.index.astype(str),
-        y=monthly_counts.values,
-        mode='lines+markers'
-    ))
-    fig.update_layout(
-        xaxis_title="Monat",
-        yaxis_title="Anzahl Fake News",
-        margin=dict(l=20, r=20, t=40, b=20),
-        height=350,
-        dragmode=False  # Deaktiviert Ziehen/Auswählen
-    )
-    st.plotly_chart(
-        fig,
-        use_container_width=True,
-        config={
-            "staticPlot": False,
-            "scrollZoom": False,
-            "displayModeBar": False,
-            "editable": False,
-            "doubleClick": "reset"
-        }
-    )
+
 
 def show_category_chart(df):
     st.header("3. Häufigste Fake-News-Kategorien (in %)")
@@ -166,32 +137,6 @@ def show_category_chart(df):
             }
         </style>
     """, unsafe_allow_html=True)
-
-def show_language_chart(df):
-    st.header("4. Sprachen der Artikel")
-    lang_counts = df['lang'].value_counts()
-    import plotly.express as px
-    fig = px.bar(
-        x=lang_counts.index,
-        y=lang_counts.values,
-        labels={'x': 'Sprache', 'y': 'Anzahl'},
-    )
-    fig.update_layout(
-        margin=dict(l=20, r=20, t=40, b=20),
-        height=350,
-        dragmode=False  # Deaktiviert Ziehen/Auswählen
-    )
-    st.plotly_chart(
-        fig,
-        use_container_width=True,
-        config={
-            "staticPlot": False,
-            "scrollZoom": False,
-            "displayModeBar": False,
-            "editable": False,
-            "doubleClick": "reset"
-        }
-    )
 
 def show_classification_chart(df):
     st.header("7. Klassifikation von Fake News")

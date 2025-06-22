@@ -3,8 +3,6 @@ import pathlib
 import pandas as pd
 from visuals.mission1 import (
     show_country_chart,
-    show_monthly_chart,
-    show_language_chart,
     show_classification_chart,
     show_wordcloud,
 )
@@ -17,6 +15,23 @@ def load_css(file_path):
 def render():
     css_path = pathlib.Path("static/styles/mission1.css")
     load_css(css_path)
+
+    # CSS für gleichmäßig verteilte Buttons
+    st.markdown("""
+    <style>
+    [data-testid="column"]:first-child div[data-testkey="left-box"] {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-evenly !important;
+        height: 70vh !important;
+        min-height: 400px !important;
+    }
+    
+    [data-testid="column"]:first-child div[data-testkey="left-box"] .stButton {
+        margin: 0 !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
     st.title("📊 Mini-Dashboard: Fake News Visualisierung", anchor="zone1")
 
@@ -35,12 +50,8 @@ def render():
         with st.container(key="left-box"):
             if st.button("Länder"):
                 st.session_state.selected = "countries"
-            if st.button("Monate"):
-                st.session_state.selected = "monthly"
             if st.button("Kategorien"):
                 st.session_state.selected = "categories"
-            if st.button("Sprachen"):
-                st.session_state.selected = "languages"
             if st.button("Klassifikationen"):
                 st.session_state.selected = "classification"
             if st.button("Wordcloud"):
@@ -51,12 +62,8 @@ def render():
             selected = st.session_state.get("selected", "countries")
             if selected == "countries":
                 show_country_chart(df)
-            elif selected == "monthly":
-                show_monthly_chart(df)
             elif selected == "categories":
                 show_category_chart_animated(df)
-            elif selected == "languages":
-                show_language_chart(df)
             elif selected == "classification":
                 show_classification_chart(df)
             elif selected == "wordcloud":
