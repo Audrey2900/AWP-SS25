@@ -17,6 +17,9 @@ _UI_KEYS = [
     # Corruptions:
     "NoCorruptionDragPuzzle",
     "NoCorruptionCoronaSlider",
+    "NoCorruptionCoronaZone",
+    "NoCorruptionFaktenChecker",
+    "NoCorruptionAiFakeNews",
 ]
 
 def init_ui_state():

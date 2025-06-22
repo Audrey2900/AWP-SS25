@@ -1,6 +1,8 @@
 import streamlit as st
 import components.FactCheckersGraph.factcheckersgraph as FactCheckersGraph
+import components.Corruption.corruption as Corruption
 from data.char_speech_state import set_text_key
+from data.ui_states import set_ui_state
 
 def render():
     col1, col2 = st.columns([3, 1])
@@ -27,7 +29,7 @@ Faktenchecker sind spezialisierte Journalistinnen und Journalisten, die sich aus
 Die Arbeitsweise von Faktencheck-Teams ist dabei sehr methodisch. Zuerst wird geprüft, woher eine Aussage stammt, in welchem Zusammenhang sie gemacht wurde und ob sie möglicherweise aus dem Kontext gerissen wurde. Anschließend werden öffentlich zugängliche Datenbanken, wissenschaftliche Studien oder offizielle Stellungnahmen herangezogen. Am Ende steht eine nachvollziehbare Bewertung, bei der erklärt wird, warum eine Aussage stimmt, teilweise richtig oder komplett falsch ist.
 """)
     
-    st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 
     st.markdown("""
 ### Wer prüft in Deutschland?
@@ -42,7 +44,7 @@ Einige dieser Redaktionen arbeiten inzwischen eng zusammen, zum Beispiel im Proj
     
     st.button("", on_click=set_text_key, args=("FCwerprüftde", "factcheckers"), key="chat")
 
-    st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 
     st.markdown("""
 ### Was ist GADMO?
@@ -56,7 +58,7 @@ Ein Vorteil von GADMO ist, dass Redaktionen nicht doppelt an derselben Sache arb
     
     st.button("", on_click=set_text_key, args=("FCgadmo",), key="chat2")
 
-    st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 
     col1, col2 = st.columns([3, 1])
     with col1:
@@ -98,7 +100,7 @@ Ein Vorteil von GADMO ist, dass Redaktionen nicht doppelt an derselben Sache arb
 
     FactCheckersGraph.render()
 
-    st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 
     st.markdown("""
 ### Faktenchecker und Deepfakes
@@ -110,7 +112,7 @@ Trotzdem: Je besser die Technik, desto schwerer die Erkennung. Deswegen ist Aufk
     
     st.button("", on_click=set_text_key, args=("FCdeepfakes",), key="chat4")
 
-    st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 
     st.markdown("""
 ### Faktencheck ≠ Zensur
@@ -125,7 +127,7 @@ Ob man eine politische Maßnahme gut oder schlecht findet, bleibt jedem selbst �
     
     st.button("", on_click=set_text_key, args=("FCzensur",), key="chat5")
 
-    st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 
     st.markdown("""
 ### Seit wann gibt es eigentlich Faktenchecker?
@@ -136,10 +138,17 @@ Eine der ersten bekannten Plattformen war **FactCheck.org** aus den USA (2003). 
 
 In Deutschland wurde das Thema ab dem Jahr **2016** präsenter. Vor allem durch den US-Wahlkampf und das Brexit-Votum gerieten digitale Falschinformationen stärker in den Fokus. **CORRECTIV** startete in dieser Zeit als erstes unabhängiges Faktencheck-Team und gehört bis heute zu den zentralen Anlaufstellen im deutschsprachigen Raum.
 """)
-    
     st.button("", on_click=set_text_key, args=("FCwann",), key="chat6")
 
+
+    # Platzhalter für Aufgabe
+    st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
     st.button("", on_click=set_text_key, args=("FCaufgabe",), key="chat7")
+
+    st.button("Platzhalter für Aufgabe", on_click=set_ui_state, args=("NoCorruptionFaktenChecker", True))
+
+    if st.session_state.ui_state["NoCorruptionFaktenChecker"] == False:
+        Corruption.render()
 
 
 #Quellen

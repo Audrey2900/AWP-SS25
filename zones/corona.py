@@ -4,29 +4,30 @@ import components.CoronaDragPuzzle.coronadragpuzzle as CoronaDragPuzzle
 import components.Corruption.corruption as Corruption
 import components.CoronaSlider.coronaslider as CoronaSlider
 import components.CoronaMiniDashboard.minidashboard as MiniDashboard
+from data.ui_states import set_ui_state
 
 def render():
-    st.title("Corona und Fake News: Wie ein Virus die Wahrheit infizierte")
+#     st.title("Corona und Fake News: Wie ein Virus die Wahrheit infizierte")
 
-    # Puzzle
-    CoronaDragPuzzle.render()
+#     # Puzzle
+#     CoronaDragPuzzle.render()
 
-    if st.session_state.ui_state["NoCorruptionDragPuzzle"] == False:
-       Corruption.render()
+#     if st.session_state.ui_state["NoCorruptionDragPuzzle"] == False:
+#        Corruption.render()
 
-    # Slider
-    CoronaSlider.render()
+#     # Slider
+#     CoronaSlider.render()
 
-    if st.session_state.ui_state["NoCorruptionCoronaSlider"] == False:
-        Corruption.render()
+#     if st.session_state.ui_state["NoCorruptionCoronaSlider"] == False:
+#         Corruption.render()
 
-    st.markdown("""
-**800 Menschen starben**. Andere wiederum hielten das Virus für harmlos oder gar für erfunden, was dazu führte, dass sie sich nicht mehr schützten und damit sich und andere in Gefahr brachten.
+#     st.markdown("""
+# **800 Menschen starben**. Andere wiederum hielten das Virus für harmlos oder gar für erfunden, was dazu führte, dass sie sich nicht mehr schützten und damit sich und andere in Gefahr brachten.
 
-**Besonders beliebt waren Verschwörungstheorien. Die bekanntesten Verschwörungstheorien während der Coronazeit waren:**
-""")
+# **Besonders beliebt waren Verschwörungstheorien. Die bekanntesten Verschwörungstheorien während der Coronazeit waren:**
+# """)
 
-    CoronaExpanders.render()
+#     CoronaExpanders.render()
 
     st.markdown("""
 Was diese Theorien gemeinsam haben? Sie sind komplett frei erfunden. Und trotzdem glaubten Millionen Menschen daran. In den USA hielten **78 %** mindestens eine verbreitete Corona-Falschaussage für möglich oder wahr.
@@ -36,7 +37,17 @@ Aber wie konnten sich solche Falschinfos so schnell verbreiten? Die Antwort ist 
 Das Gefährliche daran ist, dass Fake News oft sehr überzeugend aussehen. Manche basieren auf echten Infos, die dann verdreht oder aus dem Zusammenhang gerissen wurden. Wenn ein TikTok-Video sagt, Vitamin C schützt vor Corona, klingt das vielleicht plausibel, aber es stimmt nicht.
 """)
     
+    st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
+    
     MiniDashboard.render()
+
+    # Platzhalter für Aufgabe
+    st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
+
+    st.button("Platzhalter für Aufgabe", on_click=set_ui_state, args=("NoCorruptionCoronaZone", True))
+
+    if st.session_state.ui_state["NoCorruptionCoronaZone"] == False:
+        Corruption.render()
 
 
 
