@@ -4,9 +4,9 @@ import pandas as pd
 import streamlit.components.v1 as components
 
 def show_category_chart_animated(df):
-    st.header("3. Häufigste Fake-News-Kategorien (in %)")
+    st.header("3. Häufigste Fake-News-Kategorien")
     category_counts = df['category'].value_counts(normalize=True).mul(100).round(1)
-    steps = 10
+    steps = 10  
     data = []
     for i in range(steps + 1):
         frac = i / steps
@@ -26,7 +26,6 @@ def show_category_chart_animated(df):
         animation_frame="Frame",
         range_y=[0, category_counts.max() * 1.1],
         labels={'Kategorie': 'Kategorie', 'Prozent': 'Prozent'},
-        # Dunkles Theme
         template="plotly_dark"
     )
     
@@ -36,8 +35,15 @@ def show_category_chart_animated(df):
         width=600,
         showlegend=False,
         dragmode=False,
+        paper_bgcolor='rgba(14, 17, 23, 1)',
+        plot_bgcolor='rgba(14, 17, 23, 1)',
+        font=dict(color='white'),
     )
-    fig.update_traces(texttemplate='%{text:.1f}', textposition='outside')
+    fig.update_traces(texttemplate='%{text:.1f}', textposition='outside', marker_color='#f7941d')
+
+    # Animation schneller machen: frame.duration und transition.duration verringern
+    fig.layout.updatemenus[0].buttons[0].args[1]["frame"]["duration"] = 60   # 60ms pro Frame
+    fig.layout.updatemenus[0].buttons[0].args[1]["transition"]["duration"] = 30  # 30ms Übergang
 
     config = {
         "displayModeBar": False,
@@ -48,18 +54,13 @@ def show_category_chart_animated(df):
         "doubleClick": False,
     }
 
-    # Automatische Animation per JavaScript
     plotly_html = fig.to_html(full_html=False, include_plotlyjs='cdn', auto_play=True, config=config)
-    # auto_play=True sorgt für automatischen Start
 
     hide_controls_css = """
         <style>
-        /* Dark theme für den Container */
         .js-plotly-plot {
             background-color: #0e1117 !important;
         }
-        
-        /* Animation Controls ausblenden */
         .plotly .menulayer,
         g.updatemenu-container,
         g.updatemenu-header-group,
@@ -74,12 +75,9 @@ def show_category_chart_animated(df):
     components.html(hide_controls_css + plotly_html, height=400)
 
 def show_classification_chart_animated(df):
-    st.header("4. Klassifikation der Fake News (in %)")
-    
-    # Gleiche Datenverarbeitung wie in show_classification_chart
+    st.header("4. Klassifikation der Fake News")
     class_counts = df['class'].value_counts(normalize=True).mul(100).round(1)
-    
-    steps = 10 
+    steps = 10
     data = []
     for i in range(steps + 1):
         frac = i / steps
@@ -112,18 +110,12 @@ def show_classification_chart_animated(df):
         paper_bgcolor='rgba(14, 17, 23, 1)',
         plot_bgcolor='rgba(14, 17, 23, 1)',
         font=dict(color='white'),
-        transition={'duration': 150, 'easing': 'cubic-in-out'}
     )
-    
-    fig.update_traces(
-        texttemplate='%{text:.1f}', 
-        textposition='outside',
-        marker_color='#f7941d'
-    )
-    
-    # Animation Settings
-    fig.layout.updatemenus[0].buttons[0].args[1]["frame"]["duration"] = 150
-    fig.layout.updatemenus[0].buttons[0].args[1]["transition"]["duration"] = 100
+    fig.update_traces(texttemplate='%{text:.1f}', textposition='outside', marker_color='#f7941d')
+
+    # Animation schneller machen
+    fig.layout.updatemenus[0].buttons[0].args[1]["frame"]["duration"] = 60
+    fig.layout.updatemenus[0].buttons[0].args[1]["transition"]["duration"] = 30
 
     config = {
         "displayModeBar": False,
@@ -141,7 +133,6 @@ def show_classification_chart_animated(df):
         .js-plotly-plot {
             background-color: #0e1117 !important;
         }
-        
         .plotly .menulayer,
         g.updatemenu-container,
         g.updatemenu-header-group,

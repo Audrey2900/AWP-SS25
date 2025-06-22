@@ -73,9 +73,8 @@ def show_country_chart(df):
     )
 
     map_fig.update_layout(
-        title="Fake News Verteilung weltweit",
-        margin={"r": 0, "t": 50, "l": 0, "b": 0},
-        height=250
+        margin={"r": 0, "t": 0, "l": 0, "b": 0},
+        height=370
     )
 
     st.plotly_chart(map_fig, use_container_width=True)
@@ -101,7 +100,7 @@ def show_country_chart(df):
 
 
 def show_category_chart(df):
-    st.header("3. Häufigste Fake-News-Kategorien (in %)")
+    st.header("3. Häufigste Fake-News-Kategorien")
     category_counts = df['category'].value_counts(normalize=True).mul(100).round(1)
     fig = px.bar(
         x=category_counts.index,
