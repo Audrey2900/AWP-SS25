@@ -3,7 +3,6 @@ import pathlib
 import pandas as pd
 from visuals.mission1 import (
     show_country_chart,
-    show_classification_chart,
     show_wordcloud,
 )
 from components.chart_animation.chartanimation import show_category_chart_animated, show_classification_chart_animated

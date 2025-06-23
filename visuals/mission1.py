@@ -192,7 +192,7 @@ def show_wordcloud(df, basis, lang):
             "False", "Misleading", "Fake", " "
         })
     
-    wörter = ["Bill Gates", "Vitamin C", "5G", "Microchip", "Microchips"]
+    wörter = ["Bill Gates", "Vitamin C", "5G"]
 
     if lang != "de":
         for wort in wörter:
