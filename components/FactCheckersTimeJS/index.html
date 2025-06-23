@@ -1,0 +1,138 @@
+<html>
+  <body style="margin: 0; padding: 0; background: transparent; font-family: system-ui, sans-serif;">
+    <div style="padding: 16px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;" id="card-container"></div>
+
+    <script>
+      const cards = [
+        "PolitiFact und Full Fact",
+        "CORRECTIV",
+        "FactCheck.org",
+      ];
+
+      let selected = null;
+
+      function sendMessageToStreamlitClient(type, data) {
+        const outData = Object.assign({ isStreamlitMessage: true, type: type }, data);
+        window.parent.postMessage(outData, "*");
+      }
+
+      function sendDataToPython(value) {
+        sendMessageToStreamlitClient("streamlit:setComponentValue", { value: value });
+      }
+
+      function setFrameHeight(height) {
+        sendMessageToStreamlitClient("streamlit:setFrameHeight", { height: height });
+      }
+
+      function init() {
+        sendMessageToStreamlitClient("streamlit:componentReady", { apiVersion: 1 });
+      }
+
+      function updateCardOrder() {
+        const elements = Array.from(document.querySelectorAll(".card"));
+        const order = elements.map(el => el.textContent.trim());
+        sendDataToPython(order);
+      }
+
+      function createCard(text) {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.draggable = true;
+        card.textContent = text;
+
+        card.addEventListener("dragstart", () => {
+          card.classList.add("dragging");
+        });
+
+        card.addEventListener("dragend", () => {
+          card.classList.remove("dragging");
+          updateCardOrder();
+        });
+
+        card.addEventListener("click", () => {
+          if (selected) {
+            const container = document.getElementById("card-container");
+            if (selected !== card) {
+              const container = document.getElementById("card-container");
+              const cards = Array.from(container.children);
+              const selectedIndex = cards.indexOf(selected);
+              const targetIndex = cards.indexOf(card);
+
+              if (selectedIndex < targetIndex) {
+                container.insertBefore(selected, card.nextSibling);
+              } else {
+                container.insertBefore(selected, card);
+              }
+            }
+            selected.classList.remove("selected");
+            selected = null;
+            updateCardOrder();
+          } else {
+            card.classList.add("selected");
+            selected = card;
+          }
+        });
+
+        return card;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const container = document.getElementById("card-container");
+
+        cards.forEach(text => {
+          const card = createCard(text);
+          container.appendChild(card);
+        });
+
+        container.addEventListener("dragover", e => {
+          e.preventDefault();
+          const dragging = document.querySelector(".dragging");
+
+          const afterElement = Array.from(container.children)
+            .filter(child => child !== dragging)
+            .reduce((closest, child) => {
+              const box = child.getBoundingClientRect();
+              const offset = e.clientX - box.left - box.width / 2;
+              if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+              } else {
+                return closest;
+              }
+            }, { offset: Number.NEGATIVE_INFINITY, element: null }).element;
+
+          if (afterElement) {
+            container.insertBefore(dragging, afterElement);
+          } else {
+            container.appendChild(dragging);
+          }
+        });
+
+        init();
+        setTimeout(() => setFrameHeight(document.body.scrollHeight), 0);
+        updateCardOrder();
+      });
+    </script>
+
+    <style>
+      .card {
+        background: #ffffff;
+        padding: 16px 24px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        cursor: grab;
+        user-select: none;
+        font-size: 18px;
+        transition: transform 0.1s ease;
+      }
+
+      .card.dragging {
+        opacity: 0.5;
+        transform: scale(0.95);
+      }
+
+      .card.selected {
+        outline: 3px solid #7287ff;
+      }
+    </style>
+  </body>
+</html>
