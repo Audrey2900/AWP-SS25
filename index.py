@@ -136,7 +136,7 @@ import zones.Mission_3 as Mission3
 
 #Onboarding.render()
 
-#Corona.render()
+Corona.render()
 
 #FactCheckers.render()
 
@@ -146,4 +146,4 @@ import zones.Mission_3 as Mission3
 
 #mission2.render()
 
-Mission3.render()
+#Mission3.render()
