@@ -1,0 +1,134 @@
+<html>
+  <body style="margin:0; padding:16px; font-family: system-ui, sans-serif; background: transparent; color: white;">
+  <div style="display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;">
+    <div style="width: 400px; flex-shrink: 0;">
+      <h3 style="color: white;">Verfügbare Badges</h3>
+      <div id="left-container" style="display: flex; flex-wrap: wrap; gap: 12px;"></div>
+    </div>
+    <div style="width: 400px; flex-shrink: 0;">
+        <h3 style="color: white;">Ausgewählt</h3>
+        <div id="right-container" style="
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start; /* <- Verhindert vertikales Strecken */
+        gap: 12px;
+        min-height: 80px;
+        padding: 16px;
+        border: 2px dashed #aaa;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.05);
+        ">
+        </div>
+    </div>
+    </div>
+    <script>
+      const BADGES = ["5G-Mobilfunk verursacht COVID-19", "Bill Gates plant, Mikrochips über Impfungen zu implantieren", 
+        "COVID-19 ist nicht schlimmer als die Grippe", "Geheimplan: Corona als Schwindel oder Biowaffe", 
+        "Vitamin C in Mega-Dosis heilt COVID-19"];
+      let dragged = null;
+
+      function sendMessageToStreamlitClient(type, data) {
+        window.parent.postMessage({ isStreamlitMessage: true, type, ...data }, "*");
+      }
+
+      function sendDataToPython(list) {
+        sendMessageToStreamlitClient("streamlit:setComponentValue", { value: list });
+      }
+
+      function setFrameHeight() {
+        sendMessageToStreamlitClient("streamlit:setFrameHeight", {
+          height: document.body.scrollHeight
+        });
+      }
+
+      function init() {
+        sendMessageToStreamlitClient("streamlit:componentReady", { apiVersion: 1 });
+      }
+
+      function collectSelectedBadges() {
+        const right = document.querySelectorAll("#right-container .badge");
+        const result = Array.from(right).map(el => el.textContent.trim());
+        sendDataToPython(result);
+      }
+
+      function createBadge(text) {
+        const badge = document.createElement("div");
+        badge.className = "badge";
+        badge.textContent = text;
+        badge.draggable = true;
+
+        badge.addEventListener("dragstart", () => {
+          dragged = badge;
+        });
+
+        badge.addEventListener("dragend", () => {
+          dragged = null;
+        });
+
+        badge.addEventListener("click", () => {
+          const parent = badge.parentElement;
+          const leftContainer = document.getElementById("left-container");
+          const rightContainer = document.getElementById("right-container");
+
+          if (parent === leftContainer) {
+            rightContainer.appendChild(badge);
+          } else {
+            leftContainer.appendChild(badge);
+          }
+          collectSelectedBadges();
+          setTimeout(setFrameHeight, 0);
+        });
+
+        return badge;
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const left = document.getElementById("left-container");
+        const right = document.getElementById("right-container");
+
+        BADGES.forEach(text => {
+          const b = createBadge(text);
+          left.appendChild(b);
+        });
+
+        [right, left].forEach(container => {
+          container.addEventListener("dragover", e => e.preventDefault());
+          container.addEventListener("drop", e => {
+            e.preventDefault();
+            if (dragged) {
+              container.appendChild(dragged);
+              collectSelectedBadges();
+              setTimeout(setFrameHeight, 0);
+            }
+          });
+        });
+
+        init();
+        setTimeout(setFrameHeight, 0);
+      });
+    </script>
+
+    <style>
+      .badge {
+        display: block;             
+        width: 100%;                    
+        max-width: unset;               
+        box-sizing: border-box;         
+        padding: 12px 20px;
+        background: #f0f0f0;
+        border-radius: 18px;
+        cursor: pointer;
+        font-size: 17px;
+        font-weight: 500;
+        word-break: break-word;
+        white-space: normal;
+        user-select: none;
+        color: black;
+      }
+
+      .badge:hover {
+        background: #d8d8d8;
+      }
+    </style>
+  </body>
+</html>
