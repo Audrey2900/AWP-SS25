@@ -37,7 +37,7 @@ def generate_certificate(name: str) -> bytes:
     pdf.ln(10)
     pdf.multi_cell(0, 10,
         "für die erfolgreiche Teilnahme am interaktiven Lernprogramm\n"
-        "\"Fake News & Deepfakes erkennen und bewerten\"", 
+        "\"InfoGuard - Schützer der Informationen\"", 
         align='C')
 
     cert_id = f"ZERT-{random.randint(100000,999999)}"
@@ -45,14 +45,14 @@ def generate_certificate(name: str) -> bytes:
     pdf.set_font("Helvetica", 'I', 10)
     #pdf.cell(0, 10, f"Zertifikatsnummer: {cert_id}", ln=True, align='C')
 
-    pdf.image("static/InfoGuard_UP.png", x=85, y=115, w=120)
+    pdf.image("static/InfoGuard_UP.png", x=120, y=121, w=60)
 
     pdf.ln(30)
     pdf.set_font("Helvetica", 'I', 12)
     pdf.cell(0, 10, "Unterschrift: ____________________", ln=True, align='R')
 
     pdf.image("static/stempel.png", x=20, y=155, w=40)
-    pdf.image("static/unterschrift.png", x=200, y=170, w=50)
+    pdf.image("static/unterschrift.png", x=235, y=128, w=50)
 
     return pdf.output(dest='S').encode('latin1')
 
