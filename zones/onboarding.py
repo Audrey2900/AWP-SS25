@@ -6,7 +6,7 @@ def render():
 
     st.write("")  # Pufferplatz
     st.write("")  # Noch mehr Pufferplatz
-    
+
     # Namenseingabe
     st.markdown("#### Wie heißt du? Gib deinen Vor- und Nachnamen ein:")
     vorname = st.text_input("Vorname", key="input_vorname")
@@ -46,15 +46,17 @@ def render():
             ---
             ### 🔍 Was sind Fake News – und warum sind sie gefährlich?
 
-            Fake News sehen oft aus wie echte Nachrichten – aber sie wurden absichtlich manipuliert, um dich zu täuschen.
+            Fake News sind absichtlich erfundene oder manipulierte Informationen, die wie echte Nachrichten aussehen. Sie wollen dich täuschen – zum Beispiel, um Stimmung zu machen, Geld zu verdienen oder politische Meinungen zu beeinflussen.
 
-            Sie nutzen starke Emotionen, damit du nicht hinterfragst, sondern einfach weiterleitest. Manchmal stecken persönliche Meinungen dahinter – manchmal politische Absichten oder sogar kommerzielle Ziele.
+            Besonders in sozialen Medien verbreiten sich solche Falschinformationen rasend schnell. Warum? Weil sie starke Gefühle auslösen – Wut, Angst oder Mitleid. Genau das sorgt dafür, dass Menschen sie teilen, ohne sie zu hinterfragen.
 
-            Wer Fake News erkennt, schützt nicht nur sich selbst – sondern auch andere.
+            Das Problem: Fake News können echten Schaden anrichten. Sie untergraben Vertrauen in die Medien, führen zu Missverständnissen – und machen es schwer, zwischen Wahrheit und Lüge zu unterscheiden.
 
-            Frage dich immer: Wer sagt das? Warum? Und kann ich das irgendwo nachprüfen?
+            Deshalb ist es so wichtig, sie zu erkennen. Forschende und Entwickler arbeiten mit künstlicher Intelligenz, um Fakes automatisch zu entlarven. Aber das reicht nicht:
 
-            Gleich wirst du einige dieser Täuschungen selbst entlarven – bist du bereit?
+            Was wirklich zählt, ist dein kritisches Denken. Du bist der Filter – du entscheidest, was du glaubst und weiterverbreitest.
+
+            Und genau das trainierst du hier – mit Sam an deiner Seite.
             """)
 
             st.button("", on_click=set_text_key, args=("onboarding4",), key="chat4")

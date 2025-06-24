@@ -7,28 +7,28 @@ BUBBLE_TEXTS = {
         "Deepfakes sind KI-manipulierte Medien, die täuschend echt aussehen können.",
     ],
     ######### Onboarding + Offboarding #########
-    "onboarding": [
-        "Hey! Schön, dass du da bist.",
-        "Ich bin Sam – Reporter bei unserer Schülerzeitung.",
-        "Nach einem ziemlich fiesen Hack wurden Teile meines Artikels gelöscht… oder schlimmer: manipuliert!",
-        "Ich muss herausfinden, was noch stimmt – und was nicht.",
-        "Aber ich kann nicht jedem trauen. Gib mir bitte deinen Namen, damit ich weiß, dass du kein Hacker bist."
+   "onboarding": [
+        "Hallo! Ich bin INFO – das steht für Intelligente Nachrichten Filter Organisation.",
+        "Eigentlich sollte diese Plattform junge Detektive wie dich durch die Welt der Fake News führen.",
+        "Aber jemand hat uns gehackt… Texte fehlen, Abschnitte wurden manipuliert – alles ist durcheinander!",
+        "Ich arbeite rund um die Uhr daran, alles zu reparieren – aber alleine schaffe ich es nicht.",
+        "Deshalb brauche ich dich! Du kannst mir helfen, Falschinformationen aufzudecken und die Wahrheit wiederherzustellen.",
+        "Doch bevor wir loslegen: Sag mir bitte deinen Namen, damit ich sicher sein kann, dass du kein Hacker bist. 😉"
     ],
     "onboarding2": [
-        "Alles klar – ich weiß Bescheid. Ich kann dir vertrauen.",
-        "Bevor wir loslegen können, musst du dich allerdings noch mit den Funktionen dieser Website vertraut machen.",
-        "Schau dir kurz an, wie du durch die Anwendung navigierst.",
-        "Und was du machen kannst, wenn du mal nicht weiterkommst."
+        "Danke – jetzt weiß ich, dass ich dir vertrauen kann!",
+        "Bevor du dich ins Abenteuer stürzt, zeige ich dir kurz, wie unsere Plattform funktioniert.",
+        "Du wirst Hinweise lesen, Aufgaben lösen und defekte Zonen wiederherstellen.",
+        "Und keine Sorge: Ich bin die ganze Zeit an deiner Seite – als dein persönlicher Nachrichten-Scout."
     ],
-
     "onboarding3": [
-        "Super, jetzt weißt du Bescheid.",
-        "Dir steht nichts mehr im Wege, um mir zu helfen, die verlorenen Infos wiederzufinden und den Artikel zu reparieren.",
-        "Aber was sind Fake News überhaupt?",
-        "Lies dir diesen kurzen Text durch – danach geht's richtig los!"
+        "Top! Jetzt weißt du, wie du dich hier zurechtfindest.",
+        "Gleich beginnt deine erste Mission – doch vorher brauchst du noch etwas Wissen im Gepäck.",
+        "Was sind eigentlich Fake News? Warum sind sie gefährlich?",
+        "Lies dir den nächsten Abschnitt aufmerksam durch. Er hilft dir, Desinformationen zu erkennen!"
     ],
     "onboarding4": [
-        "Alles klar – du bist startbereit."
+        "Los geht's – deine erste Mission wartet!"
     ],
     "offboarding": [
         "Puh... was für eine Reise!",
