@@ -9,6 +9,10 @@ _UI_KEYS = [
     "CoronaSliderDone",
     "SentimentSlider",
     "SentimentSliderDone",
+    "CoronaQuiz",
+    "CoronaQuizDone",
+    "FCQuiz",
+    "FCQuizDone",
 
     
 

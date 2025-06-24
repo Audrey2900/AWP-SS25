@@ -28,7 +28,6 @@ def render():
 
     DeepfakeFinderLogic.render()
 
-
 # Quellen 
 # https://incidentdatabase.ai/taxonomies/
 # https://airtable.com/appOU03dlKuBdbmty/shrEkrIYINbrcKQ3z/tbleGYjNLn2D4Xfzs

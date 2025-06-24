@@ -37,7 +37,7 @@ Die Arbeitsweise von Faktencheck-Teams ist dabei sehr methodisch. Zuerst wird ge
 
 In Deutschland gibt es mehrere professionelle Teams, die regelmäßig Faktenchecks veröffentlichen. Manche arbeiten unabhängig, andere sind Teil großer Nachrichtenagenturen oder öffentlich-rechtlicher Sender. Besonders bekannt ist die Redaktion von **CORRECTIV**. Sie arbeitet gemeinnützig und unabhängig. Das bedeutet, sie finanziert sich über Spenden und nimmt keine Werbung oder Einfluss von außen an.
 
-Auch **AFP Deutschland**, also die deutsche Redaktion der internationalen Nachrichtenagentur Agence France Presse, betreibt ein eigenes Faktencheck-Team.  
+Auch **AFP Faktencheck Deutschland**, also die deutsche Redaktion der internationalen Nachrichtenagentur Agence France Presse, betreibt ein eigenes Faktencheck-Team.  
 Die **Deutsche Presseagentur (dpa)** hat ebenfalls ein spezialisiertes Team aufgebaut, das Falschbehauptungen überprüft. Zusätzlich engagieren sich auch einige öffentlich-rechtliche Sender im Faktencheck: **ARD Faktenfinder**, **BR24 Faktenfuchs**, **MDR Fact Checking Team** und auch **DW Fact Check** von der Deutschen Welle.
 
 Einige dieser Redaktionen arbeiten inzwischen eng zusammen, zum Beispiel im Projekt **GADMO**.
@@ -141,12 +141,15 @@ In Deutschland wurde das Thema ab dem Jahr **2016** präsenter. Vor allem durch 
 """)
     st.button("", on_click=set_text_key, args=("FCwann",), key="chat6")
 
-
-    # Platzhalter für Aufgabe
     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
-    st.button("", on_click=set_text_key, args=("FCaufgabe",), key="chat7")
+    st.button("", on_click=set_text_key, args=("FCaufgabe", "FCQuiz"), key="chat7")
 
-    FactCheckersQuiz.render()
+    if st.session_state.ui_state["FCQuizDone"] == False:
+        if (
+            st.session_state.text_key == "FCaufgabe" and st.session_state.text_index == 3
+        ) or st.session_state.ui_state["FCQuiz"]:
+            st.session_state.ui_state["FCQuiz"] = True
+            FactCheckersQuiz.render()
 
     if st.session_state.ui_state["NoCorruptionFaktenChecker"] == False:
         Corruption.render()

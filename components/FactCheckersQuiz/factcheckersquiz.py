@@ -1,11 +1,13 @@
 import streamlit as st
+from data.char_speech_state import set_text_key
+from data.ui_states import set_ui_state
+from components.FactCheckersTimeJS import factcheckerstime
 
 def render():
-    # --- Quiz Aufgabe ---
     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
-    st.subheader("Quiz: Faktenchecker")
+    st.header("Quiz: Faktenchecker", anchor="FCQuiz")
 
-    factchecker_quiz = [
+    single_choice_questions = [
         {
             "question": "1. Was ist ein zentrales Merkmal seriöser Faktencheck-Redaktionen?",
             "options": [
@@ -14,7 +16,8 @@ def render():
                 "Sie arbeiten ausschließlich für politische Parteien.",
                 "Sie prüfen keine Aussagen aus sozialen Netzwerken."
             ],
-            "answer": 1
+            "answer_index": 1,
+            "wrong_key": "FCQuiz1falsch"
         },
         {
             "question": "2. Was ist das Ziel des GADMO-Projekts?",
@@ -24,55 +27,96 @@ def render():
                 "Nur in Österreich Falschmeldungen prüfen.",
                 "Falschinformationen verbreiten."
             ],
-            "answer": 0
+            "answer_index": 0,
+            "wrong_key": "FCQuiz2falsch"
         },
         {
             "question": "3. Was ist der Unterschied zwischen Faktencheck und Zensur?",
             "options": [
-                "Faktenchecks richten sich gegen falsche Aussagen, nicht gegen Meinungen.",
-                "Faktenchecks verbieten politische Meinungen.",
                 "Faktenchecks löschen alle Beiträge im Internet.",
+                "Faktenchecks verbieten politische Meinungen.",
+                "Faktenchecks richten sich gegen falsche Aussagen, nicht gegen Meinungen.",
                 "Faktenchecks werden nur von der Regierung durchgeführt."
             ],
-            "answer": 0
+            "answer_index": 2,
+            "wrong_key": "FCQuiz3falsch"
         }
     ]
 
-    if "factchecker_quiz_answers" not in st.session_state:
-        st.session_state.factchecker_quiz_answers = [None] * len(factchecker_quiz)
-    if "factchecker_quiz_submitted" not in st.session_state:
-        st.session_state.factchecker_quiz_submitted = False
+    checkbox_options = {
+        "BR24 Faktenfuchs": True,
+        "TurboFinder": False,
+        "PolitiFact": False,
+        "AFP Faktencheck": True,
+        "FactCheck.org": False,
+        "ARD Faktenfinder": True,
+        "Full Fact": False,
+        "ABM Faktenteam": False,
+        "MedienCheck": False,
+        "MDR Fact Checking Team": True
+    }
 
-    with st.form("factchecker_quiz_form"):
-        for idx, q in enumerate(factchecker_quiz):
-            st.markdown(f"**{q['question']}**")
-            st.session_state.factchecker_quiz_answers[idx] = st.radio(
-                label=f"Antwort zu Frage {idx+1}",
-                options=q["options"],
-                index=(q["options"].index(st.session_state.factchecker_quiz_answers[idx]) if st.session_state.factchecker_quiz_answers[idx] in q["options"] else 0),
-                key=f"factchecker_quiz_q{idx}",
-                label_visibility="collapsed"
-            )
-            st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
-        submitted = st.form_submit_button("Antworten abgeben")
+    expected_order = [
+        "FactCheck.org",
+        "PolitiFact und Full Fact",
+        "CORRECTIV"
+    ]
 
-    if submitted:
-        st.session_state.factchecker_quiz_submitted = True
+    # Fragen 1–3
+    for idx, q in enumerate(single_choice_questions):
+        st.markdown(f"**{q['question']}**")
+        st.radio(
+            label=f"Antwort zu Frage {idx+1}",
+            options=q["options"],
+            key=f"factchecker_quiz_q{idx}",
+            label_visibility="collapsed"
+        )
+        st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
-    if st.session_state.factchecker_quiz_submitted:
-        st.markdown("### Auswertung")
-        correct = 0
-        for idx, q in enumerate(factchecker_quiz):
-            user_answer = st.session_state.factchecker_quiz_answers[idx]
-            correct_answer = q["options"][q["answer"]]
-            if user_answer == correct_answer:
-                st.success(f"Frage {idx+1}: Richtig! ✅")
-                correct += 1
-            else:
-                st.error(f"Frage {idx+1}: Falsch ❌ (Richtig wäre: **{correct_answer}**)")
-        st.info(f"Du hast {correct} von {len(factchecker_quiz)} Fragen richtig beantwortet.")
+    # Frage 4 – Checkboxen
+    st.markdown("**4. Welche Faktenchecker gibt es in Deutschland?**")
+    for label in checkbox_options:
+        st.checkbox(label, key=f"fc_checkbox_{label}")
+    st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
-        if st.button("Quiz erneut versuchen"):
-            st.session_state.factchecker_quiz_answers = [None] * len(factchecker_quiz)
-            st.session_state.factchecker_quiz_submitted = False
-            st.experimental_rerun()
+    # Frage 5 – Drag-and-Drop Komponente (außerhalb von Formular!)
+    st.markdown("**5. Bringe die internationalen Faktenchecker in die richtige Reihenfolge:**")
+    st.markdown("_Tipp: Ziehe oder klicke die Karten, um die Reihenfolge zu ändern._")
+    order = factcheckerstime() or []
+    st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+    def auswertung():
+        # Fragen 1–3
+        for idx, q in enumerate(single_choice_questions):
+            key = f"factchecker_quiz_q{idx}"
+            if key not in st.session_state:
+                return
+            user_answer = st.session_state[key]
+            if user_answer != q["options"][q["answer_index"]]:
+                set_text_key(q["wrong_key"])
+                return
+
+        # Frage 4
+        for label, is_correct in checkbox_options.items():
+            if st.session_state.get(f"fc_checkbox_{label}", False) != is_correct:
+                set_text_key("FCQuiz4falsch")
+                return
+
+        # Frage 5
+        if order != expected_order:
+            set_text_key("FCQuiz5falsch")
+            return
+
+        set_text_key("FCQuizAlleRichtig")
+
+    st.button("Antworten abgeben", on_click=auswertung)
+
+    # Abschlussaktion
+    if (
+        st.session_state.text_key == "FCQuizAlleRichtig"
+        and st.session_state.text_index == 1
+        and not st.session_state.ui_state["FCQuizDone"]
+    ):
+        set_ui_state("FCQuizDone", True)
+        set_ui_state("NoCorruptionFaktenChecker", True)
+        st.rerun()

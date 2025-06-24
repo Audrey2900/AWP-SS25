@@ -113,10 +113,29 @@ BUBBLE_TEXTS = {
         "2016… erst seit dann ist das Thema Faktenchecks ein Alltagsthema. Ziemlich spät für Deutschland, oder? Aber wenn man an Trump und Brexit denkt, macht das schon Sinn.",
     ],
     "FCaufgabe" : [
-        "Ab hier beginnt wieder der beschädigte Teil der Website. In meine Web-Engine kann ich sehen, dass die Basisdaten weiterhin im Hintergrund beschädigt sind.",
+        "Ab hier beginnt wieder der beschädigte Teil der Website. In meiner Web-Engine kann ich sehen, dass die Basisdaten weiterhin im Hintergrund beschädigt sind.",
         "Dadurch kann ich leider nicht den nächsten Abschnitt vom Artikel ziehen. Wenn wir aber so vorgehen, wie vorhin, sollten wir ganz einfach die beschädigten Daten korrigieren können.",
-        "Ist dies geschehen, sollten bei mir im Code keine Fehlermeldungen kommen, wenn ich versuche den neuen Abschnitt zu laden.",
-        "Einen Moment, ich schicke dir mal kurz einige Fragen in den Vordergrund. Wenn du durch bist, kannst du mir wieder die Lösung zuschicken."
+        "Aber hey, jetzt können wir endlich die Frage von vorhin mit den Faktencheckern richtig Beantworten.",
+        "Einen Moment, ich schicke dir mal kurz einige Fragen in den Vordergrund."
+    ],
+    "FCQuiz1falsch": [
+        "Die erste Frage ist noch falsch."
+    ],
+    "FCQuiz2falsch": [
+        "Bei Frage 2 ist etwas nicht richtig."
+    ],
+    "FCQuiz3falsch": [
+        "Frage 3 passt noch nicht ganz"
+    ],
+    "FCQuiz4falsch": [
+        "Frage 4 passt noch nicht."
+    ],
+    "FCQuiz5falsch": [
+        "Die Reihenfolge bei Frage 5 stimmt noch nicht."
+    ],
+    "FCQuizAlleRichtig": [
+        "Mega! Von meiner Seite gibts nichts mehr auszusetzen. Ich kann nun den letzten Artikelabschnitt wieder herstellen.",
+        "Wir haben es fast geschafft, weiter geht's!",
     ],
     ######### FakeNews and Ai #########
     "test1": [],
