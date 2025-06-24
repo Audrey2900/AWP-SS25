@@ -138,12 +138,46 @@ import zones.Mission_3 as Mission3
 
 #Corona.render()
 
-FactCheckers.render()
+#FactCheckers.render()
 
-#AiFakeNews.render()
+AiFakeNews.render()
 
 #Offboarding.render()
 
 #mission2.render()
 
 #Mission3.render()
+
+#TODO zu Faktenchecker hinzufügen. 
+# from components.FactCheckersTimeJS import factcheckerstime
+# order = factcheckerstime() or []
+
+# st.write("Aktuelle Reihenfolge:", order)
+
+#TODO zu FaktencheckerQuiz hinzufügen
+#TODO: Charaktertext: Also, wieder zur Frage von Vorhin. Die Faktenchecker Deutschlands. Welche waren die nochmal? Kann mich noch an Correctiv, DW Fact Check und die DPA erinnern. 
+# antworten = st.multiselect(
+#     "Welche dieser Organisationen sind Faktenchecker?",
+#     [
+#         "FactCheck.org",
+#         "Wikipedia",         #TODO Anpassen.
+#         "PolitiFact",
+#         "YouTube",
+#         "CORRECTIV",
+#         "Telegram"
+#     ]
+# )
+
+# if antworten:
+#     st.write("Du hast ausgewählt:", antworten)
+
+# from components.CoronaQuizDrag import coronaquizdrag
+# result = coronaquizdrag() or []
+
+# st.write("Aktuell ausgewählt:", result)
+
+
+# import components.CoronaExpanders.coronaexpanders as i
+# import components.CoronaMiniDashboard.minidashboard as min
+# min.render()
+# i.render()

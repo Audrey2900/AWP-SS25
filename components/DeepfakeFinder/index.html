@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <body style="margin: 0; padding: 0; background: transparent; color: white; font-family: sans-serif;">
+
+    <div style="
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 18px;
+      padding: 40px 5px;
+      background-color: rgba(255, 255, 255, 0.02);
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    ">
+
+      <div style="display: flex; justify-content: center;">
+        <div id="image-container" style="
+            width: 90vw;
+            max-width: 900px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        ">
+          <div style="position: relative; width: 60%; aspect-ratio: auto;">
+            <img id="below" src="fishermanFake.png" style="
+              width: 100%;
+              height: auto;
+              display: block;
+              position: relative;
+              z-index: 0;">
+            <img id="above" src="fisherman.png" style="
+              width: 100%;
+              height: auto;
+              display: block;
+              position: absolute;
+              top: 0;
+              left: 0;
+              z-index: 1;
+              -webkit-mask-image: none;
+              mask-image: none;
+              -webkit-mask-repeat: no-repeat;
+              mask-repeat: no-repeat;
+              -webkit-mask-size: 100% 100%;
+              mask-size: 100% 100%;">
+            <img id="magnifier" src="lupe.png" style="
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 225px;
+              transform: translate(-39%, -30%);
+              z-index: 10;
+              pointer-events: none;
+              display: none;">
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 20px; text-align: center;">
+        <button id="reveal-btn" style="padding: 10px 20px; font-size: 16px;">Erkennungsmerkmal auflösen</button>
+        <div id="reveal-text" style="margin-top: 10px; font-size: 16px; min-height: 24px;"></div>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 20px; margin-top: 30px;">
+        <button id="prev-btn" style="padding: 10px 20px; font-size: 16px;">&lt; Zurück</button>
+        <button id="next-btn" style="padding: 10px 20px; font-size: 16px;">Weiter &gt;</button>
+      </div>
+    </div>
+
+    <script>
+      const sets = [
+        { below: "fishermanFake.png", above: "fisherman.png" },
+        { below: "verzerrtFake.png", above: "verzerrt.png" },
+        { below: "brücheweltFake.png", above: "brüchewelt.png" },
+        { below: "mimikFake.png", above: "mimik.png" }
+      ];
+      let currentSet = 0;
+
+      const descriptions = [
+        "Ungewöhnliche Körpermerkmale oder anatomische Unstimmigkeiten, etwa bei Zähnen, Ohren oder Händen. <br> hier: zu viele Finger",
+        "Verzerrte Objekte, fehlerhafte Schriftzüge oder unrealistische Details – häufig in Accessoires oder Möbeln erkennbar. <br> hier: verzerrte Schrift/Objekte, unstimmiges Detail bei der Kopfbedeckung",
+        "Verletzungen physikalischer Gesetze oder widersprüchliche Logik im Bildaufbau. <br> hier: Maskenband sollte eigentlich straff gespannt sein",
+        "unnatürlich wirkende Mimik, verwaschene Übergänge zwischen Gesicht, Haaren oder Hintergrund",
+      ];
+
+      function sendMessageToStreamlitClient(type, data) {
+        window.parent.postMessage({ isStreamlitMessage: true, type, ...data }, "*");
+      }
+
+      function sendDataToPython(data) {
+        sendMessageToStreamlitClient("streamlit:setComponentValue", { value: data });
+      }
+
+      function setFrameHeight() {
+        sendMessageToStreamlitClient("streamlit:setFrameHeight", {
+          height: 800
+        });
+      }
+
+      function updateMask(x, y, radius) {
+        const svg = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <defs>
+              <mask id="mask">
+                <rect width="100%" height="100%" fill="white"/>
+                <circle cx="${x}" cy="${y}" r="${radius}" fill="black"/>
+              </mask>
+            </defs>
+            <rect width="100%" height="100%" fill="black" mask="url(#mask)"/>
+          </svg>
+        `;
+        const encoded = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
+        const aboveImg = document.getElementById("above");
+        aboveImg.style.webkitMaskImage = `url('${encoded}')`;
+        aboveImg.style.maskImage = `url('${encoded}')`;
+
+        const magnifier = document.getElementById("magnifier");
+        magnifier.style.left = `${x}px`;
+        magnifier.style.top = `${y}px`;
+        magnifier.style.display = "block";
+      }
+
+      function updateImages() {
+        document.getElementById("below").src = sets[currentSet].below;
+        document.getElementById("above").src = sets[currentSet].above;
+
+        const aboveImg = document.getElementById("above");
+        aboveImg.style.webkitMaskImage = "none";
+        aboveImg.style.maskImage = "none";
+
+        document.getElementById("reveal-text").textContent = "";
+        document.getElementById("magnifier").style.display = "none"; 
+
+        setFrameHeight();
+      }
+
+      function init() {
+        sendMessageToStreamlitClient("streamlit:componentReady", { apiVersion: 1 });
+        sendDataToPython("ready");
+
+        const aboveImg = document.getElementById("above");
+        aboveImg.parentElement.addEventListener("click", e => {
+          const rect = aboveImg.getBoundingClientRect();
+          const clickX = e.clientX - rect.left;
+          const clickY = e.clientY - rect.top;
+          updateMask(clickX, clickY, 48);
+        });
+
+        document.getElementById("prev-btn").addEventListener("click", () => {
+          currentSet = (currentSet - 1 + sets.length) % sets.length;
+          updateImages();
+        });
+
+        document.getElementById("next-btn").addEventListener("click", () => {
+          currentSet = (currentSet + 1) % sets.length;
+          updateImages();
+        });
+
+        document.getElementById("reveal-btn").addEventListener("click", () => {
+          document.getElementById("reveal-text").innerHTML = descriptions[currentSet] || "";
+        });
+
+        const images = document.querySelectorAll("img");
+        let loaded = 0;
+        images.forEach(img => {
+          if (img.complete) {
+            loaded++;
+          } else {
+            img.onload = () => {
+              loaded++;
+              if (loaded === images.length) setFrameHeight();
+            };
+          }
+        });
+        if (loaded === images.length) setFrameHeight();
+      }
+
+      window.addEventListener("DOMContentLoaded", init);
+      window.addEventListener("load", setFrameHeight);
+    </script>
+  </body>
+</html>
