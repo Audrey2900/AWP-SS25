@@ -133,12 +133,13 @@ import zones.onboarding as Onboarding
 import zones.offboarding as Offboarding
 import zones.Mission_2 as mission2
 import zones.Mission_3 as Mission3
+import zones.Mission_4 as Mission4
 
 #Onboarding.render()
 
 #Corona.render()
 
-FactCheckers.render()
+#FactCheckers.render()
 
 #AiFakeNews.render()
 
@@ -147,6 +148,8 @@ FactCheckers.render()
 #mission2.render()
 
 #Mission3.render()
+
+Mission4.render()
 
 #TODO zu CoronaQuiz hinzufügen
 # from components.CoronaQuizDrag import coronaquizdrag
