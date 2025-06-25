@@ -11,9 +11,10 @@ def render():
         In den ersten drei Monaten der Pandemie wurden weltweit etwa <span class="corrupt">[MissingNumber]</span> Menschen wegen solcher Falschinfos ins Krankenhaus eingeliefert.
         """, unsafe_allow_html=True)    
 
-        st.button("", on_click=set_text_key, args=("6000",), key="chatcorona6000")
+        st.button("", on_click=set_text_key, args=("6000", "CoronaSlider"), key="chatcorona6000")
 
     if st.session_state.ui_state["CoronaSliderDone"] == True:
+        st.markdown('<div id="SliderDone"></div>', unsafe_allow_html=True)
         st.markdown("""
         **Das Problem:** Viele dieser Gerüchte waren nicht nur falsch, sondern gefährlich.  
         Manche Menschen glaubten, Desinfektionsmittel zu trinken oder heißes Wasser zu inhalieren würde gegen Corona helfen.  

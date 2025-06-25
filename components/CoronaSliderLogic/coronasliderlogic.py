@@ -16,10 +16,11 @@ def render():
             else:
                 set_text_key("sliderhigh")
         else:
-            set_text_key("slidercorrect")
+            set_text_key("slidercorrect", "SliderDone")
 
     if not st.session_state.ui_state["CoronaSliderDone"]:
-        st.markdown("### Wie viele Menschen wurden in den ersten 3 Monaten wegen gefährlicher Corona-Falschinformationen und falscher ""Heilmittel"" ins Krankenhaus eingeliefert?")    
+        st.subheader("Wie viele Menschen wurden in den ersten 3 Monaten wegen gefährlicher Corona-Falschinformationen und falscher ""Heilmittel"" ins Krankenhaus eingeliefert?",
+                     anchor="CoronaSlider")
         value = coronasliderjs(value=0) or 0
         st.button("Auswertung", on_click=sliderauswertung)
 

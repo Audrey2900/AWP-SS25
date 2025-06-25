@@ -3,7 +3,6 @@ import components.FactCheckersGraph.factcheckersgraph as FactCheckersGraph
 import components.FactCheckersQuiz.factcheckersquiz as FactCheckersQuiz
 import components.Corruption.corruption as Corruption
 from data.char_speech_state import set_text_key
-from data.ui_states import set_ui_state
 
 def render():
     col1, col2 = st.columns([3, 1])

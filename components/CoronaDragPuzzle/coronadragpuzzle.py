@@ -12,7 +12,7 @@ def render():
             Schon früh warnte <span class="falsetext">Jugendlichen zwischen 14 und 24 Jahren</span> vor einer Infodemie, einer Welle an falschen Nachrichten, die sich schneller verbreitet als das Virus selbst. Und tatsächlich: Studien zeigen, dass ein Großteil der Menschen während der Pandemie mit Desinformation in Kontakt kam. In Deutschland sahen **68%** der <span class="falsetext">WhatsApp, TikTok, Instagram und YouTube</span> Fake News zur Corona-Pandemie. Bei <span class="falsetext">Falschinformationen, Gerüchte und wilde Verschwörungstheorien</span> waren es sogar **76%**, die mindestens einmal pro Woche auf Falschnachrichten stießen.
             """, unsafe_allow_html=True)
 
-            st.button("", on_click=set_text_key, args=("dragpuzzle",), key="chatcoronadragpuzzle")
+            st.button("", on_click=set_text_key, args=("dragpuzzle", "CoronaTitle"), key="chatcoronadragpuzzle")
 
             if (
                 st.session_state.text_key == "dragpuzzle" and st.session_state.text_index == 4
@@ -29,8 +29,7 @@ def render():
         Schon früh warnte die Weltgesundheitsorganisation (WHO) vor einer Infodemie, einer Welle an falschen Nachrichten, die sich schneller verbreitet als das Virus selbst. Und tatsächlich: Studien zeigen, dass ein Großteil der Menschen während der Pandemie mit Desinformation in Kontakt kam. In Deutschland sahen **68%** der Social-Media-Nutzer Fake News zur Corona-Pandemie. Bei Jugendlichen zwischen 14 und 24 Jahren waren es sogar **76%**, die mindestens einmal pro Woche auf Falschnachrichten stießen.
         """, unsafe_allow_html=True)
 
-        st.button("", on_click=set_text_key, args=("coronadone",), key="donecoronapuzzle")
-
+        st.button("", on_click=set_text_key, args=("coronadone",), key="donecoronapuzzle") 
 
 
 

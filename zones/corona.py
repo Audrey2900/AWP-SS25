@@ -5,30 +5,29 @@ import components.Corruption.corruption as Corruption
 import components.CoronaSlider.coronaslider as CoronaSlider
 import components.CoronaMiniDashboard.minidashboard as MiniDashboard
 import components.CoronaQuiz.coronaquiz as CoronaQuiz
-from data.ui_states import set_ui_state
 
 def render():
-#     st.title("Corona und Fake News: Wie ein Virus die Wahrheit infizierte")
+    st.title("Corona und Fake News: Wie ein Virus die Wahrheit infizierte", anchor="CoronaTitle")
 
-#     # Puzzle
-#     CoronaDragPuzzle.render()
+    # Puzzle
+    CoronaDragPuzzle.render()
 
-#     if st.session_state.ui_state["NoCorruptionDragPuzzle"] == False:
-#        Corruption.render()
+    if st.session_state.ui_state["NoCorruptionDragPuzzle"] == False:
+       Corruption.render()
 
-#     # Slider
-#     CoronaSlider.render()
+    # Slider
+    CoronaSlider.render()
 
-#     if st.session_state.ui_state["NoCorruptionCoronaSlider"] == False:
-#         Corruption.render()
+    if st.session_state.ui_state["NoCorruptionCoronaSlider"] == False:
+        Corruption.render()
 
-#     st.markdown("""
-# **800 Menschen starben**. Andere wiederum hielten das Virus für harmlos oder gar für erfunden, was dazu führte, dass sie sich nicht mehr schützten und damit sich und andere in Gefahr brachten.
+    st.markdown("""
+**800 Menschen starben**. Andere wiederum hielten das Virus für harmlos oder gar für erfunden, was dazu führte, dass sie sich nicht mehr schützten und damit sich und andere in Gefahr brachten.
 
-# **Besonders beliebt waren Verschwörungstheorien. Die bekanntesten Verschwörungstheorien während der Coronazeit waren:**
-# """)
+**Besonders beliebt waren Verschwörungstheorien. Die bekanntesten Verschwörungstheorien während der Coronazeit waren:**
+""")
 
-#     CoronaExpanders.render()
+    CoronaExpanders.render()
 
     st.markdown("""
 Was diese Theorien gemeinsam haben? Sie sind komplett frei erfunden. Und trotzdem glaubten Millionen Menschen daran. In den USA hielten **78 %** mindestens eine verbreitete Corona-Falschaussage für möglich oder wahr.

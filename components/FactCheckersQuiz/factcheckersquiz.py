@@ -4,8 +4,7 @@ from data.ui_states import set_ui_state
 from components.FactCheckersTimeJS import factcheckerstime
 
 def render():
-    st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
-    st.header("Quiz: Faktenchecker", anchor="FCQuiz")
+    st.header("Fragen: Faktenchecker", anchor="FCQuiz")
 
     single_choice_questions = [
         {
@@ -62,7 +61,6 @@ def render():
         "CORRECTIV"
     ]
 
-    # Fragen 1–3
     for idx, q in enumerate(single_choice_questions):
         st.markdown(f"**{q['question']}**")
         st.radio(
@@ -73,20 +71,17 @@ def render():
         )
         st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
-    # Frage 4 – Checkboxen
     st.markdown("**4. Welche Faktenchecker gibt es in Deutschland?**")
     for label in checkbox_options:
         st.checkbox(label, key=f"fc_checkbox_{label}")
     st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
-    # Frage 5 – Drag-and-Drop Komponente (außerhalb von Formular!)
     st.markdown("**5. Bringe die internationalen Faktenchecker in die richtige Reihenfolge:**")
     st.markdown("_Tipp: Ziehe oder klicke die Karten, um die Reihenfolge zu ändern._")
     order = factcheckerstime() or []
     st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
     def auswertung():
-        # Fragen 1–3
         for idx, q in enumerate(single_choice_questions):
             key = f"factchecker_quiz_q{idx}"
             if key not in st.session_state:
@@ -96,13 +91,11 @@ def render():
                 set_text_key(q["wrong_key"])
                 return
 
-        # Frage 4
         for label, is_correct in checkbox_options.items():
             if st.session_state.get(f"fc_checkbox_{label}", False) != is_correct:
                 set_text_key("FCQuiz4falsch")
                 return
 
-        # Frage 5
         if order != expected_order:
             set_text_key("FCQuiz5falsch")
             return
@@ -111,7 +104,6 @@ def render():
 
     st.button("Antworten abgeben", on_click=auswertung)
 
-    # Abschlussaktion
     if (
         st.session_state.text_key == "FCQuizAlleRichtig"
         and st.session_state.text_index == 1

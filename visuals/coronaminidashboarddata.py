@@ -1,19 +1,13 @@
-import altair as alt
 from matplotlib import pyplot as plt
 import streamlit as st
-import pandas as pd
 from wordcloud import STOPWORDS, WordCloud
 import plotly.express as px
-import plotly.graph_objects as go
-
 import streamlit as st
-import pandas as pd
 import plotly.express as px
 
 def show_country_chart(df):
     st.subheader("Fake News nach Ländern in 2020")
 
-    # Button-Logik für Ansichtswechsel
     col1, col2, col3 = st.columns(3)
     with col1:
         if st.button("🌍 Europa", key="europe_view"):
@@ -25,19 +19,16 @@ def show_country_chart(df):
         if st.button("🌏 Asien", key="asia_view"):
             st.session_state.globe_view = "asia"
 
-    # Länderspalte aufsplitten und zählen
     df_expanded = df['country'].dropna().str.split(',').explode().str.strip()
     country_counts = df_expanded.value_counts().reset_index()
     country_counts.columns = ['Land', 'Anzahl']
 
-    # Optional: manuelle Korrektur für bekannte Abkürzungen
     country_counts['Land'] = country_counts['Land'].replace({
         'USA': 'United States',
         'UK': 'United Kingdom',
         'Brasil': 'Brazil'
     })
 
-    # Plotly-Weltkarte mit orthographischer Projektion
     map_fig = px.choropleth(
         country_counts,
         locations="Land",
@@ -49,7 +40,6 @@ def show_country_chart(df):
         template="plotly_dark"  # Dark theme hinzufügen
     )
 
-    # Ansicht basierend auf Auswahl anpassen
     view = st.session_state.get("globe_view", "world")
     if view == "europe":
         lon, lat = 10, 50
@@ -79,7 +69,6 @@ def show_country_chart(df):
 
     st.plotly_chart(map_fig, use_container_width=True)
 
-    # Zusatzmetriken
     col1, col2, col3 = st.columns(3)
     with col1:
         st.metric("Länder gesamt", len(country_counts))
@@ -88,7 +77,6 @@ def show_country_chart(df):
     with col3:
         st.metric("Höchste Anzahl", country_counts.iloc[0]['Anzahl'])
 
-    # Plotly-Toolbar ausblenden
     st.markdown("""
         <style>
             div.modebar {
@@ -110,7 +98,7 @@ def show_category_chart(df):
     fig.update_layout(
         margin=dict(l=20, r=20, t=40, b=20),
         height=350,
-        dragmode=True  # <-- Wird alles ignoriert sobald man es animiert
+        dragmode=True 
     )
     st.plotly_chart(
         fig,
@@ -154,7 +142,7 @@ def show_classification_chart(df):
     fig.update_layout(
         margin=dict(l=20, r=20, t=40, b=20),
         height=360,
-        dragmode=False  # Deaktiviert Ziehen/Auswählen
+        dragmode=False 
     )
     st.plotly_chart(
         fig,
@@ -212,6 +200,3 @@ def show_wordcloud(df, basis, lang):
     ax.imshow(wordcloud, interpolation='bilinear')
     ax.axis("off")
     st.pyplot(fig)
-
-## Weitere Beispiele:
-# Top Faktenchecker (muss erstmals überprüft werden) (vielleicht auch mit Dropdown für Land)
