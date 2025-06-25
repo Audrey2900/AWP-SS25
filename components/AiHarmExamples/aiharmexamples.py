@@ -48,13 +48,13 @@ def render():
     ]
 
     bilder = [
-        ("static/AiHarm/Sozialhilfeempfänger.png", "static/AiHarm/ProduktivePerson.png"),
-        ("static/AiHarm/Geschlecht.png", ""),
+        ("static/AiHarm/Sozialhilfeempfänger.webp", "static/AiHarm/ProduktivePerson.webp"),
+        ("static/AiHarm/Geschlecht.webp", ""),
         (None, None),
-        ("static/AiHarm/Behinderung.png", None),
-        ("static/AiHarm/Nationalität.png", None),
+        ("static/AiHarm/Behinderung.webp", None),
+        ("static/AiHarm/Nationalität.webp", None),
         (None, None),
-        ("static/AiHarm/Alter.png", None),
+        ("static/AiHarm/Alter.webp", None),
     ]
 
     selected_index = st.selectbox("Wähle eine Diskriminierungskategorie aus:", kategorien, index=0)
