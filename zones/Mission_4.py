@@ -2,8 +2,12 @@ import streamlit as st
 
 def render():
     st.title("Deepfakes erkennen – Wie können wir Deepfakes erkennen und nicht auf Fakenews reinfallen")
-    st.markdown("Es scheint so, als wäre die Internetseite auch komprimiert. \
-    Wähle für jede Aussage die **richtige** Antwort aus und hilf mir die kaputten Texte wieder herzustellen.")
+    st.markdown(
+        "Es scheint so, als wäre die Internetseite auch komprimiert. "
+        "Wähle für jede Aussage die **richtige** Antwort aus und hilf mir die kaputten Texte wieder herzustellen."
+    )
+
+    st.markdown("<div style='height: 24px;'></div>", unsafe_allow_html=True)
 
     # Fragen+ Lösungen
     quiz = [
@@ -45,6 +49,8 @@ def render():
         }
     ]
 
+    st.markdown("<div style='height: 24px;'></div>", unsafe_allow_html=True)
+
     # Speichern der Antworten
     if "mission4_antworten" not in st.session_state:
         st.session_state.mission4_antworten = [0] * len(quiz)
@@ -58,6 +64,7 @@ def render():
             index=st.session_state.mission4_antworten[i]
         )
         st.session_state.mission4_antworten[i] = eintrag["optionen"].index(auswahl)
+        st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
 
     # Auswertung
     if st.button("Abgeben", key="mission4_abgeben"):
@@ -68,9 +75,13 @@ def render():
 
         st.success(f"Du hast {punkte} von {len(quiz)} Fragen richtig beantwortet!")
 
+        st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
+
         if punkte == len(quiz):
             st.markdown("### Glückwunsch, du hast alle Hinweise richtig entschlüsselt!")
             st.markdown("Der Zeitungsartikel ist nun wieder vollständig lesbar:")
+
+            st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
 
             st.markdown("""
             ---
@@ -95,6 +106,7 @@ def render():
             """)
         else:
             st.markdown("Du kannst es nochmal versuchen oder unten die richtigen Antworten vergleichen.")
+            st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
             with st.expander("Richtige Antworten anzeigen"):
                 for i, eintrag in enumerate(quiz):
                     richtige = eintrag["optionen"][eintrag["lösung"]]

@@ -12,12 +12,6 @@ def render():
         Bewerte für jedes Bild, ob du es für **einen Fake** hältst oder nicht.  
         **Schau dir die Bilder genau an und markiere die Deepfakes.**
         """)
-    with col2:
-        st.markdown("""
-            <img src="/app/static/deepfake_icon.png"
-            alt="Deepfake Icon"
-            style="width: 100%; border-radius: 8px;" />""",
-        unsafe_allow_html=True)
 
     st.markdown("<div style='height: 40px;'></div>", unsafe_allow_html=True)
 
