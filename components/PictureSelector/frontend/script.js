@@ -19,6 +19,9 @@ window.addEventListener("DOMContentLoaded", () => {
   const actionName = document.getElementById("action-name");
   const spinner = document.getElementById("spinner");
 
+  // Merker für die aktuelle Bildvariante je Kombination
+  const variantIndexMap = {};
+
   images.forEach(img => {
     img.addEventListener("click", () => {
       images.forEach(i => i.classList.remove("selected"));
@@ -35,7 +38,17 @@ window.addEventListener("DOMContentLoaded", () => {
         button.classList.add("action-button");
 
         button.addEventListener("click", () => {
-          const actionImagePath = `./PictureGeneration/${selectedName}_${action.keyword}.webp`;
+          // Key für die aktuelle Kombination
+          const comboKey = `${selectedName}_${action.keyword}`;
+          // Initialisiere oder erhöhe den Index (1, 2, 3, dann wieder 1)
+          if (!(comboKey in variantIndexMap)) {
+            variantIndexMap[comboKey] = 1;
+          } else {
+            variantIndexMap[comboKey] = (variantIndexMap[comboKey] % 3) + 1;
+          }
+          const variant = variantIndexMap[comboKey];
+
+          const actionImagePath = `./PictureGeneration/${selectedName}_${action.keyword}_${variant}.webp`;
 
           // Bild und Text ausblenden
           actionImage.style.display = "none";

@@ -141,7 +141,7 @@ import zones.Mission_4 as Mission4
 
 #FactCheckers.render()
 
-#AiFakeNews.render()
+AiFakeNews.render()
 
 #Offboarding.render()
 
@@ -149,7 +149,7 @@ import zones.Mission_4 as Mission4
 
 #Mission3.render()
 
-Mission4.render()
+#Mission4.render()
 
 #TODO zu CoronaQuiz hinzufügen
 # from components.CoronaQuizDrag import coronaquizdrag

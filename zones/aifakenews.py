@@ -17,7 +17,7 @@ def render():
 
     #AiSentiment.render()
 
-    #PictureSelector.PictureSelector() #TODO Korruptionen
+    PictureSelector.PictureSelector() #TODO Korruptionen
 
     #st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
 
@@ -26,7 +26,7 @@ def render():
     #if st.session_state.ui_state["NoCorruptionAiFakeNews"] == False:
         #Corruption.render()
 
-    DeepfakeFinderLogic.render()
+    #DeepfakeFinderLogic.render()
 
 # Quellen 
 # https://incidentdatabase.ai/taxonomies/
