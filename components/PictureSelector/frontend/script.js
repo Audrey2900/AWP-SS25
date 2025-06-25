@@ -38,46 +38,39 @@ window.addEventListener("DOMContentLoaded", () => {
         button.classList.add("action-button");
 
         button.addEventListener("click", () => {
-          // Key für die aktuelle Kombination
           const comboKey = `${selectedName}_${action.keyword}`;
-          // Initialisiere oder erhöhe den Index (1, 2, 3, dann wieder 1)
           if (!(comboKey in variantIndexMap)) {
-            variantIndexMap[comboKey] = 1;
+            variantIndexMap[comboKey] = Math.floor(Math.random() * 3) + 1;
           } else {
             variantIndexMap[comboKey] = (variantIndexMap[comboKey] % 3) + 1;
           }
-          const variant = variantIndexMap[comboKey];
 
+          const variant = variantIndexMap[comboKey];
           const actionImagePath = `./PictureGeneration/${selectedName}_${action.keyword}_${variant}.webp`;
 
-          // Bild und Text ausblenden
           actionImage.style.display = "none";
           actionName.style.display = "none";
-
-          // Spinner anzeigen
           spinner.style.display = "block";
 
-          // Zufällige Zeit zwischen 5 und 10 Sekunden berechnen
+          // Buttons deaktivieren
+          const allButtons = document.querySelectorAll(".action-button");
+          allButtons.forEach(btn => btn.disabled = true);
+
           const randomDelay = Math.floor(Math.random() * (10000 - 5000 + 1)) + 5000;
 
-          // Nach der zufälligen Zeit das Bild laden
           setTimeout(() => {
-            // Neues Bild laden
             const tempImage = new Image();
             tempImage.src = actionImagePath;
-
-            // Sobald das Bild vollständig geladen ist
             tempImage.onload = () => {
               actionImage.src = actionImagePath;
               actionImage.alt = `${selectedName} ${action.label}`;
               actionImage.style.display = "block";
-
-              // Zeige zusammengesetzten Satz
               actionName.textContent = `${selectedName} ${action.label}`;
               actionName.style.display = "block";
-
-              // Spinner ausblenden
               spinner.style.display = "none";
+
+              // Buttons wieder aktivieren
+              allButtons.forEach(btn => btn.disabled = false);
             };
           }, randomDelay);
         });
