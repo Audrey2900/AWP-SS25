@@ -23,6 +23,7 @@ _UI_KEYS = [
     "NoCorruptionCoronaSlider",
     "NoCorruptionCoronaZone",
     "NoCorruptionFaktenChecker",
+    "NoCorruptionSentimentSlider",
     "NoCorruptionAiFakeNews",
 ]
 

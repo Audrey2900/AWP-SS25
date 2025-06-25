@@ -4,12 +4,10 @@ import components.AiSentimentQuestions.aisentimentquestions as AiSentimentQuesti
 from data.char_speech_state import set_text_key
 
 def render():
-    st.markdown("""
-    ## Welche Wirkung Ki in Kombination mit Fake News anstreben
-    """)
+    st.subheader("Welche Wirkung Ki in Kombination mit Fake News anstreben", anchor="SentimentSlider")
 
     if st.session_state.ui_state["SentimentSlider"] == False:
-        st.button("", on_click=set_text_key, args=("manipulationsentiment",), key="chataisentiment1")
+        st.button("", on_click=set_text_key, args=("manipulationsentiment", "SentimentSlider"), key="chataisentiment1")
 
     if (
         st.session_state.text_key == "manipulationsentiment" and st.session_state.text_index == 4
