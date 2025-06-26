@@ -141,6 +141,7 @@ In Deutschland wurde das Thema ab dem Jahr **2016** präsenter. Vor allem durch 
     st.button("", on_click=set_text_key, args=("FCwann",), key="chat6")
 
     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
+    st.markdown('<div id="AnchorFCQuizDone"></div>', unsafe_allow_html=True)
     st.button("", on_click=set_text_key, args=("FCaufgabe", "FCQuiz"), key="chat7")
 
     if st.session_state.ui_state["FCQuizDone"] == False:

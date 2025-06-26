@@ -1,7 +1,9 @@
+import time
 import streamlit as st
 from components.CoronaSliderJS import coronasliderjs
 from data.char_speech_state import set_text_key
 from data.ui_states import set_ui_state
+from data.zone_anchor import autojump
 
 def render():
     def sliderauswertung():
@@ -29,6 +31,8 @@ def render():
         and st.session_state.text_index == 2
         and not st.session_state.ui_state["CoronaSliderDone"]
     ):
+        autojump("AnchorSliderDone")
+        time.sleep(1)
         set_ui_state("CoronaSliderDone", True)
         set_ui_state("NoCorruptionCoronaSlider", True)
         st.rerun()

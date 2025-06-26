@@ -85,7 +85,7 @@ BUBBLE_TEXTS = {
         "So können wir im Nu den Artikel reparieren. Aber genug gefeiert, der restliche Artikel wartet auf weitere reparaturen.",
     ],
     "CoronaQuiz": [
-        "Wieder eine Beschäfigung... Dieser Corona-Bereich ist eigentlich vollständig repariert. Kleine Probleme sind aber noch da.",
+        "Wieder eine Beschädigung... Dieser Corona-Bereich ist eigentlich vollständig repariert. Kleine Probleme sind aber noch da.",
         "So wie bei dir vorhin, ist bei mir hier im Hintergrund alles Rot. Viele Daten sind noch beschädigt.",
         "Ich brauche wieder deine Hilfe, kann ich erneut auf dich zählen? Du musst mir nun ein paar Fragen beantworten. Die Daten sollten wir im Artikeltext und dem Dashboard finden können.",
         "Hier die Fragen."

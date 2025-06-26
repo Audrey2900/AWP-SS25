@@ -1,7 +1,9 @@
+import time
 import streamlit as st
 from data.char_speech_state import set_text_key
 from data.ui_states import set_ui_state
 from components.FactCheckersTimeJS import factcheckerstime
+from data.zone_anchor import autojump
 
 def render():
     st.header("Fragen: Faktenchecker", anchor="FCQuiz")
@@ -100,7 +102,7 @@ def render():
             set_text_key("FCQuiz5falsch")
             return
 
-        set_text_key("FCQuizAlleRichtig")
+        set_text_key("FCQuizAlleRichtig", "AnchorFCQuizDone")
 
     st.button("Antworten abgeben", on_click=auswertung)
 
@@ -109,6 +111,8 @@ def render():
         and st.session_state.text_index == 1
         and not st.session_state.ui_state["FCQuizDone"]
     ):
+        autojump("AnchorFCQuizDone")
+        time.sleep(1.5)
         set_ui_state("FCQuizDone", True)
         set_ui_state("NoCorruptionFaktenChecker", True)
         st.rerun()
