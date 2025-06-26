@@ -111,7 +111,7 @@ ResetTimer.render()
 ############################## Timer ##############################
 
 ############################## Init Zones ##############################
-from data.zone_anchor import init_zone_state
+from data.zone_anchor import autojump, init_zone_state
 from data.ui_states import init_ui_state
 
 init_zone_state()
@@ -137,11 +137,11 @@ import zones.Mission_4 as Mission4
 
 #Onboarding.render()
 
-#Corona.render()
+Corona.render()
 
-#FactCheckers.render()
+FactCheckers.render()
 
-AiFakeNews.render()
+#AiFakeNews.render()
 
 #Offboarding.render()
 
@@ -151,17 +151,5 @@ AiFakeNews.render()
 
 #Mission4.render()
 
-#TODO zu CoronaQuiz hinzufügen
-# from components.CoronaQuizDrag import coronaquizdrag
-# result = coronaquizdrag() or []
-
-# st.write("Aktuell ausgewählt:", result)
-
-
-# import components.CoronaExpanders.coronaexpanders as i
-# import components.CoronaMiniDashboard.minidashboard as min
-# min.render()
-# i.render()
-
-import components.CoronaMiniDashboard.minidashboard as i
-i.render()
+# Anchors erstellen:
+#        st.markdown('<div id="SliderDone"></div>', unsafe_allow_html=True)

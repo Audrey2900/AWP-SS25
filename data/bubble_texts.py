@@ -84,13 +84,41 @@ BUBBLE_TEXTS = {
         "Einen Moment, ich aktualisiere den Artikel für dich.",
         "So können wir im Nu den Artikel reparieren. Aber genug gefeiert, der restliche Artikel wartet auf weitere reparaturen.",
     ],
+    "CoronaQuiz": [
+        "Wieder eine Beschäfigung... Dieser Corona-Bereich ist eigentlich vollständig repariert. Kleine Probleme sind aber noch da.",
+        "So wie bei dir vorhin, ist bei mir hier im Hintergrund alles Rot. Viele Daten sind noch beschädigt.",
+        "Ich brauche wieder deine Hilfe, kann ich erneut auf dich zählen? Du musst mir nun ein paar Fragen beantworten. Die Daten sollten wir im Artikeltext und dem Dashboard finden können.",
+        "Hier die Fragen."
+    ],
+    "CoronaQuiz1falsch": [
+        "Die erste Frage ist noch falsch."
+    ],
+    "CoronaQuiz2falsch": [
+        "Bei Frage 2 ist etwas nicht richtig."
+    ],
+    "CoronaQuiz3falsch": [
+        "Frage 3 passt noch nicht ganz"
+    ],
+    "CoronaQuiz4falsch": [
+        "Frage 4 passt noch nicht."
+    ],
+    "CoronaQuiz5falsch": [
+        "Frage 5 stimmt noch nicht."
+    ],
+    "CoronaQuiz6falsch": [
+        "Nummer 6 passt nicht."
+    ],
+    "CoronaQuiz7falsch": [
+        "Frage 7 mit den Vorkommen passt noch nicht. Schauen wir nochmal nach. Vielleicht sollten wir die Cloud einer anderen Sprache auswählen."
+    ],
     "transitionFactcheckers" :[
-        "Da stimmt doch etwas nicht. Nur einen Faktenchecker?!",
+        "Alles passt! Jetzt können wir endli-",
+        "Warte mal, da stimmt doch etwas nicht. Nur einen Faktenchecker?!",
         "Außerdem scheint es so, dass wir den Defekten Bereich, trotz deiner Antworten, nicht schmälern können. Eigentlich sollten hier mehrere Faktenchecker auftauchen. Sind irgendwo die Daten für Deutschland kaputt gegangen?",
         "So kann ich diesen Artikel nie veröffentlichen. Nach diesem Bereich hätte eigentlich die Thematik Faktenchecker behandelt werden sollen…",
         "Ich brauche neue und richtige Daten. Zeit für einen Plan-B! Warte einen Moment, ich sollte hier irgendwo meine alten Rechercheunterlagen haben.",
         "Diese füge ich der Website hinzu. Wenn ich mich recht erinnere, dann sollte der Text für diesen Notfall auch für einen Artikel für die Schülerzeitung taugen. Dann müssen wir nicht den gesamten Bereich neu schreiben.",
-        "Hier ist der Abschnitt, also dann ran an die Arbeit!",
+        "Hier ist der Abschnitt, also zurück zur Arbeit!",
     ],
     ######### FactCheckers #########
     "FCwerprüftde": [
@@ -113,10 +141,10 @@ BUBBLE_TEXTS = {
         "2016… erst seit dann ist das Thema Faktenchecks ein Alltagsthema. Ziemlich spät für Deutschland, oder? Aber wenn man an Trump und Brexit denkt, macht das schon Sinn.",
     ],
     "FCaufgabe" : [
-        "Ab hier beginnt wieder der beschädigte Teil der Website. In meiner Web-Engine kann ich sehen, dass die Basisdaten weiterhin im Hintergrund beschädigt sind.",
-        "Dadurch kann ich leider nicht den nächsten Abschnitt vom Artikel ziehen. Wenn wir aber so vorgehen, wie vorhin, sollten wir ganz einfach die beschädigten Daten korrigieren können.",
-        "Aber hey, jetzt können wir endlich die Frage von vorhin mit den Faktencheckern richtig Beantworten.",
-        "Einen Moment, ich schicke dir mal kurz einige Fragen in den Vordergrund."
+        "Alles durch? Dann können wir jetzt endlich die Frage aus dem vorherigen Abschnitt richtig beantworten.",
+        "Gerade sehe ich auch, dass andere Basisdaten im Hintergrund bei mir beschäfigt sind.",
+        "Selbst wenn wir die Frage aus dem vorherigen Abschnitt richtig beantworten, werde ich so nicht den nachfolgenden Teil der Website ziehen können. Wenn wir aber so vorgehen, wie vorhin, sollten wir ganz einfach die beschädigten Daten korrigieren können.",
+        "Einen Moment, ich schicke dir mal kurz einige Fragen in den Vordergrund.",
     ],
     "FCQuiz1falsch": [
         "Die erste Frage ist noch falsch."
