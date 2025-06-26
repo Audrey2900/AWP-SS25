@@ -9,42 +9,42 @@ import components.CoronaQuiz.coronaquiz as CoronaQuiz
 from data.char_speech_state import set_text_key
 
 def render():
-    st.markdown('<div id="AnchorCoronaDragPuzzle"></div>', unsafe_allow_html=True)
-    st.title("Corona und Fake News: Wie ein Virus die Wahrheit infizierte", anchor="CoronaTitle")
-    # Puzzle
-    CoronaDragPuzzle.render()
-    st.markdown('<div id="AnchorSliderDone"></div>', unsafe_allow_html=True)
+#     st.markdown('<div id="AnchorCoronaDragPuzzle"></div>', unsafe_allow_html=True)
+#     st.title("Corona und Fake News: Wie ein Virus die Wahrheit infizierte", anchor="CoronaTitle")
+#     # Puzzle
+#     CoronaDragPuzzle.render()
+#     st.markdown('<div id="AnchorSliderDone"></div>', unsafe_allow_html=True)
 
-    if st.session_state.ui_state["NoCorruptionDragPuzzle"] == False:
-       Corruption.render()
+#     if st.session_state.ui_state["NoCorruptionDragPuzzle"] == False:
+#        Corruption.render()
 
-    # Slider
-    CoronaSlider.render()
+#     # Slider
+#     CoronaSlider.render()
 
-    if st.session_state.ui_state["NoCorruptionCoronaSlider"] == False:
-        Corruption.render()
+#     if st.session_state.ui_state["NoCorruptionCoronaSlider"] == False:
+#         Corruption.render()
 
-    st.markdown("""
-**800 Menschen starben**. Andere wiederum hielten das Virus für harmlos oder gar für erfunden, was dazu führte, dass sie sich nicht mehr schützten und damit sich und andere in Gefahr brachten.
+#     st.markdown("""
+# **800 Menschen starben**. Andere wiederum hielten das Virus für harmlos oder gar für erfunden, was dazu führte, dass sie sich nicht mehr schützten und damit sich und andere in Gefahr brachten.
 
-**Besonders beliebt waren Verschwörungstheorien. Die bekanntesten Verschwörungstheorien während der Coronazeit waren:**
-""")
+# **Besonders beliebt waren Verschwörungstheorien. Die bekanntesten Verschwörungstheorien während der Coronazeit waren:**
+# """)
 
-    CoronaExpanders.render()
+#     CoronaExpanders.render()
 
-    st.markdown("""
-Was diese Theorien gemeinsam haben? Sie sind komplett frei erfunden. Und trotzdem glaubten Millionen Menschen daran. In den USA hielten **78 %** mindestens eine verbreitete Corona-Falschaussage für möglich oder wahr.
+#     st.markdown("""
+# Was diese Theorien gemeinsam haben? Sie sind komplett frei erfunden. Und trotzdem glaubten Millionen Menschen daran. In den USA hielten **78 %** mindestens eine verbreitete Corona-Falschaussage für möglich oder wahr.
 
-Aber wie konnten sich solche Falschinfos so schnell verbreiten? Die Antwort ist einfach: über Social Media und Messenger. TikTok, Instagram, YouTube, Telegram und WhatsApp sind nicht nur unsere Kommunikationskanäle, sondern auch Nachrichtenquellen. Und was sich dort gut verbreitet, ist oft das, was besonders aufregend, schockierend oder empörend ist, nicht unbedingt das, was wahr ist. Auf Telegram etwa wurden jeden Tag hunderttausende Nachrichten mit Falschbehauptungen abgerufen. YouTube-Videos wie **"Plandemic"** wurden millionenfach gesehen, bevor sie überhaupt gelöscht wurden.
+# Aber wie konnten sich solche Falschinfos so schnell verbreiten? Die Antwort ist einfach: über Social Media und Messenger. TikTok, Instagram, YouTube, Telegram und WhatsApp sind nicht nur unsere Kommunikationskanäle, sondern auch Nachrichtenquellen. Und was sich dort gut verbreitet, ist oft das, was besonders aufregend, schockierend oder empörend ist, nicht unbedingt das, was wahr ist. Auf Telegram etwa wurden jeden Tag hunderttausende Nachrichten mit Falschbehauptungen abgerufen. YouTube-Videos wie **"Plandemic"** wurden millionenfach gesehen, bevor sie überhaupt gelöscht wurden.
 
-Das Gefährliche daran ist, dass Fake News oft sehr überzeugend aussehen. Manche basieren auf echten Infos, die dann verdreht oder aus dem Zusammenhang gerissen wurden. Wenn ein TikTok-Video sagt, Vitamin C schützt vor Corona, klingt das vielleicht plausibel, aber es stimmt nicht.
-""")
+# Das Gefährliche daran ist, dass Fake News oft sehr überzeugend aussehen. Manche basieren auf echten Infos, die dann verdreht oder aus dem Zusammenhang gerissen wurden. Wenn ein TikTok-Video sagt, Vitamin C schützt vor Corona, klingt das vielleicht plausibel, aber es stimmt nicht.
+# """)
     
-    st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
-    MiniDashboard.render()
+#     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
+#     MiniDashboard.render()
 
-    st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
-    st.markdown('<div id="AnchorQuizDone"></div>', unsafe_allow_html=True)
+#     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
+#     st.markdown('<div id="AnchorQuizDone"></div>', unsafe_allow_html=True)
     st.button("", on_click=set_text_key, args=("CoronaQuiz", "CoronaQuiz"), key="chatcoronaquiz")
 
     if st.session_state.ui_state["CoronaQuizDone"] == False:

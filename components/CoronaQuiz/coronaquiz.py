@@ -144,7 +144,9 @@ def render():
     for i, (label_text, _) in enumerate(checkbox_items.items()):
         col1, col2, col3 = st.columns([1, 3, 10])
         with col1:
-            checkbox_selections[label_text] = st.checkbox("", value=False, key=f"cb_{i}")
+            checkbox_selections[label_text] = st.checkbox(
+                "Verstecktes Label", key=f"cb_{i}", label_visibility="collapsed"
+            )
         with col2:
             st.markdown(
                 f"<div style='margin-top: 0.6rem;'>{label_text}</div>",
