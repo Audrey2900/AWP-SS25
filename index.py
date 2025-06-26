@@ -162,3 +162,6 @@ AiFakeNews.render()
 # import components.CoronaMiniDashboard.minidashboard as min
 # min.render()
 # i.render()
+
+import components.CoronaMiniDashboard.minidashboard as i
+i.render()
