@@ -204,7 +204,7 @@ def render():
                 }}
                 // Pause/Stop GIF Animation
                 if (avatar) {{
-                    avatar.src = "https://raw.githubusercontent.com/Audrey2900/AWP-SS25/main/static/PrototypeChar_still.png"; // Replace with static image
+                    avatar.src = "/app/static/PrototypeChar_still.png"; // Replace with static image
                 }}
             }}
         }}
