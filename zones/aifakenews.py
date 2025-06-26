@@ -15,9 +15,9 @@ def render():
 
     #HarmChartExamples.render()
 
-    AiSentiment.render()
+    #AiSentiment.render()
 
-    #PictureSelector.PictureSelector() #TODO Korruptionen
+    PictureSelector.PictureSelector() #TODO Korruptionen
 
     #st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
 
