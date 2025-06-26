@@ -8,7 +8,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const images = document.querySelectorAll(".selectable");
   const actions = [
-    { label: "eröffnet veganen Dönerladen", keyword: "Döner" },
+    { label: "eröffnet veganen Dönerladen", keyword: "Doener" },
     { label: "flieht vor der Polizei", keyword: "Polizei" },
     { label: "als Marvel-Schurke", keyword: "Schurke" },
     { label: "wird beim Stehlen von Gartenzwergen erwischt", keyword: "Zwerg" }
