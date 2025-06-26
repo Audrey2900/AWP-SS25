@@ -13,6 +13,8 @@ def set_zone(name: str):
         st.session_state.visited_zones.add(name)
 
 # Kann nur jeweils 1 mal je gesetzten Anchor ausgeführt werden.
+# Wenn diese Funktion beim aktualisieren der Website (neue Textabschnitte) verwendet wird, sollte
+# timer importiert werden und timer.sleep(1.5) eingefügt werden, bevor der Rerun das ziehen verhindert. Bsp. CoronaQuiz
 def autojump(anchor_id: str):
     html(f"""
     <script>

@@ -111,6 +111,9 @@ BUBBLE_TEXTS = {
     "CoronaQuiz7falsch": [
         "Frage 7 mit den Vorkommen passt noch nicht. Schauen wir nochmal nach. Vielleicht sollten wir die Cloud einer anderen Sprache auswählen."
     ],
+    "CoronaQuiz8falsch": [
+        "Das sind doch nicht alle Faktenchecker in Deutschland, oder?"
+    ],
     "transitionFactcheckers" :[
         "Alles passt! Jetzt können wir endli-",
         "Warte mal, da stimmt doch etwas nicht. Nur einen Faktenchecker?!",

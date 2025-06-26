@@ -4,11 +4,38 @@ from data.ui_states import set_ui_state
 import components.Corruption.corruption as Corruption
 from components.CoronaQuizDrag import coronaquizdrag
 import time
-
 from data.zone_anchor import autojump
 
 def render():
     st.header("Fragen: Corona & Fake News", anchor="CoronaQuiz")
+
+    # CSS für corrupt-Stil
+    st.markdown("""
+    <style>
+    .corrupt {
+        display: inline-block;
+        background: repeating-linear-gradient(
+            -45deg,
+            red,
+            red 2px,
+            black 2px,
+            black 4px
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        animation: glitch 1s infinite;
+    }
+    @keyframes glitch {
+        0% { transform: translate(0); }
+        20% { transform: translate(-1px, 1px); }
+        40% { transform: translate(1px, -1px); }
+        60% { transform: translate(-1px, 0px); }
+        80% { transform: translate(1px, 1px); }
+        100% { transform: translate(0); }
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
     quiz_questions = [
         {
@@ -95,10 +122,36 @@ def render():
         )
         st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
+    # Frage 7: Drag & Drop
     st.markdown("**7. Welche Verschwörungsmythen können aus den Wordclouds entnommen werden?**")
     st.markdown("_Tipp: Ziehe oder klicke die Karten, um deine Auswahl zu treffen. Klicke zum Entfernen_")
     drag_result = coronaquizdrag() or []
     st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+    # Frage 8: Checkbox-Stilfrage
+    st.markdown("**8. Welche Faktenchecker gibt es in Deutschland?**")
+
+    checkbox_items = {
+        "Correctiv": True,
+        '<span class="corrupt">[MissingText]</span>': False,
+        '<span class="corrupt">huagzifebaknl</span>': False,
+        '<span class="corrupt">MrTheFunny</span>': False,
+        '<span class="corrupt">HHHHHHHHHHH</span>': False,
+        '<span class="corrupt">49823692</span>': False,
+    }
+
+    checkbox_selections = {}
+    for i, (label_text, _) in enumerate(checkbox_items.items()):
+        col1, col2, col3 = st.columns([1, 3, 10])
+        with col1:
+            checkbox_selections[label_text] = st.checkbox("", value=False, key=f"cb_{i}")
+        with col2:
+            st.markdown(
+                f"<div style='margin-top: 0.6rem;'>{label_text}</div>",
+                unsafe_allow_html=True
+            )
+        with col3:
+            st.markdown("")
 
     def auswertung():
         for idx, q in enumerate(quiz_questions):
@@ -114,8 +167,14 @@ def render():
             set_text_key("CoronaQuiz7falsch")
             return
 
+        # "Correctiv" ist cb_0
+        if not st.session_state.get("cb_0", False):
+            set_text_key("CoronaQuiz8falsch")
+            return
+
         set_text_key("transitionFactcheckers", "AnchorQuizDone")
 
+    st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
     st.button("Antworten abgeben", on_click=auswertung)
 
     if (
@@ -124,7 +183,7 @@ def render():
         and not st.session_state.ui_state["CoronaQuizDone"]
     ):
         autojump("AnchorQuizDone")
-        time.sleep(2)
+        time.sleep(1.5)
         set_ui_state("CoronaQuizDone", True)
         set_ui_state("NoCorruptionCoronaZone", True)
         st.rerun()

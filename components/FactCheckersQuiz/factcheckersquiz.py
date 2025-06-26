@@ -76,7 +76,7 @@ def render():
         st.checkbox(label, key=f"fc_checkbox_{label}")
     st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
-    st.markdown("**5. Bringe die internationalen Faktenchecker in die richtige Reihenfolge:**")
+    st.markdown("**5. Sortiere die Faktenchecker vom ältesten zum jüngsten**")
     st.markdown("_Tipp: Ziehe oder klicke die Karten, um die Reihenfolge zu ändern._")
     order = factcheckerstime() or []
     st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
