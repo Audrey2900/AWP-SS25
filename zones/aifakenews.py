@@ -11,9 +11,9 @@ import components.DeepfakeFinderLogic.deepfakefinderlogic as d
 
 def render():
 
-    #HarmChart.render() 
+    HarmChart.render() 
 
-    #HarmChartExamples.render()
+    HarmChartExamples.render()
 
     AiSentiment.render()
 
