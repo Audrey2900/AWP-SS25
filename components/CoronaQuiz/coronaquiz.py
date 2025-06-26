@@ -123,8 +123,8 @@ def render():
         and st.session_state.text_index == 6
         and not st.session_state.ui_state["CoronaQuizDone"]
     ):
-        autojump("MiniDashboard")
-        time.sleep(1)
+        autojump("AnchorQuizDone")
+        time.sleep(2)
         set_ui_state("CoronaQuizDone", True)
         set_ui_state("NoCorruptionCoronaZone", True)
         st.rerun()

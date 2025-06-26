@@ -43,8 +43,8 @@ def render():
     MiniDashboard.render()
 
     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
-    st.button("", on_click=set_text_key, args=("CoronaQuiz", "CoronaQuiz"), key="chatcoronaquiz")
     st.markdown('<div id="AnchorQuizDone"></div>', unsafe_allow_html=True)
+    st.button("", on_click=set_text_key, args=("CoronaQuiz", "CoronaQuiz"), key="chatcoronaquiz")
 
     if st.session_state.ui_state["CoronaQuizDone"] == False:
         if (
@@ -56,6 +56,7 @@ def render():
     if st.session_state.ui_state["NoCorruptionCoronaZone"] == False:
         Corruption.render()
 
+    st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 # Quellen:
 #https://www.stiftungen.org/aktuelles/news-aus-stiftungen/detail/studie-zu-desinformation-von-jungen-menschen-in-der-coronakrise-4986.html
 #https://www.bitkom.org/Presse/Presseinformation/Mehr-als-50-Millionen-Deutsche-nutzen-soziale-Medien
