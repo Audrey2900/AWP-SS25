@@ -39,12 +39,12 @@ def render():
 # Das Gefährliche daran ist, dass Fake News oft sehr überzeugend aussehen. Manche basieren auf echten Infos, die dann verdreht oder aus dem Zusammenhang gerissen wurden. Wenn ein TikTok-Video sagt, Vitamin C schützt vor Corona, klingt das vielleicht plausibel, aber es stimmt nicht.
 # """)
     
-#     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
-    st.markdown('<div id="MiniDashboard"></div>', unsafe_allow_html=True)
+    st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
     MiniDashboard.render()
 
     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
     st.button("", on_click=set_text_key, args=("CoronaQuiz", "CoronaQuiz"), key="chatcoronaquiz")
+    st.markdown('<div id="AnchorQuizDone"></div>', unsafe_allow_html=True)
 
     if st.session_state.ui_state["CoronaQuizDone"] == False:
         if (

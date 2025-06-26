@@ -5,6 +5,8 @@ import components.Corruption.corruption as Corruption
 from components.CoronaQuizDrag import coronaquizdrag
 import time
 
+from data.zone_anchor import autojump
+
 def render():
     st.header("Fragen: Corona & Fake News", anchor="CoronaQuiz")
 
@@ -112,7 +114,7 @@ def render():
             set_text_key("CoronaQuiz7falsch")
             return
 
-        set_text_key("transitionFactcheckers", "MiniDashboard")
+        set_text_key("transitionFactcheckers", "AnchorQuizDone")
 
     st.button("Antworten abgeben", on_click=auswertung)
 
@@ -121,19 +123,11 @@ def render():
         and st.session_state.text_index == 6
         and not st.session_state.ui_state["CoronaQuizDone"]
     ):
+        autojump("MiniDashboard")
+        time.sleep(1)
         set_ui_state("CoronaQuizDone", True)
-        scroll_to_anchor("MiniDashboard")
         set_ui_state("NoCorruptionCoronaZone", True)
         st.rerun()
 
     if st.session_state.ui_state["NoCorruptionCoronaZone"] == False:
         Corruption.render()
-
-
-def scroll_to_anchor(anchor_id: str):
-    st.components.v1.html(f"""
-    <script>
-        parent.location.href = "#{anchor_id}";
-    </script>
-    """, height=0)
-
