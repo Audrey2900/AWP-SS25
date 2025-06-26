@@ -15,7 +15,7 @@ def render():
 
     #HarmChartExamples.render()
 
-    #AiSentiment.render()
+    AiSentiment.render()
 
     PictureSelector.PictureSelector() #TODO Korruptionen
 

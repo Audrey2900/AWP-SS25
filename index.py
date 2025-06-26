@@ -91,7 +91,7 @@ div[data-testid="stMainBlockContainer"] {
 
 def load_css(file_path):
         with open(file_path) as f:
-            st.html(f"<style>{f.read()}</style>")
+            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 css_path = pathlib.Path("static/styles/global.css")
 load_css(css_path)
