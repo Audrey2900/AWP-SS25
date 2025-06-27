@@ -138,6 +138,22 @@ Eine der ersten bekannten Plattformen war **FactCheck.org** aus den USA (2003). 
 
 In Deutschland wurde das Thema ab dem Jahr **2016** präsenter. Vor allem durch den US-Wahlkampf und das Brexit-Votum gerieten digitale Falschinformationen stärker in den Fokus. **CORRECTIV** startete in dieser Zeit als erstes unabhängiges Faktencheck-Team und gehört bis heute zu den zentralen Anlaufstellen im deutschsprachigen Raum.
 """)
+    if st.toggle("Quellen", key="quelleFactCheckers"):
+        st.markdown("""
+        <div style="border:1px solid #ccc; border-radius:6px; padding:10px; margin-top:5px;">
+        <ul>
+            <li><a href='https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Informationen-und-Empfehlungen/Kuenstliche-Intelligenz/Deepfakes/deepfakes_node.html#doc1009562bodyText6' target='_blank'>Deepfakes - Gefahren und Gegenmaßnahmen</a></li>
+            <li><a href='https://www.bundesregierung.de/breg-de/aktuelles/desinformation-erkennen-1750146' target='_blank'>Woran Sie Desinformation erkennen können</a></li>
+            <li><a href='https://www.bundesregierung.de/breg-de/service/archiv-bundesregierung/die-arbeit-der-faktenchecker-2081802' target='_blank'>Die Arbeit der Faktenchecker</a></li>
+            <li><a href='https://euvsdisinfo.eu/de/' target='_blank'>https://euvsdisinfo.eu/de/</a></li>
+            <li><a href='https://ifcncodeofprinciples.poynter.org/' target='_blank'>https://ifcncodeofprinciples.poynter.org/</a></li>
+            <li><a href='https://gadmo.eu/' target='_blank'>https://gadmo.eu/</a></li>
+            <li><a href='https://en.wikipedia.org/wiki/FactCheck.org' target='_blank'>https://en.wikipedia.org/wiki/FactCheck.org</a></li>
+            <li><a href='https://de.wikipedia.org/wiki/Correctiv' target='_blank'>https://de.wikipedia.org/wiki/Correctiv</a></li>W
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
+
     st.button("", on_click=set_text_key, args=("FCwann",), key="chat6")
 
     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
@@ -153,13 +169,3 @@ In Deutschland wurde das Thema ab dem Jahr **2016** präsenter. Vor allem durch 
 
     if st.session_state.ui_state["NoCorruptionFaktenChecker"] == False:
         Corruption.render()
-
-#Quellen
-# https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Informationen-und-Empfehlungen/Kuenstliche-Intelligenz/Deepfakes/deepfakes_node.html#doc1009562bodyText6
-# https://www.bundesregierung.de/breg-de/aktuelles/desinformation-erkennen-1750146
-# https://www.bundesregierung.de/breg-de/service/archiv/die-arbeit-der-faktenchecker-2081802
-# https://euvsdisinfo.eu/de/
-# https://ifcncodeofprinciples.poynter.org/signatories
-# https://gadmo.eu/
-# https://en.wikipedia.org/wiki/FactCheck.org
-# https://de.wikipedia.org/wiki/Correctiv

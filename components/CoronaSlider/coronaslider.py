@@ -20,6 +20,16 @@ def render():
         In den ersten drei Monaten der Pandemie wurden weltweit etwa **6.000 Menschen** wegen solcher Falschinfos ins Krankenhaus eingeliefert.
         """, unsafe_allow_html=True)
 
+        if st.toggle("Quellen", key="quelleCoronaSlider"):
+            st.markdown("""
+            <div style="border:1px solid #ccc; border-radius:6px; padding:10px; margin-top:5px;">
+            <ul>
+                <li><a href='https://www.who.int/news-room/feature-stories/detail/fighting-misinformation-in-the-time-of-covid-19-one-click-at-a-time' 
+                        target='_blank'>WHO: Fighting misinformation in the time of COVID-19, one click at a time</a></li>
+            </ul>
+            </div>
+            """, unsafe_allow_html=True)
+
         st.button("", on_click=set_text_key, args=("coronadone",), key="donecoronalider")
 
     if (

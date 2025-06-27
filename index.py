@@ -39,6 +39,15 @@ div[data-testid="stMainBlockContainer"] {
     margin-left: auto;
     margin-right: auto;
 }
+[class*="st-key-quelle"] label > div:first-child {
+    display: none !important;
+}
+[class*="st-key-quelle"] label {
+    cursor: pointer !important;
+}
+[class*="st-key-quelle"] [data-testid="stMarkdownContainer"] {
+    color: #1a73e8 !important;
+}
 .corrupt {
     display: inline-block;
     background: repeating-linear-gradient(
@@ -137,7 +146,7 @@ import zones.Mission_4 as Mission4
 
 #Onboarding.render()
 
-Corona.render()
+#Corona.render()
 
 #FactCheckers.render()
 
