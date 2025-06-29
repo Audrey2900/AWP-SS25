@@ -1,12 +1,16 @@
 # DOKUMENTATION: FAKE NEWS VISUALISIERUNG & AUFKLÄRUNG
 
 ## Inhaltsverzeichnis
+
 1. Projektübersicht und Ziel des Projekts
 2. Fachliche Komponenten
 3. Technische Komponenten
 4. Installation und Setup  
 4.1 !WICHTIG! Code-Anpassung für Streamlit Cloud und lokales Deployment (Bildpfade)
-5. Datenmodell und -verarbeitung
+5. Code-Logik und zentrale Funktionen
+5.1 Datenmodell und -verarbeitung
+5.2 Wichtige Funktionen
+5.3 Praktische Anwendung & Spezialfunktionen
 6. Komponenten-Details
 7. Herausforderungen und Lösungen
 8. Erweiterungsmöglichkeiten
@@ -19,58 +23,69 @@ Das Projekt "Fake News Visualisierung & Aufklärung" ist eine interaktive Webanw
 ### Hauptfunktionen
 
 #### Interaktives Dashboard
+
 - **Funktionalität**: Filtermöglichkeiten nach Ländern, Monaten, Kategorien, Sprachen, Klassifikationen und Wordcloud
 - **Nutzen**: Ermöglicht die gezielte Analyse von Fake-News-Daten nach verschiedenen Kriterien
 - **Umsetzung**: Streamlit-Buttons und Seitenleiste mit Session-State zur Filterung
 - **Update Juni 2025**: Optimiertes Layout mit gleichmäßig verteilten Buttons über die gesamte Container-Höhe
 
 #### Animierte Diagramme
+
 - **Funktionalität**: Automatisch ablaufende Balkendiagramme zur Veranschaulichung von Trends
 - **Nutzen**: Dynamische Darstellung von Datenentwicklungen und Verhältnissen
 - **Besonderheit**: HTML/CSS/JS-Integration für flüssige Animationen
 - **Update Juni 2025**: Verbesserte Performance mit optimierten Timing-Parametern (60ms pro Frame) für flüssigere Animationen
 
 #### Bildauswahl- und Kombinationsspiel (PictureSelector)
+
 - **Funktionalität**: Interaktive Kombination von Personen und Fake-News-Schlagzeilen
 - **Nutzen**: Spielerische Auseinandersetzung mit absurden Falschmeldungen
 - **Update Juni 2025**: Bilder werden jetzt aus dem Ordner `pictureGeneration` geladen mit einheitlicher Bildgröße
 
 #### Aufklappbare Info-Boxen (CoronaExpanders)
+
 - **Funktionalität**: Übersicht und detaillierte Erläuterung bekannter Corona-Verschwörungstheorien
 - **Nutzen**: Kompakte Aufbereitung von Fakten zu verbreiteten Falschinformationen
 
 #### 3D-Weltkarte
+
 - **Funktionalität**: Interaktive Darstellung der globalen Fake-News-Verteilung
 - **Nutzen**: Geografische Einordnung und Schwerpunktanalyse
 - **Technologie**: Plotly-3D-Globe mit Länderdaten
 - **Update Juni 2025**: Größere Darstellung (400px Höhe) und verbessertes dunkles Theme für konsistente Darstellung
 
 #### Statistische Metriken
+
 - **Funktionalität**: Anzeige von Kennzahlen wie Anzahl der Länder, häufigste Fake-News-Kategorien etc.
 - **Nutzen**: Schneller Überblick über die wichtigsten Daten auf einen Blick
 
 #### Interaktive Quiz-Komponenten (Neu)
+
 - **Funktionalität**: Interaktive Wissenstests zu Corona-Fake-News und Faktencheckern
-- **Nutzen**: Spielerische Wissensüberprüfung mit sofortigem Feedback 
+- **Nutzen**: Spielerische Wissensüberprüfung mit sofortigem Feedback
 - **Besonderheit**: Automatische Auswertung und Anzeige der korrekten Antworten
 
 #### Deepfake-Erkennung (Mission 3) (Neu)
+
 - **Funktionalität**: Interaktive Übung zur Unterscheidung echter und KI-generierter Bilder
 - **Nutzen**: Sensibilisierung für KI-generierte Inhalte
 - **Besonderheit**: Bilder werden auf einheitliche Größe (350x250px) gebracht für konsistente Darstellung
 
 #### Faktenchecker-Bereich (Neu)
+
 - **Funktionalität**: Informationen über Arbeit und Geschichte von Faktencheckern
 - **Nutzen**: Aufklärung über wichtige Instanzen der Fake-News-Bekämpfung
 - **Besonderheit**: Integriertes Quiz zur Überprüfung des Verständnisses
 
 ### Datenquellen
+
 - **FakeCovid_July2020.csv**: Hauptdatensatz mit Fake-News-Artikeln
   - Enthält Informationen zu Kategorien, Ländern, Sprachen, Veröffentlichungsdatum, Quellen, Faktencheckern und weiteren Attributen
   - Umfasst mehrere tausend Einträge aus dem Zeitraum der frühen Corona-Pandemie
   - Struktur: ID, Titel, Text, Quelle, Land, Sprache, Kategorie, Veröffentlichungsdatum, Faktencheck-Status
 
 ### Nutzerinteraktionen
+
 - **Daten filtern**: Auswahl verschiedener Ansichten im Dashboard durch Button-Navigation
 - **Visualisierungen erkunden**: Interaktion mit Diagrammen durch Hover, Zoom und Filterung
 - **Spielerische Elemente**: Kombination von Bildern und Texten im PictureSelector
@@ -112,6 +127,7 @@ usw.
 ### Backend (Python)
 
 #### mission1.py
+
 - **Funktionalität**: Enthält alle grundlegenden Visualisierungsfunktionen
 - **Wichtige Funktionen**:
   - `show_country_chart(df)`: Erstellt 3D-Weltkugel mit Fake-News-Verteilung
@@ -123,6 +139,7 @@ usw.
 - **Update Juni 2025**: Konsistentes dunkles Theme (`template="plotly_dark"`) und erweiterte Größenoptionen
 
 #### minidashboard.py
+
 - **Funktionalität**: Steuert das Hauptdashboard, Navigation und Auswahl der Visualisierungen
 - **Besonderheiten**:
   - Verwendet Streamlit Session State für persistente Auswahlzustände
@@ -132,6 +149,7 @@ usw.
 - **Update Juni 2025**: Optimiertes Button-Layout mit CSS für gleichmäßige vertikale Verteilung
 
 #### coronaexpanders.py
+
 - **Funktionalität**: Stellt die Info-Expander zu Verschwörungstheorien bereit
 - **Inhalte**: Informationen zu gängigen Corona-Mythen wie:
   - 5G-Mobilfunk und COVID-19
@@ -142,6 +160,7 @@ usw.
 - **Design**: Formatierte Expander mit angepasstem CSS für bessere Lesbarkeit
 
 #### chartanimation.py
+
 - **Funktionalität**: Erweiterte Visualisierungskomponente für animierte Diagramme
 - **Besonderheiten**:
   - Nutzt Streamlit Components und HTML-Injection zur Animation
@@ -154,12 +173,14 @@ usw.
   - Animation bleibt flüssig, läuft aber schneller ab
 
 #### corona.py
+
 - **Funktionalität**: Hauptseite für Corona-Fake-News mit Text und integrierten Komponenten
 - **Inhalte**: Erläuternde Texte zu Fake News während der Pandemie
 - **Integration**: Bindet CoronaExpanders und andere Komponenten ein
 - **Update Juni 2025**: Integration des neuen Corona-Quiz und verbesserter Visualisierungen
 
 #### Mission_3.py (Neu)
+
 - **Funktionalität**: Deepfake-Erkennungsaufgabe
 - **Besonderheiten**:
   - Lädt Bilder aus zwei Ordnern (echt/KI-generiert)
@@ -168,6 +189,7 @@ usw.
   - Dynamische Fortschrittsanzeige der Ergebnisse
 
 #### factcheckers.py (Neu)
+
 - **Funktionalität**: Informationsseite zu Faktencheckern
 - **Inhalte**: Geschichte, Arbeit und Bedeutung von Faktencheckern
 - **Besonderheiten**: Integration eines Wissensquiz mit automatischer Auswertung
@@ -175,6 +197,7 @@ usw.
 ### Frontend (CSS/JS)
 
 #### styles.css
+
 - **Funktionalität**: Styling für das Bildauswahlspiel
 - **Design-Elemente**:
   - Dunkles Farbschema als Hintergrund
@@ -185,6 +208,7 @@ usw.
 - **Besonderheiten**: Angepasstes Styling für Bilderrahmen, Auswahleffekte und Anzeige der kombinierten Elemente
 
 #### config.toml
+
 - **Funktionalität**: Globale Streamlit-Konfiguration
 - **Einstellungen**:
   - Dark Mode als Basis-Theme
@@ -192,9 +216,12 @@ usw.
   - Versteckte obere Leiste
   - Aktiviertes statisches Serving
 
-## Datenmodell und -verarbeitung
+## Code-Logik und zentrale Funktionen
+
+### 5.1 Datenmodell und -verarbeitung
 
 #### FakeCovid_July2020.csv
+
 - **Struktur**: Tabellendaten mit mehreren Spalten:
   - `published_date`: Datum der Veröffentlichung
   - `country`: Ursprungsland der Fake News
@@ -204,6 +231,7 @@ usw.
   - weitere Felder mit Details zu Quellen, Faktencheckern etc.
 
 #### Datenverarbeitung
+
 - **Vorverarbeitung**:
   - Datumsumwandlung mit Pandas für zeitliche Analysen
   - Gruppierung und Aggregation für verschiedene Visualisierungen
@@ -227,7 +255,7 @@ usw.
   - Verwendet für PictureSelector und animierte Diagramme
 - **Pillow (v10.0+)**: Bildverarbeitung für standardisierte Bildgrößen (Neu)
 
-## Code-Logik und zentrale Funktionen
+## 5.2 Wichtige Funktionen
 
 ### `data/bubble_texts.py`
 
@@ -240,29 +268,38 @@ Jeder Block enthält eine Liste von Strings, die nacheinander in der Sprechblase
 ### `data/char_speech_state.py`
 
 #### `init_char_speech_state()`
+
 Initialisiert die relevanten Streamlit-Zustände für die Sprechblase:
+
 - `bubble_text`: ein optionaler Starttext
 - `text_index`: Position innerhalb des aktuellen Textblocks
 - `text_key`: aktueller Textblock-Schlüssel (z. B. `"onboarding"`)
 
 #### `set_text_key(key: str, zone: str = None)`
+
 Wechselt zu einem anderen Textblock. Zusätzlich:
+
 - wird `text_index` auf `0` zurückgesetzt
 - `typewriter_refresh` erhöht (für die Animation)
 - bei Übergabe eines `zone`-Namens wird `set_zone(...)` aufgerufen
+
 ---
 
 ### `data/zone_anchor.py`
 
 #### `init_zone_state()`
+
 Initialisiert die Zustände zur Bereichssteuerung:
+
 - `visited_zones`: Menge aller besuchten Zonen
 - `current_zone`: aktuell aktive Zone
 
 #### `set_zone(name: str)`
+
 Aktualisiert `current_zone` und fügt die Zone zu `visited_zones` hinzu – nur, wenn sie noch nicht besucht wurde. Dadurch kann das Sprungziel vom Auge-Button angepasst werden
 
 #### `autojump(anchor_id: str)`
+
 Scrollt per JavaScript automatisch zu einem HTML-Element mit der entsprechenden `id`.  
 > Hinweis: Bei sofortigem Triggern nach einem Zonenwechsel sollte `time.sleep(1.5)` verwendet werden, um ein Überspringen durch das Neuladen (Rerun) zu verhindern.
 
@@ -273,29 +310,33 @@ Scrollt per JavaScript automatisch zu einem HTML-Element mit der entsprechenden 
 ### `data/ui_states.py`
 
 #### `init_ui_state()`
+
 Legt im `st.session_state` das Dictionary `ui_state` an, in dem für alle definierten UI-Komponenten der Zustand (`True`/`False`) gespeichert wird.  
 Die enthaltenen Schlüssel betreffen z. B.:
+
 - abgeschlossene Aufgaben (`CoronaQuizDone`)
 - sichtbare UI-Elemente (`CoronaSlider`)
 - aktivierte Corruption-Effekte (`NoCorruptionDragPuzzle`)
 
 #### `set_ui_state(key: str, value: bool)`
+
 Ändert gezielt den Status eines UI-Elements oder -Effekts.
 
 > Damit lässt sich zentral steuern, welche Komponenten sichtbar oder deaktiviert werden. Beispielsweise wird dadurch gesteuert wann der Corruption-Gif zu sehen ist.
 
-
-## 5.2 Praktische Anwendung & Spezialfunktionen
+## 5.3 Praktische Anwendung & Spezialfunktionen
 
 ### Korruptionsanzeige aktivieren/deaktivieren
 
 **Korruption anzeigen (z. B. wenn Aufgabe noch nicht gelöst):**
+
 ```python
 if st.session_state.ui_state["NoCorruptionCoronaSlider"] == False:
     Corruption.render()
 ```
 
 **Korruption ausblenden (nach erfolgreicher Lösung):**
+
 ```python
 if (
     st.session_state.text_key == "slidercorrect"
@@ -306,37 +347,44 @@ if (
     set_ui_state("NoCorruptionCoronaSlider", True)
     st.rerun()
 ```
+
 >Hinweis: Der st.rerun() sorgt dafür, dass nach dem Setzen der Zustände sofort neu geladen wird und der Korruptionseffekt verschwindet.
 
 ---
 
 ### Sprungziele für den „Auge“-Button setzen
 
-#### Voraussetzung:
+#### Voraussetzung
+
 In einem Streamlit-Element (z. B. `st.title`) einen `anchor` setzen:
+
 ```python
 st.title("Faktencheck", anchor="factcheckers")
 oder in einer Markdown:
 st.markdown('<div id="factcheckers"></div>', unsafe_allow_html=True)
 ```
 
-#### Ziel per Code setzen:
+#### Ziel per Code setzen
+
 ```python
 set_zone("factcheckers")
 ```
 
-#### Ziel über Button in der Sprechblase setzen:
+#### Ziel über Button in der Sprechblase setzen
+
 ```python
 st.button("", on_click=set_text_key, args=("FCwerprüftde", "factcheckers"), key="chat_fc")
 ```
+
 - Erstes Argument = Schlüssel aus `bubble_texts` (Welcher Text aus dem Dictionary soll gezeigt werden)
-- Zweites Argument = Sprungziel-Anchor 
+- Zweites Argument = Sprungziel-Anchor
 
 ---
 
 ### Charaktertext gezielt anzeigen
 
 Text muss in `data/bubble_texts.py` enthalten sein:
+
 ```python
 "FCwerprüftde": [
     "Wer überprüft eigentlich Fakten im Netz?..."
@@ -344,9 +392,11 @@ Text muss in `data/bubble_texts.py` enthalten sein:
 ```
 
 Dann mit Button aufrufen:
+
 ```python
 st.button("", on_click=set_text_key, args=("FCwerprüftde", "factcheckers"), key="chat_fc")
 ```
+
 Durch den Ersten Parameter wird bei einem Klick der Text angepasst zu "FCwerprüftde"
 
 ---
@@ -354,6 +404,7 @@ Durch den Ersten Parameter wird bei einem Klick der Text angepasst zu "FCwerprü
 ### Sichtbarkeit und Fortschritt per `ui_state` steuern
 
 In `data/ui_states.py` neue Keys ergänzen:
+
 ```python
 _UI_KEYS = [
     "DragPuzzle",
@@ -364,12 +415,14 @@ _UI_KEYS = [
 ```
 
 **Zustände ändern:**
+
 ```python
 set_ui_state("DragPuzzle", True)
 set_ui_state("DragPuzzleDone", True)
 ```
 
 **Verwendung im Code:**
+
 ```python
 if (
     st.session_state.text_key == "dragpuzzle"
@@ -378,11 +431,12 @@ if (
     st.session_state.ui_state["DragPuzzle"] = True
     DragPuzzleLogic.render()
 ```
+
 >st.session_state.text_key == "dragpuzzle" prüft, ob gerade der richtige Textabschnitt aktiv ist.
 
 >st.session_state.text_index == 4 prüft, ob der aktuelle Satz in der Sprechblase dem Punkt entspricht, an dem das Puzzle starten soll.
 
->or st.session_state.ui_state["DragPuzzle"] stellt sicher, dass das Puzzle auch nach einem st.rerun() weiterhin angezeigt wird. Ebenfalls wird verhindert, dass diese Komponente in Zukunft erneut angezeigt wird, wenn man auf denselben button klickt. 
+>or st.session_state.ui_state["DragPuzzle"] stellt sicher, dass das Puzzle auch nach einem st.rerun() weiterhin angezeigt wird. Ebenfalls wird verhindert, dass diese Komponente in Zukunft erneut angezeigt wird, wenn man auf denselben button klickt.
 
 ---
 
@@ -393,6 +447,7 @@ if (
 3. Alles darunter auskommentieren (inkl. `render()`)
 
 4. Stattdessen eigene Komponente laden:
+
 ```python
 import zones.Corona as Corona
 Corona.render()
@@ -412,6 +467,7 @@ Durch die Option von oben "Korruption ausblenden" kann man dies lösen und die K
 ### Glitch- und FakeText-Effekte im Text
 
 Einfügen in `st.markdown(...)`:
+
 ```html
 <span class="corrupt">[MissingNumber]</span>
 <span class="falsetext">DeinFalscherText</span>
@@ -423,7 +479,8 @@ In `index.py` im `<style>`-Block ganz oben ergänzen – unbedingt **eindeutige 
 ---
 
 ### Automatisch scrollen beim Zonenwechsel
->Wenn Streamlit dynamisch die Website erweitern, bspw. entfernen der Corruption und hinzufügen einer neuen Zone, dann wird die Position des Users nicht automatisch angepasst. 
+>
+>Wenn Streamlit dynamisch die Website erweitern, bspw. entfernen der Corruption und hinzufügen einer neuen Zone, dann wird die Position des Users nicht automatisch angepasst.
 Somit wird der User mitten in der Zone positioniert sein, nachdem die Seitenanpassungen durch sind.
 Deshalb bietet sich die autojump-Funktion an.
 
@@ -475,35 +532,42 @@ st.button("", on_click=set_text_key, args=("FCwerprüftde", "factcheckers"), key
 ```
 
 **Achtung:**  
+
 - Button-Key muss **einzigartig** sein (z. B. `"chat_fc"`, `"chat_drag"`)  
 - Keine zwei Buttons dürfen den gleichen Key haben – sonst reagiert Streamlit nicht mehr korrekt
-
 
 ## Installation und Setup siehe auch README.md
 
 ### Voraussetzungen
+
 - Python 3.10 oder höher
 - pip (Paketmanager)
 - Git (optional, für Projekt-Klonen)
 
 ### Installation
+
 1. Repository klonen oder als ZIP herunterladen
 2. Virtuelle Umgebung erstellen (empfohlen):
+
    ```
    python -m venv .venv
    .venv\Scripts\activate  # Windows
    source .venv/bin/activate  # Unix/Mac
    ```
+
 3. Dependencies installieren:
+
    ```
    pip install -r requirements.txt
    ```
 
 ### Ausführung
+
 ```
 streamlit run app.py
 ```
-Die Anwendung ist dann unter http://localhost:8501 erreichbar.
+
+Die Anwendung ist dann unter <http://localhost:8501> erreichbar.
 
 ---
 
@@ -516,6 +580,7 @@ Außerdem **muss eine Kleinigkeit im Code angepasst werden**, sodass `PrototypeC
 Streamlit Cloud erlaubt **kein direktes Fileserving aus dem `/static/`-Ordner**, sodass JS nicht auf lokale Bilder zugreifen kann.
 
 ## Code-Anpassung für Streamlit Cloud (Bildpfade)
+
 ### Anpassung in `components/CharSpeechBubble/charspeechbubble.py`
 
 Folgenden Code:
@@ -523,6 +588,7 @@ Folgenden Code:
 ```html
 <img id="floating-avatar" src="app/static/PrototypeChar2.gif" />
 ```
+
 ```js
 avatar.src = "app/static/PrototypeChar2.gif";
 avatar.src = "app/static/PrototypeChar_still.png";
@@ -533,6 +599,7 @@ avatar.src = "app/static/PrototypeChar_still.png";
 ```html
 <img id="floating-avatar" src="https://raw.githubusercontent.com/Audrey2900/AWP-SS25/main/static/PrototypeChar2.gif" />
 ```
+
 ```js
 avatar.src = "https://raw.githubusercontent.com/Audrey2900/AWP-SS25/main/static/PrototypeChar2.gif";
 avatar.src = "https://raw.githubusercontent.com/Audrey2900/AWP-SS25/main/static/PrototypeChar_still.png";
@@ -561,7 +628,6 @@ Wenn **kein Deployment in der Cloud** erfolgt, sondern die App lokal ausgeführt
 ```
 "app/static/(NameVomBild,Gif)"
 ```
-
 
 ## Komponenten-Details
 
@@ -595,6 +661,7 @@ Die interaktiven Quizze zu Corona und Faktencheckern bieten:
 Die Mission 3 zur Deepfake-Erkennung bietet:
 
 1. Bildverarbeitung für einheitliche Größen:
+
 ```python
 img = img.convert("RGB")
 img.thumbnail(target_size, Image.LANCZOS)
@@ -647,12 +714,14 @@ background.paste(img, offset)
 ## Anhang und Referenzen
 
 ### Nützliche Ressourcen
+
 - [Streamlit Dokumentation](https://docs.streamlit.io/)
 - [Plotly Python Dokumentation](https://plotly.com/python/)
 - [Pandas Dokumentation](https://pandas.pydata.org/docs/)
 - [Pillow Dokumentation](https://pillow.readthedocs.io/) (Neu)
 
 ### Projekthistorie und Meilensteine
+
 - **April 2025**: Projektstart, Konzeption
 - **Juni 2025**: Entwicklung der Kernkomponenten
 - **11. Juni 2025**: Erste Dokumentation
