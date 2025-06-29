@@ -73,12 +73,19 @@ def render():
 
         if bild2:
             st.image(bild2, use_container_width=True)
-
-
-
-#https://www.fr.de/verbraucher/sexismus-rassismus-ki-diskriminierung-unsichtbar-benachteiligung-frauen-forschung-92861297.html
-#https://www.vox.com/future-perfect/22672414/ai-artificial-intelligence-gpt-3-bias-muslim
-#https://www.hsbi.de/presse/pressemitteilungen/diskriminierung-von-menschen-mit-behinderungserfahrung-durch-chatgpt-und-co-hsbi-workshop-bringt-neue-erkenntnisse
-#https://www.businessinsider.com/zuckerbergs-wife-chinese-american-metas-ai-image-generator-cant-cope-2024-4
-#https://www.sciencedaily.com/releases/2023/01/230131101910.htm
-#https://netzpolitik.org/2021/kindergeldaffaere-niederlande-zahlen-millionenstrafe-wegen-datendiskriminierung
+    
+    if st.toggle("Quellen", key="quelleAiHarmExamples"):
+        st.markdown("""
+        <div style="border:1px solid #ccc; border-radius:6px; padding:10px; margin-top:5px;">
+        <ul>
+            <li><a href='https://incidentdatabase.ai/taxonomies/' target='_blank'>Grafik - Diskriminierung</a></li>
+            <li><a href='https://www.washingtonpost.com/technology/interactive/2023/ai-generated-images-bias-racism-sexism-stereotypes/' target='_blank'>This is how AI image generators see the world</a></li>
+            <li><a href='https://www.fr.de/verbraucher/sexismus-rassismus-ki-diskriminierung-unsichtbar-benachteiligung-frauen-forschung-92861297.html' target='_blank'>KI auf Sexismus trainiert? So diskriminiert die Technik</a></li>
+            <li><a href='https://www.vox.com/future-perfect/22672414/ai-artificial-intelligence-gpt-3-bias-muslim' target='_blank'>AI’s Islamophobia problem</a></li>
+            <li><a href='https://www.hsbi.de/presse/pressemitteilungen/diskriminierung-von-menschen-mit-behinderungserfahrung-durch-chatgpt-und-co-hsbi-workshop-bringt-neue-erkenntnisse' target='_blank'>Diskriminierung von Menschen mit Behinderungserfahrung durch ChatGPT und Co.: HSBI-Workshop bringt neue Erkenntnisse</a></li>
+            <li><a href='https://www.sciencedaily.com/releases/2023/01/230131101910.htm' target='_blank'>AI technologies have even more exaggerated biases in perception of facial age than humans</a></li>
+            <li><a href='https://netzpolitik.org/2021/kindergeldaffaere-niederlande-zahlen-millionenstrafe-wegen-datendiskriminierung/' target='_blank'>Niederlande zahlen Millionenstrafe wegen Datendiskriminierung</a></li>
+            <li><a href='https://www.businessinsider.com/zuckerbergs-wife-chinese-american-metas-ai-image-generator-cant-cope-2024-4' target='_blank'>Mark Zuckerberg is married to a Chinese-American woman, but Meta's AI image generator can't imagine an Asian man with a white woman</a></li>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)

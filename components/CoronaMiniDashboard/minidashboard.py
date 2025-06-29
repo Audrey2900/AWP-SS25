@@ -15,7 +15,7 @@ def load_css(file_path):
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 def render():
-    css_path = pathlib.Path("static/styles/mission1.css")
+    css_path = pathlib.Path("static/styles/coronaminidashboard.css")
     load_css(css_path)
 
     st.title("📊 Mini-Dashboard: Fake News Visualisierung", anchor="zone1")
