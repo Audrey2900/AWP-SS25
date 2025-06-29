@@ -28,6 +28,12 @@ html, body, [class*="css"]  {
 .stButton>button:hover {
     background-color: #ffa733;
 }
+/* Streamlit Cloud Branding unten rechts */
+    [data-testid="stDecoration"] {display: none !important;}
+    /* GitHub Avatar Overlay */
+    .st-emotion-cache-1v0mbdj {display: none !important;}
+    /* Fallback für andere mögliche Klassen */
+    img[alt="View source on GitHub"] {display: none !important;}
 div[data-testid="stMainBlockContainer"] {
     max-width: 900px;
     margin: 0 auto;
@@ -154,9 +160,9 @@ import zones.Mission_4 as Mission4
 
 #Offboarding.render()
 
-#mission2.render()
+mission2.render()
 
-Mission3.render()
+#Mission3.render()
 
 #Mission4.render()
 
