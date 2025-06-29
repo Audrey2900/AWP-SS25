@@ -3,6 +3,7 @@ import components.FactCheckersGraph.factcheckersgraph as FactCheckersGraph
 import components.FactCheckersQuiz.factcheckersquiz as FactCheckersQuiz
 import components.Corruption.corruption as Corruption
 from data.char_speech_state import set_text_key
+import pathlib
 
 def render():
     col1, col2 = st.columns([3, 1])
@@ -14,11 +15,8 @@ def render():
         """)
         
     with col2:
-        st.markdown("""
-    	    <img src="/app/static/factcheckersintro.webp"
-            alt="400 Faktenchecker visualisiert"
-            style="width: 100%; border-radius: 8px;" />""", 
-        unsafe_allow_html=True)    
+        img_path = pathlib.Path(__file__).parent / "factcheckers_pic" / "factcheckersintro.webp"
+        st.image(str(img_path), use_container_width=True)    
     
 
     st.markdown("""
@@ -84,19 +82,13 @@ Ein Vorteil von GADMO ist, dass Redaktionen nicht doppelt an derselben Sache arb
         """)
 
     with col2:
-        st.markdown("""
-    	    <img src="/app/static/400factcheckingteams.webp"
-            alt="400 Faktenchecker visualisiert"
-            style="margin-top: 80px; width: 100%; border-radius: 8px;" />""", 
-        unsafe_allow_html=True)
+        img_path2 = pathlib.Path(__file__).parent / "factcheckers_pic" / "400factcheckingteams.webp"
+        st.image(str(img_path2), use_container_width=True)
     
     st.button("", on_click=set_text_key, args=("FCifcn",), key="chat3")
 
-    st.components.v1.html("""
-        <div style="text-align: center;">
-            <img src="/app/static/IFCNcerts.png" style="border-radius: 8px; width: 800px; height: auto; display: block; margin: 20px auto 0 auto;;" />
-        </div>
-    """, height=360)
+    img_path3 = pathlib.Path(__file__).parent / "factcheckers_pic" / "IFCNcerts.png"
+    st.image(str(img_path3), use_container_width=True)
 
     FactCheckersGraph.render()
 
