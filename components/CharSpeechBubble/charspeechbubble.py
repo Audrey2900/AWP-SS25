@@ -149,7 +149,8 @@ def render():
     </style>
 
     <div id="avatar-container">
-        <img id="floating-avatar" src="/app/static/PrototypeChar2.gif" />
+                                                <!-- Diese Zeile Anpassen VVVVVV -->
+        <img id="floating-avatar" src="<img id="floating-avatar" src="https://raw.githubusercontent.com/Audrey2900/AWP-SS25/main/static/PrototypeChar2.gif" />
         <div style="position: relative;">
             <div id="speech-tail"></div>
             <div id="speech-bubble">
@@ -179,7 +180,8 @@ def render():
 
     // Start GIF Animation
     if (avatar) {{
-        avatar.src = "/app/static/PrototypeChar2.gif"; // Start Animation
+        // Diese Zeile Anpassen VVVVVV
+        avatar.src = "https://raw.githubusercontent.com/Audrey2900/AWP-SS25/main/static/PrototypeChar2.gif"; // Start Animation
     }}
 
     // Typewriter-Effekt
@@ -204,7 +206,8 @@ def render():
                 }}
                 // Pause/Stop GIF Animation
                 if (avatar) {{
-                    avatar.src = "/app/static/PrototypeChar_still.png"; // Replace with static image
+                    // Diese Zeile Anpassen VVVVVV
+                    avatar.src = "https://raw.githubusercontent.com/Audrey2900/AWP-SS25/main/static/PrototypeChar_still.png"; // Replace with static image
                 }}
             }}
         }}

@@ -4,7 +4,8 @@
 1. Projektübersicht und Ziel des Projekts
 2. Fachliche Komponenten
 3. Technische Komponenten
-4. Installation und Setup
+4. Installation und Setup  
+4.1 Code-Anpassung für Streamlit Cloud (Bildpfade)
 5. Datenmodell und -verarbeitung
 6. Komponenten-Details
 7. Herausforderungen und Lösungen
@@ -251,6 +252,48 @@ usw.
 streamlit run app.py
 ```
 Die Anwendung ist dann unter http://localhost:8501 erreichbar.
+
+---
+
+## Deployment auf Streamlit Cloud
+
+Um den Code auf **Streamlit Cloud** laufen zu lassen, muss das Repository auf **GitHub öffentlich** sein.  
+Außerdem **muss eine Kleinigkeit im Code angepasst werden**, sodass `PrototypeChar2.gif` und `PrototypeChar_still.png` korrekt angezeigt werden.
+
+**Hintergrund:**  
+Streamlit Cloud erlaubt **kein direktes Fileserving aus dem `/static/`-Ordner**, sodass JS nicht auf lokale Bilder zugreifen kann.
+
+## Code-Anpassung für Streamlit Cloud (Bildpfade)
+### Anpassung in `components/CharSpeechBubble/charspeechbubble.py`
+
+Folgenden Code:
+
+```html
+<img id="floating-avatar" src="app/static/PrototypeChar2.gif" />
+```
+```js
+avatar.src = "app/static/PrototypeChar2.gif";
+avatar.src = "app/static/PrototypeChar_still.png";
+```
+
+ändern zu:
+
+```html
+<img id="floating-avatar" src="https://raw.githubusercontent.com/Audrey2900/AWP-SS25/main/static/PrototypeChar2.gif" />
+```
+```js
+avatar.src = "https://raw.githubusercontent.com/Audrey2900/AWP-SS25/main/static/PrototypeChar2.gif";
+avatar.src = "https://raw.githubusercontent.com/Audrey2900/AWP-SS25/main/static/PrototypeChar_still.png";
+```
+
+> **Wichtig:** Statt `Audrey2900/AWP-SS25` muss der eigene GitHub-Repo-Pfad verwendet werden.
+
+Wenn **kein Deployment in der Cloud** erfolgt, sondern die App lokal ausgeführt wird, kann weiterhin folgendes verwendet werden:
+
+```
+"app/static/(NameVomBild,Gif)"
+```
+
 
 ## Komponenten-Details
 
