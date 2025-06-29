@@ -3,11 +3,6 @@ import components.FactCheckersGraph.factcheckersgraph as FactCheckersGraph
 import components.FactCheckersQuiz.factcheckersquiz as FactCheckersQuiz
 import components.Corruption.corruption as Corruption
 from data.char_speech_state import set_text_key
-from PIL import Image
-import pathlib
-
-img_path = pathlib.Path(__file__).parent / "factcheckersintro.webp"
-st.image(str(img_path), use_column_width=True, caption="400 Faktenchecker visualisiert")
 
 def render():
     col1, col2 = st.columns([3, 1])
@@ -22,7 +17,7 @@ def render():
         st.markdown("""
     	    <img src="/app/static/factcheckersintro.webp"
             alt="400 Faktenchecker visualisiert"
-            style="margin-top: 80px; width: 100%; border-radius: 8px;" />""", 
+            style="width: 100%; border-radius: 8px;" />""", 
         unsafe_allow_html=True)    
     
 
