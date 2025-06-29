@@ -82,7 +82,7 @@ Ein Vorteil von GADMO ist, dass Redaktionen nicht doppelt an derselben Sache arb
         """)
 
     with col2:
-        img_path2 = pathlib.Path(__file__).parent / "factcheckers_pic" / "400factcheckingteams.webp"
+        img_path2 = pathlib.Path(__file__).parent / "factcheckers_pic" / "400FactCheckingTeams.webp"
         st.image(str(img_path2), use_container_width=True)
     
     st.button("", on_click=set_text_key, args=("FCifcn",), key="chat3")
