@@ -20,7 +20,7 @@ def render():
         </style>
     """, unsafe_allow_html=True)
     st.components.v1.html("""
-        <img src="/app/static/corruption.gif"
+        <img src="https://raw.githubusercontent.com/Audrey2900/AWP-SS25/main/static/corruption.gif"
             style="
                 position: relative;
                 left: 50%;
@@ -30,6 +30,6 @@ def render():
                 display: block;
             " />
         """,
-        height=800
+        height=550
     )
     st.stop()

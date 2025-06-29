@@ -286,7 +286,21 @@ avatar.src = "https://raw.githubusercontent.com/Audrey2900/AWP-SS25/main/static/
 avatar.src = "https://raw.githubusercontent.com/Audrey2900/AWP-SS25/main/static/PrototypeChar_still.png";
 ```
 
-> **Wichtig:** Statt `Audrey2900/AWP-SS25` muss der eigene GitHub-Repo-Pfad verwendet werden.
+### Anpassung in `components/Corruption/corruption.py`
+
+Folgenden Code:
+
+```html
+<img src="app/static/corruption.gif"
+```
+
+ändern zu:
+
+```html
+<img src="https://raw.githubusercontent.com/Audrey2900/AWP-SS25/main/static/corruption.gif"
+```
+
+> **Wichtig:** Statt `Audrey2900/AWP-SS25` muss der eigene GitHub-Repo-Pfad verwendet werden. Der Restliche Pfad kann so bleiben.
 
 Wenn **kein Deployment in der Cloud** erfolgt, sondern die App lokal ausgeführt wird, kann weiterhin folgendes verwendet werden:
 
