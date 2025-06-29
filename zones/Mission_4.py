@@ -1,11 +1,11 @@
 import streamlit as st
+from data.char_speech_state import set_text_key
 
 def render():
-    st.title("Deepfakes erkennen – Wie können wir Deepfakes erkennen und nicht auf Fakenews reinfallen")
-    st.markdown(
-        "Es scheint so, als wäre die Internetseite auch komprimiert. "
-        "Wähle für jede Aussage die **richtige** Antwort aus und hilf mir die kaputten Texte wieder herzustellen."
-    )
+    st.title("Fast geschafft – bring Licht ins digitale Dunkel")
+
+    # Intro-Dialog durch Chatbutton
+    st.button("", on_click=set_text_key, args=("mission4.1",), key="chat4-1")
 
     st.markdown("<div style='height: 24px;'></div>", unsafe_allow_html=True)
 
@@ -51,11 +51,9 @@ def render():
 
     st.markdown("<div style='height: 24px;'></div>", unsafe_allow_html=True)
 
-    # Speichern der Antworten
     if "mission4_antworten" not in st.session_state:
         st.session_state.mission4_antworten = [0] * len(quiz)
 
-    # Anzeige der Fragen
     for i, eintrag in enumerate(quiz):
         auswahl = st.radio(
             eintrag["frage"], 
@@ -66,7 +64,6 @@ def render():
         st.session_state.mission4_antworten[i] = eintrag["optionen"].index(auswahl)
         st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
 
-    # Auswertung
     if st.button("Abgeben", key="mission4_abgeben"):
         punkte = 0
         for i, eintrag in enumerate(quiz):
@@ -76,6 +73,9 @@ def render():
         st.success(f"Du hast {punkte} von {len(quiz)} Fragen richtig beantwortet!")
 
         st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
+
+        # Ergebnis-Dialog durch Chatbutton
+        st.button("", on_click=set_text_key, args=("mission4.2",), key="chat4-2")
 
         if punkte == len(quiz):
             st.markdown("### Glückwunsch, du hast alle Hinweise richtig entschlüsselt!")
@@ -112,8 +112,6 @@ def render():
                     richtige = eintrag["optionen"][eintrag["lösung"]]
                     st.markdown(f"**Frage {i+1}:** {richtige}")
 
-# Diese Zeile wird nicht gebraucht, wenn die render() Funktion von außen
-# aufgerufen wird, z.B. aus der index.py
 if __name__ == "__main__":
     st.set_page_config(page_title="Deepfake erkennen", layout="centered")
     render()

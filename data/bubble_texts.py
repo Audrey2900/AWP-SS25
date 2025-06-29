@@ -231,6 +231,17 @@ BUBBLE_TEXTS = {
     "Achte besonders auf unnatürliche Augenbewegungen oder wenig Lidschlag. Verwaschene Übergänge im Gesicht oder seltsame Hintergrunddetails sind auch oft ein Hinweis.",
     "Fehlende Metadaten oder unbekannte Quellen? Auch das ist verdächtig!",
     "Wenn dir etwas seltsam vorkommt: Frag nach, schau genau hin – und vertrau deinem Gefühl!"
+    ],
+    ######### Mission 4 #########
+    "mission4.1": [
+    "Fast geschafft! Ein letzter Abschnitt ist noch beschädigt.",
+    "Dieser Teil ist stark komprimiert, die Aussagen sind verrutscht oder kaum lesbar.",
+    "Wenn wir die richtigen Antworten finden, kann ich ihn wiederherstellen.",
+    "Komm, ein letztes Mal bündeln wir unsere Kräfte – dann hast du den Artikel erflogreich repariert!"
+    ],
+    "mission4.2": [
+    "Super gemacht – wieder ein Stück der Plattform repariert!",
+    "Du hast gezeigt, dass du Fake News und Deepfakes nicht so leicht auf den Leim gehst.",
+    "Und das Wichtigste: Du hast den Blick fürs Detail geschärft – eine echte Superkraft im Netz!"
     ]
-
 }
