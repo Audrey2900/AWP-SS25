@@ -1,21 +1,15 @@
 import altair as alt
 import streamlit as st
 import pandas as pd
+from data.char_speech_state import set_text_key
 
 def render():
     col1, col2 = st.columns([3, 1])
     with col1:
-        st.title("Mission 2: Erkenne die Fake-News-Wörter", anchor="mission2")
-        st.markdown("""
-        In dieser Mission geht es darum, die Unterschiede zwischen Fake-News- und Real-News-Artikeln zu erkennen.  
-        Du siehst zwei Wordclouds: Eine zeigt die häufigsten Wörter in Fake-News-Artikeln, die andere die aus Real-News-Artikeln.  
-        """)
-
-        st.markdown(""" 
-        **Schau sie dir genau an und wähle die mit den Fake News aus.**
-        """)
-
+        st.title("Versteckte Hinweise im Wortchaos", anchor="mission2")
+ 
     st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+    st.button("", on_click=set_text_key, args=("mission2.1",), key="chat1")
 
     col1, col2 = st.columns(2)
     with col1:
@@ -33,22 +27,16 @@ def render():
         choice = st.session_state["chosen_option"]
         st.markdown(f"**Du hast Option {choice} gewählt.**")
 
+        # Folge-Dialog abhängig von der Auswahl
         if choice == "A":
-            st.warning("Falsch! Option A zeigt die echte News-Cloud. Fake News und echte News sind oft schwer zu unterscheiden.")
-        else:
-            st.success("Richtig! Aber Achtung: Fake News und echte News können sich stark ähneln.")
+            st.button("", on_click=set_text_key, args=("mission2_resultA",), key="chat_m2_a")
+        elif choice == "B":
+            st.button("", on_click=set_text_key, args=("mission2_resultB",), key="chat_m2_b")
 
-        st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+        st.markdown("---\n## Auflösung: Was verrät uns die Sprache?")
+        st.button("", on_click=set_text_key, args=("mission2.3",), key="chat3")
 
-        st.markdown("""
-        ### Auflösung: So ähnlich sehen Fake News und echte News aus
-
-        Das folgende Diagramm stellt eine Sentiment-Analyse dar.  
-        Es vergleicht Fake-News-Artikel mit Real-News-Artikeln bezüglich ihrer negativen oder positiven Einstellung zum Thema.  
-        Man kann klar erkennen, dass sich Fake und Real News nicht so sehr voneinander unterscheiden.
-        """)
-
-        # Daten für Sentiment-Analyse
+        # Sentiment-Diagramm
         data = pd.DataFrame({
             'Sentiment': ['sehr negativ', 'negativ', 'neutral', 'positiv', 'sehr positiv'],
             'Real News': [2, 238, 20220, 947, 10],
@@ -58,25 +46,16 @@ def render():
         farben = alt.Scale(domain=['Fake News', 'Real News'], range=['red', 'green'])
 
         chart = alt.Chart(df_long).mark_bar().encode(
-            x=alt.X('Sentiment:N', sort=['sehr negativ', 'negativ', 'neutral', 'positiv', 'sehr positiv'], title="Sentiment-Kategorie"),
+            x=alt.X('Sentiment:N', sort=['sehr negativ', 'negativ', 'neutral', 'positiv', 'sehr positiv'], title="Stimmung"),
             y=alt.Y('Anzahl:Q', title="Anzahl Artikel"),
             color=alt.Color('Kategorie:N', scale=farben, legend=alt.Legend(title="Kategorie")),
             tooltip=['Kategorie', 'Sentiment', 'Anzahl'],
             xOffset='Kategorie:N'
-        ).properties(
-            width=600,
-            height=400,
-            title="Verteilung der Sentiment-Kategorien: Fake News vs. Real News"
-        )
+        ).properties(width=600, height=400, title="Sentiment-Analyse: Fake News vs. Real News")
 
         st.altair_chart(chart, use_container_width=True)
 
-        st.markdown("""
-        <div style='height: 20px;'></div>
-        Das Diagramm zeigt: Fake News und echte News unterscheiden sich im Sentiment kaum.
-        """, unsafe_allow_html=True)
-
-        # Top-Wörter
+        # Wort-Vergleich
         true_words = {
             "said": 0.071557,
             "trump": 0.043959,
@@ -101,6 +80,7 @@ def render():
             "said": 0.020374,
             "donald": 0.019236
         }
+
         df_true = pd.DataFrame(list(true_words.items()), columns=["word", "frequency"])
         df_fake = pd.DataFrame(list(fake_words.items()), columns=["word", "frequency"])
 
@@ -108,20 +88,13 @@ def render():
             x=alt.X('frequency:Q', title='Häufigkeit'),
             y=alt.Y('word:N', sort='-x', title='Real-News-Wörter'),
             tooltip=['word', 'frequency']
-        ).properties(
-            width=300,
-            height=400,
-            title="Real News"
-        )
+        ).properties(width=300, height=400, title="Real News")
+
         chart_fake = alt.Chart(df_fake).mark_bar(color='red').encode(
             x=alt.X('frequency:Q', title='Häufigkeit'),
             y=alt.Y('word:N', sort='-x', title='Fake-News-Wörter'),
             tooltip=['word', 'frequency']
-        ).properties(
-            width=300,
-            height=400,
-            title="Fake News"
-        )
+        ).properties(width=300, height=400, title="Fake News")
 
         col1, col2 = st.columns(2)
         with col1:
@@ -129,11 +102,7 @@ def render():
         with col2:
             st.altair_chart(chart_fake, use_container_width=True)
 
-        st.markdown("""
-        Auch bei den Top-Wörtern fallen keine extremen Unterschiede auf.  
-        Das liegt daran, dass Fake News oft von KIs generiert werden und diese gelernt haben, wie Real News aussehen und welche Wörter häufig von Journalist:innen benutzt werden.  
-        Dies macht es unfassbar schwer, Real und Fake News allein anhand der Wörter, der Grammatik oder des Inhalts der Artikel zu unterscheiden.
-        """)
+        st.button("", on_click=set_text_key, args=("mission2.4",), key="chat4")
 
 if __name__ == "__main__":
     render()

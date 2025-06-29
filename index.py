@@ -156,7 +156,7 @@ import zones.Mission_4 as Mission4
 
 #mission2.render()
 
-#Mission3.render()
+Mission3.render()
 
 #Mission4.render()
 

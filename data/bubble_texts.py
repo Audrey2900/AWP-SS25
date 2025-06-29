@@ -188,7 +188,49 @@ BUBBLE_TEXTS = {
     "SentimentSliderFalse": [
         "Hmmm, bei mir tut sich nichts. Wir brauchen eine andere Schlussfolgerung."
     ],
-    ######### Mission 1 + 2 + ... #########
-    "test2": [],
-    "test3": [],
+    ######### Mission 2 #########
+    "mission2_resultA": [
+    "Hmm, das war die echte Nachrichten-Wolke.",
+    "Aber keine Sorge – das war ganz schön knifflig.",
+    "Manchmal ist es fast unmöglich, Fake und echt zu unterscheiden. Genau deshalb trainieren wir deinen Blick!"
+    ],
+    "mission2_resultB": [
+    "Richtig! Das war die Fake-News-Wolke.",
+    "Du hast ein gutes Gespür für reißerische Sprache.",
+    "Lass uns weitermachen – die nächste Spur wartet schon!"
+    ],
+    "mission2.1": [
+    "Ich habe hier zwei Datenfragmente gefunden – sogenannte Wordclouds, aber sie sind beschädigt.",
+    "Die Beschriftungen fehlen, ich weiß also nicht mehr, welche zu den Fake News gehört.",
+    "Gut, dass ich dich habe – wir kriegen das zusammen sicher wieder hin!",
+    "Schau dir die Begriffe genau an: Was wirkt übertrieben, auffällig oder seltsam formuliert?"
+    ],
+    "mission2.3": [
+    "Fake News nutzen oft starke Gefühle, um besonders viel Aufmerksamkeit zu bekommen.",
+    "Das sieht man auch an der Stimmung in ihren Texten.",
+    "Hier siehst du die häufigsten Wörter in echten und gefälschten Nachrichten.",
+    "Erkennst du Unterschiede? Manchmal sind sie kleiner als gedacht – bleib wachsam!"
+    ],
+    "mission2.4": [
+    "Fake News sind oft von KIs generiert und diese haben gelernt haben, wie Real News aussehen und welche Wörter häufig von Journalist:innen benutzt werden.",
+    "Dies macht es unfassbar schwer, Real und Fake News allein anhand der Wörter, der Grammatik oder des Inhalts der Artikel zu unterscheiden."
+    ],
+    ######### Mission 3 #########
+    "mission3.1": [
+    "INFO hier – ich hab ein neues Datenleck gefunden. Diesmal geht's um Bilder!",
+    "Einige davon könnten Deepfakes sein – aber welche?",
+    "Schau genau hin und hilf mir herauszufinden, was echt ist und was nur manipuliert wirkt.",
+    "Was sind eigentlich Deepfakes? Ich erklär's dir!",
+    "Deepfakes sind täuschend echte Bilder, Videos oder Audios, die mit KI erstellt oder verändert wurden.",
+    "Sie zeigen reale Personen beim Sprechen oder Handeln – obwohl sie das nie gesagt oder getan haben.",
+    "Am bekanntesten sind Deepfake-Gesichter: Sie wirken überzeugend echt, sind aber oft komplett computergeneriert."
+    ],
+    "mission3.2": [
+    "Wow, das war gar nicht so leicht – aber super gemacht!",
+    "Zum Schluss noch ein paar Tipps, wie du Deepfakes besser erkennen kannst:",
+    "Achte besonders auf unnatürliche Augenbewegungen oder wenig Lidschlag. Verwaschene Übergänge im Gesicht oder seltsame Hintergrunddetails sind auch oft ein Hinweis.",
+    "Fehlende Metadaten oder unbekannte Quellen? Auch das ist verdächtig!",
+    "Wenn dir etwas seltsam vorkommt: Frag nach, schau genau hin – und vertrau deinem Gefühl!"
+    ]
+
 }
