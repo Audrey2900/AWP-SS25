@@ -5,7 +5,7 @@
 2. Fachliche Komponenten
 3. Technische Komponenten
 4. Installation und Setup  
-4.1 Code-Anpassung für Streamlit Cloud (Bildpfade)
+4.1 !WICHTIG! Code-Anpassung für Streamlit Cloud und lokales Deployment (Bildpfade)
 5. Datenmodell und -verarbeitung
 6. Komponenten-Details
 7. Herausforderungen und Lösungen
@@ -192,7 +192,7 @@ usw.
   - Versteckte obere Leiste
   - Aktiviertes statisches Serving
 
-### Datenmodell und -verarbeitung
+## Datenmodell und -verarbeitung
 
 #### FakeCovid_July2020.csv
 - **Struktur**: Tabellendaten mit mehreren Spalten:
@@ -226,6 +226,258 @@ usw.
 - **Streamlit Components v1**: Integration eigener HTML/JS/CSS-Komponenten
   - Verwendet für PictureSelector und animierte Diagramme
 - **Pillow (v10.0+)**: Bildverarbeitung für standardisierte Bildgrößen (Neu)
+
+## Code-Logik und zentrale Funktionen
+
+### `data/bubble_texts.py`
+
+In dieser Datei ist das gesamte **Skript des Charakters** als Dictionary `BUBBLE_TEXTS` gespeichert.  
+Die Texte sind in thematische Blöcke unterteilt, z. B. `"onboarding"`, `"test"`, `"onboarding2"`.  
+Jeder Block enthält eine Liste von Strings, die nacheinander in der Sprechblase angezeigt werden.
+
+---
+
+### `data/char_speech_state.py`
+
+#### `init_char_speech_state()`
+Initialisiert die relevanten Streamlit-Zustände für die Sprechblase:
+- `bubble_text`: ein optionaler Starttext
+- `text_index`: Position innerhalb des aktuellen Textblocks
+- `text_key`: aktueller Textblock-Schlüssel (z. B. `"onboarding"`)
+
+#### `set_text_key(key: str, zone: str = None)`
+Wechselt zu einem anderen Textblock. Zusätzlich:
+- wird `text_index` auf `0` zurückgesetzt
+- `typewriter_refresh` erhöht (für die Animation)
+- bei Übergabe eines `zone`-Namens wird `set_zone(...)` aufgerufen
+---
+
+### `data/zone_anchor.py`
+
+#### `init_zone_state()`
+Initialisiert die Zustände zur Bereichssteuerung:
+- `visited_zones`: Menge aller besuchten Zonen
+- `current_zone`: aktuell aktive Zone
+
+#### `set_zone(name: str)`
+Aktualisiert `current_zone` und fügt die Zone zu `visited_zones` hinzu – nur, wenn sie noch nicht besucht wurde. Dadurch kann das Sprungziel vom Auge-Button angepasst werden
+
+#### `autojump(anchor_id: str)`
+Scrollt per JavaScript automatisch zu einem HTML-Element mit der entsprechenden `id`.  
+> Hinweis: Bei sofortigem Triggern nach einem Zonenwechsel sollte `time.sleep(1.5)` verwendet werden, um ein Überspringen durch das Neuladen (Rerun) zu verhindern.
+
+> Hinweis: Verlässlich, solange das Sprungziel sich zwischen dem Aufruf verändert hat. Streamlit blockiert manchmal diesen Funktionsaufruf, wenn das Sprungziel sich nicht verändert hat.
+
+---
+
+### `data/ui_states.py`
+
+#### `init_ui_state()`
+Legt im `st.session_state` das Dictionary `ui_state` an, in dem für alle definierten UI-Komponenten der Zustand (`True`/`False`) gespeichert wird.  
+Die enthaltenen Schlüssel betreffen z. B.:
+- abgeschlossene Aufgaben (`CoronaQuizDone`)
+- sichtbare UI-Elemente (`CoronaSlider`)
+- aktivierte Corruption-Effekte (`NoCorruptionDragPuzzle`)
+
+#### `set_ui_state(key: str, value: bool)`
+Ändert gezielt den Status eines UI-Elements oder -Effekts.
+
+> Damit lässt sich zentral steuern, welche Komponenten sichtbar oder deaktiviert werden. Beispielsweise wird dadurch gesteuert wann der Corruption-Gif zu sehen ist.
+
+
+## 5.2 Praktische Anwendung & Spezialfunktionen
+
+### Korruptionsanzeige aktivieren/deaktivieren
+
+**Korruption anzeigen (z. B. wenn Aufgabe noch nicht gelöst):**
+```python
+if st.session_state.ui_state["NoCorruptionCoronaSlider"] == False:
+    Corruption.render()
+```
+
+**Korruption ausblenden (nach erfolgreicher Lösung):**
+```python
+if (
+    st.session_state.text_key == "slidercorrect"
+    and st.session_state.text_index == 1
+    and not st.session_state.ui_state["CoronaSliderDone"]
+):
+    set_ui_state("CoronaSliderDone", True)
+    set_ui_state("NoCorruptionCoronaSlider", True)
+    st.rerun()
+```
+>Hinweis: Der st.rerun() sorgt dafür, dass nach dem Setzen der Zustände sofort neu geladen wird und der Korruptionseffekt verschwindet.
+
+---
+
+### Sprungziele für den „Auge“-Button setzen
+
+#### Voraussetzung:
+In einem Streamlit-Element (z. B. `st.title`) einen `anchor` setzen:
+```python
+st.title("Faktencheck", anchor="factcheckers")
+oder in einer Markdown:
+st.markdown('<div id="factcheckers"></div>', unsafe_allow_html=True)
+```
+
+#### Ziel per Code setzen:
+```python
+set_zone("factcheckers")
+```
+
+#### Ziel über Button in der Sprechblase setzen:
+```python
+st.button("", on_click=set_text_key, args=("FCwerprüftde", "factcheckers"), key="chat_fc")
+```
+- Erstes Argument = Schlüssel aus `bubble_texts` (Welcher Text aus dem Dictionary soll gezeigt werden)
+- Zweites Argument = Sprungziel-Anchor 
+
+---
+
+### Charaktertext gezielt anzeigen
+
+Text muss in `data/bubble_texts.py` enthalten sein:
+```python
+"FCwerprüftde": [
+    "Wer überprüft eigentlich Fakten im Netz?..."
+]
+```
+
+Dann mit Button aufrufen:
+```python
+st.button("", on_click=set_text_key, args=("FCwerprüftde", "factcheckers"), key="chat_fc")
+```
+Durch den Ersten Parameter wird bei einem Klick der Text angepasst zu "FCwerprüftde"
+
+---
+
+### Sichtbarkeit und Fortschritt per `ui_state` steuern
+
+In `data/ui_states.py` neue Keys ergänzen:
+```python
+_UI_KEYS = [
+    "DragPuzzle",
+    "DragPuzzleDone",
+    "NoCorruptionDragPuzzle",
+    "NoCorruptionCoronaSlider"
+]
+```
+
+**Zustände ändern:**
+```python
+set_ui_state("DragPuzzle", True)
+set_ui_state("DragPuzzleDone", True)
+```
+
+**Verwendung im Code:**
+```python
+if (
+    st.session_state.text_key == "dragpuzzle"
+    and st.session_state.text_index == 4
+) or st.session_state.ui_state["DragPuzzle"]:
+    st.session_state.ui_state["DragPuzzle"] = True
+    DragPuzzleLogic.render()
+```
+>st.session_state.text_key == "dragpuzzle" prüft, ob gerade der richtige Textabschnitt aktiv ist.
+
+>st.session_state.text_index == 4 prüft, ob der aktuelle Satz in der Sprechblase dem Punkt entspricht, an dem das Puzzle starten soll.
+
+>or st.session_state.ui_state["DragPuzzle"] stellt sicher, dass das Puzzle auch nach einem st.rerun() weiterhin angezeigt wird. Ebenfalls wird verhindert, dass diese Komponente in Zukunft erneut angezeigt wird, wenn man auf denselben button klickt. 
+
+---
+
+### Eigene Zone lokal testen
+
+1. Datei `index.py` öffnen  
+2. Unten Abschnitt `## Andere Dashboards:` finden  
+3. Alles darunter auskommentieren (inkl. `render()`)
+
+4. Stattdessen eigene Komponente laden:
+```python
+import zones.Corona as Corona
+Corona.render()
+```
+
+> Voraussetzung: Die Ziel-Datei enthält eine `def render():`-Funktion.
+
+---
+
+### Hinweis zu Korruption und Tests
+
+Wenn eine Zone korrupt ist, werden Inhalte blockiert.  
+Durch die Option von oben "Korruption ausblenden" kann man dies lösen und die Korruption ausblenden, falls man eine Aufgabe richtig löst.
+
+---
+
+### Glitch- und FakeText-Effekte im Text
+
+Einfügen in `st.markdown(...)`:
+```html
+<span class="corrupt">[MissingNumber]</span>
+<span class="falsetext">DeinFalscherText</span>
+```
+
+**Eigene CSS-Effekte:**  
+In `index.py` im `<style>`-Block ganz oben ergänzen – unbedingt **eindeutige Klassennamen** verwenden.
+
+---
+
+### Automatisch scrollen beim Zonenwechsel
+>Wenn Streamlit dynamisch die Website erweitern, bspw. entfernen der Corruption und hinzufügen einer neuen Zone, dann wird die Position des Users nicht automatisch angepasst. 
+Somit wird der User mitten in der Zone positioniert sein, nachdem die Seitenanpassungen durch sind.
+Deshalb bietet sich die autojump-Funktion an.
+
+```python
+from data.zone_anchor import autojump
+import time
+
+time.sleep(1.5)
+autojump("factcheckers")
+```
+
+**Voraussetzung:**
+
+```python
+st.title("Faktencheck", anchor="factcheckers")
+```
+
+ Wichtig:
+
+- `time.sleep(1.5)` ist nötig, da Streamlit sonst sofort neu rendert
+- Scroll funktioniert nur, bzw. meistens nur, wenn sich das Sprungziel, zwischen den Aufrufen der Funktion, verändert hat
+
+---
+
+### Quellenangaben einfügen
+
+```python
+if st.toggle("Quellen", key="quelle_slider"):
+    st.markdown("""
+    <div style="border:1px solid #ccc; border-radius:6px; padding:10px; margin-top:5px;">
+        <ul>
+            <li><a href='https://example.com/a' target='_blank'>Studie A</a></li>
+            <li><a href='https://example.com/b' target='_blank'>Studie B</a></li>
+            <li><a href='https://example.com/c' target='_blank'>Artikel C</a></li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+```
+
+**Hinweis:**  
+Der Key des Toggles sollte mit `"quelle"` beginnen, damit das Styling korrekt greift.
+
+---
+
+### Buttons im Chat-Stil verwenden
+
+```python
+st.button("", on_click=set_text_key, args=("FCwerprüftde", "factcheckers"), key="chat_fc")
+```
+
+**Achtung:**  
+- Button-Key muss **einzigartig** sein (z. B. `"chat_fc"`, `"chat_drag"`)  
+- Keine zwei Buttons dürfen den gleichen Key haben – sonst reagiert Streamlit nicht mehr korrekt
+
 
 ## Installation und Setup siehe auch README.md
 
@@ -301,6 +553,8 @@ Folgenden Code:
 ```
 
 > **Wichtig:** Statt `Audrey2900/AWP-SS25` muss der eigene GitHub-Repo-Pfad verwendet werden. Der Restliche Pfad kann so bleiben.
+
+## Kein Deployment in der Cloud
 
 Wenn **kein Deployment in der Cloud** erfolgt, sondern die App lokal ausgeführt wird, kann weiterhin folgendes verwendet werden:
 
