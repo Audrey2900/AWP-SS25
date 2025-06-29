@@ -119,7 +119,7 @@ def render():
         text-decoration: none;
         color: #666;
         cursor: pointer;
-        z-index: 10;
+        z-index: 20;
         display: flex;
         align-items: center;
         justify-content: center;
