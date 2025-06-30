@@ -11,12 +11,6 @@ import components.Mission_4.Mission_4 as Mission4
 from data.char_speech_state import set_text_key
 
 def render():
-    #st.markdown("<div style='height: 100px;'></div>", unsafe_allow_html=True)
-
-    #st.button("Platzhalter für Schlussaufgabe", on_click=set_ui_state, args=("NoCorruptionAiFakeNews", True))
-
-    #if st.session_state.ui_state["NoCorruptionAiFakeNews"] == False:
-        #Corruption.render()
     
     # st.title("Künstliche Intelligenz und Fake News - wie hängt das zusammen?")
 
