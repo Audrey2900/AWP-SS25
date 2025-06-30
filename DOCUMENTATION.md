@@ -3,20 +3,20 @@
 ## Inhaltsverzeichnis
 
 1. Projektübersicht und Ziel des Projekts
-2. Fachliche Komponenten
+2. Streamlit
 3. Technische Komponenten
-4. Installation und Setup  
-    4.1 !WICHTIG! Code-Anpassung für Streamlit Cloud und lokales Deployment (Bildpfade)
-5. Code-Logik und zentrale Funktionen  
-    5.1 Datenmodell und -verarbeitung  
-    5.2 Wichtige Funktionen  
-    5.3 Praktische Anwendung & Spezialfunktionen
+4. Code-Logik und zentrale Funktionen  
+    4.1 Datenmodell und -verarbeitung  
+    4.2 Wichtige Funktionen  
+    4.3 Praktische Anwendung & Spezialfunktionen
+5. Installation und Setup  
+    5.1 Deployment auf Streamlit Cloud und lokales Deployment
 6. Komponenten-Details
 7. Herausforderungen und Lösungen
 8. Erweiterungsmöglichkeiten
 9. Anhang und Referenzen
 
-## Projektübersicht und Ziel des Projekts
+## 1. Projektübersicht und Ziel des Projekts
 
 Das Projekt "Fake News Visualisierung & Aufklärung" ist eine interaktive Webanwendung, die mit Streamlit und Python entwickelt wurde. Es bietet verschiedene interaktive Elemente zur Aufklärung über Desinformation. Die Anwendung dient Bildungszwecken und soll Nutzer:innen für die Problematik von Fake News sensibilisieren.
 
@@ -94,7 +94,31 @@ Das Projekt "Fake News Visualisierung & Aufklärung" ist eine interaktive Webanw
 - **Wissen testen**: Beantwortung von Quiz-Fragen mit direktem Feedback (Neu)
 - **Bilderkennung**: Unterscheidung echter und KI-generierter Bilder (Neu)
 
-## Technische Komponenten
+## 2. Streamlit
+
+### Was ist Streamlit?
+
+Streamlit ist ein Open-Source-Python-Framework, mit dem sich Webanwendungen schnell und einfach erstellen lassen – ohne tiefgreifende Frontend-Kenntnisse. Es richtet sich insbesondere an Entwickler*innen und Data Scientists, die interaktive Dashboards oder Tools mit minimalem Codeaufwand realisieren möchten. Die Logik läuft komplett in Python, das Frontend (Buttons, Slider, Diagramme usw.) wird automatisch generiert.
+
+### Wie funktioniert Streamlit?
+
+Streamlit arbeitet deklarativ: Jedes Mal, wenn ein Nutzer mit der App interagiert, wird das Skript von oben nach unten neu ausgeführt. Der Zustand der Anwendung kann über `st.session_state` erhalten bleiben. UI-Elemente wie `st.button`, `st.slider` oder `st.markdown` erzeugen direkt sichtbare Komponenten im Browser.
+
+### Ist Streamlit modular aufgebaut wie React?
+
+Nein, Streamlit ist nicht nativ komponentenbasiert wie React. Es gibt keine eingebauten Module oder Wiederverwendungskonzepte à la JSX-Komponenten oder Lifecycle-Methoden. Alles wird sequentiell innerhalb eines Python-Skripts definiert.
+
+### Wie kann man dennoch Modularität in Streamlit simulieren?
+
+Obwohl Streamlit keine native Komponentenstruktur bietet, kann man ein modulares Verhalten durch folgende Ansätze nachbilden:
+
+- **Seitenabschnitte in `render()`-Funktionen kapseln**: Einzelne UI-Bereiche werden in klar abgegrenzte Funktionen ausgelagert (z. B. `def render_dashboard(): ...`), die gezielt aufgerufen werden können.
+- **Eigene Custom Components einbinden**: Über `streamlit.components.v1` lassen sich eigene HTML/JavaScript-Komponenten integrieren, ähnlich wie eigenständige UI-Komponenten in React.
+
+**Auf diese Weise simulieren wir in Streamlit die Modularität, die in Frameworks wie React von Haus aus vorhanden ist.**
+
+
+## 3. Technische Komponenten
 
 ### Systemarchitektur
 
@@ -216,9 +240,9 @@ usw.
   - Versteckte obere Leiste
   - Aktiviertes statisches Serving
 
-## Code-Logik und zentrale Funktionen
+## 4. Code-Logik und zentrale Funktionen
 
-### 5.1 Datenmodell und -verarbeitung
+### 4.1 Datenmodell und -verarbeitung
 
 #### FakeCovid_July2020.csv
 
@@ -255,7 +279,7 @@ usw.
   - Verwendet für PictureSelector und animierte Diagramme
 - **Pillow (v10.0+)**: Bildverarbeitung für standardisierte Bildgrößen (Neu)
 
-## 5.2 Wichtige Funktionen
+## 4.2 Wichtige Funktionen
 
 ### `data/bubble_texts.py`
 
@@ -324,7 +348,7 @@ Die enthaltenen Schlüssel betreffen z. B.:
 
 > Damit lässt sich zentral steuern, welche Komponenten sichtbar oder deaktiviert werden. Beispielsweise wird dadurch gesteuert wann der Corruption-Gif zu sehen ist.
 
-## 5.3 Praktische Anwendung & Spezialfunktionen
+## 4.3 Praktische Anwendung & Spezialfunktionen
 
 ### Korruptionsanzeige aktivieren/deaktivieren
 
@@ -536,7 +560,7 @@ st.button("", on_click=set_text_key, args=("FCwerprüftde", "factcheckers"), key
 - Button-Key muss **einzigartig** sein (z. B. `"chat_fc"`, `"chat_drag"`)  
 - Keine zwei Buttons dürfen den gleichen Key haben – sonst reagiert Streamlit nicht mehr korrekt
 
-## Installation und Setup siehe auch README.md
+## 5. Installation und Setup siehe auch README.md
 
 ### Voraussetzungen
 
@@ -571,7 +595,7 @@ Die Anwendung ist dann unter <http://localhost:8501> erreichbar.
 
 ---
 
-## Deployment auf Streamlit Cloud
+## 5.1 Deployment auf Streamlit Cloud
 
 Um den Code auf **Streamlit Cloud** laufen zu lassen, muss das Repository auf **GitHub öffentlich** sein.  
 Außerdem **muss eine Kleinigkeit im Code angepasst werden**, sodass `PrototypeChar2.gif` und `PrototypeChar_still.png` korrekt angezeigt werden.
@@ -629,7 +653,7 @@ Wenn **kein Deployment in der Cloud** erfolgt, sondern die App lokal ausgeführt
 "app/static/(NameVomBild,Gif)"
 ```
 
-## Komponenten-Details
+## 5. Komponenten-Details
 
 ### Animierte Diagramme
 
@@ -673,7 +697,7 @@ background.paste(img, offset)
 2. Bewertungssystem für richtige und falsche Antworten
 3. Fortschrittsanzeige mit farblichen Indikatoren
 
-## Herausforderungen und Lösungen
+## 7. Herausforderungen und Lösungen
 
 ### 1. Automatische Animation in Streamlit
 
@@ -707,11 +731,21 @@ background.paste(img, offset)
 
 **Lösung**: Optimierung der Timing-Parameter für Frame-Dauer und Übergänge, Reduzierung unnötiger Neuzeichnungen mit `redraw: False`.
 
-## Erweiterungsmöglichkeiten
+## 8. Erweiterungsmöglichkeiten
 
-...
+Die bestehende Anwendung ist modular aufgebaut und bietet eine solide Grundlage für zukünftige Erweiterungen.
 
-## Anhang und Referenzen
+- Weitere Datensätze können eingebunden werden, etwa zu Desinformation über Klima, Wahlen oder gesellschaftliche Themen abseits von COVID-19.
+- Eine Anbindung an externe APIs (z. B. von Faktencheck-Plattformen oder Nachrichtenagenturen) würde die Aktualität erhöhen und dynamische Inhalte ermöglichen.
+- Die Themenbereiche könnten ausgebaut werden. Neue Missionsseiten zu anderen Desinformationskampagnen wären einfach integrierbar, z. B. durch zusätzliche `zones/*.py`-Dateien.
+- Die Kartenansicht kann weiterentwickelt werden, etwa durch anklickbare Länder, zusätzliche Filter oder detailreichere Regionsebene.
+- Die Visualisierungen könnten durch Trendanalysen oder einfache Vorhersagemodelle ergänzt werden, um z. B. saisonale Muster oder sprachspezifische Unterschiede zu zeigen.
+- Für größere Datenmengen oder persistente Nutzerinteraktionen wäre eine Anbindung an eine Datenbank (z. B. PostgreSQL) oder ein separates Backend sinnvoll.
+- Auch eine Trennung von Frontend (Streamlit) und Datenlogik (z. B. via FastAPI) ist perspektivisch möglich.
+
+Die Anwendung ist insgesamt sehr gut erweiterbar, da die Zustände zentral über `session_state` gesteuert werden, Textinhalte modular in `bubble_texts` verwaltet sind und UI-Komponenten über `render()`-Funktionen eingebunden werden. Auch die Steuerung über `zone_anchor` und `ui_state` ermöglicht eine saubere logische Trennung der Inhalte – das erleichtert sowohl Wartung als auch Erweiterung.
+
+## 9. Anhang und Referenzen
 
 ### Nützliche Ressourcen
 
@@ -730,5 +764,5 @@ background.paste(img, offset)
 
 ---
 
-**Stand:** 24. Juni 2025  
-**Autor:** Luca Breisinger
+**Stand:** 30. Juni 2025  
+**Autor:** Luca Breisinger, Ronny Friedmann
