@@ -6,11 +6,11 @@
 2. Fachliche Komponenten
 3. Technische Komponenten
 4. Installation und Setup  
-4.1 !WICHTIG! Code-Anpassung für Streamlit Cloud und lokales Deployment (Bildpfade)
-5. Code-Logik und zentrale Funktionen
-5.1 Datenmodell und -verarbeitung
-5.2 Wichtige Funktionen
-5.3 Praktische Anwendung & Spezialfunktionen
+    4.1 !WICHTIG! Code-Anpassung für Streamlit Cloud und lokales Deployment (Bildpfade)
+5. Code-Logik und zentrale Funktionen  
+    5.1 Datenmodell und -verarbeitung  
+    5.2 Wichtige Funktionen  
+    5.3 Praktische Anwendung & Spezialfunktionen
 6. Komponenten-Details
 7. Herausforderungen und Lösungen
 8. Erweiterungsmöglichkeiten
