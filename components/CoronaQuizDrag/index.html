@@ -53,7 +53,7 @@
       function collectSelectedBadges() {
         const right = document.querySelectorAll("#right-container .badge");
         const result = Array.from(right).map(el => el.textContent.trim());
-        sendDataToPython(result);  // ← wieder immer senden
+        sendDataToPython(result);
       }
 
       function createBadge(text) {

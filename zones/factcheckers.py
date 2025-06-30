@@ -141,7 +141,7 @@ In Deutschland wurde das Thema ab dem Jahr **2016** präsenter. Vor allem durch 
             <li><a href='https://ifcncodeofprinciples.poynter.org/' target='_blank'>https://ifcncodeofprinciples.poynter.org/</a></li>
             <li><a href='https://gadmo.eu/' target='_blank'>https://gadmo.eu/</a></li>
             <li><a href='https://en.wikipedia.org/wiki/FactCheck.org' target='_blank'>https://en.wikipedia.org/wiki/FactCheck.org</a></li>
-            <li><a href='https://de.wikipedia.org/wiki/Correctiv' target='_blank'>https://de.wikipedia.org/wiki/Correctiv</a></li>W
+            <li><a href='https://de.wikipedia.org/wiki/Correctiv' target='_blank'>https://de.wikipedia.org/wiki/Correctiv</a></li>
         </ul>
         </div>
         """, unsafe_allow_html=True)
