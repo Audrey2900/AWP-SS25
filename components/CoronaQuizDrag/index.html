@@ -36,10 +36,15 @@
       }
 
       function setFrameHeight() {
+        const minHeight = 475;
+        const bodyHeight = document.body.scrollHeight;
+        const finalHeight = Math.max(bodyHeight, minHeight);
+
         sendMessageToStreamlitClient("streamlit:setFrameHeight", {
-          height: document.body.scrollHeight
+          height: finalHeight
         });
       }
+
 
       function init() {
         sendMessageToStreamlitClient("streamlit:componentReady", { apiVersion: 1 });
@@ -48,7 +53,7 @@
       function collectSelectedBadges() {
         const right = document.querySelectorAll("#right-container .badge");
         const result = Array.from(right).map(el => el.textContent.trim());
-        sendDataToPython(result);
+        sendDataToPython(result);  // ← wieder immer senden
       }
 
       function createBadge(text) {
@@ -76,7 +81,6 @@
             leftContainer.appendChild(badge);
           }
           collectSelectedBadges();
-          setTimeout(setFrameHeight, 0);
         });
 
         return badge;
@@ -98,7 +102,6 @@
             if (dragged) {
               container.appendChild(dragged);
               collectSelectedBadges();
-              setTimeout(setFrameHeight, 0);
             }
           });
         });
