@@ -64,65 +64,72 @@ def render():
 
     # Überschrift
     st.markdown("<h1 style='text-align: center; margin-top: 30px;'>🏁 Fertig! Du hast es geschafft! 🥳</h1>", unsafe_allow_html=True)
-    
-    # 🎓 Info-Text zentriert
-    st.markdown(f"""
-        <div style="text-align: center; margin-top: 50px; margin-bottom: 30px;">
-            <h3>🎓 {name}, du bist jetzt ein zertifizierter <strong>Faktenchecker</strong>!</h3>
-        </div>
-        <div style="text-align: center; margin-bottom: 30px;">
-            <p style="font-size: 18px;">
-  Dein offizielles Zertifikat wartet auf dich.<br>
-  Klicke, um es herunterzuladen:<br>
-  <span style="font-size: 50px;">⬇️</span>
-</p>
-    """, unsafe_allow_html=True)
 
-    # Zertifikat erzeugen
-    pdf_bytes = generate_certificate(name)
+    if st.session_state.ui_state["OffboardingPDF"] == True:
+        # 🎓 Info-Text zentriert
+        st.markdown(f"""
+            <div style="text-align: center; margin-top: 50px; margin-bottom: 30px;">
+                <h3>🎓 {name}, du bist jetzt ein zertifizierter <strong>Faktenchecker</strong>!</h3>
+            </div>
+            <div style="text-align: center; margin-bottom: 30px;">
+                <p style="font-size: 18px;">
+            Dein offizielles Zertifikat wartet auf dich.<br>
+            Klicke, um es herunterzuladen:<br>
+            <span style="font-size: 50px;">⬇️</span>
+            </p>
+        """, unsafe_allow_html=True)
 
-    # Button zentrieren mit CSS
-    st.markdown("""
+        # Zertifikat erzeugen
+        pdf_bytes = generate_certificate(name)
+
+        # Button zentrieren mit CSS
+        st.markdown("""
+            <style>
+            div.stDownloadButton {
+                display: flex;
+                justify-content: center;
+            }
+            </style>
+        """, unsafe_allow_html=True)
+
+        st.download_button(
+            label="📥 Zertifikat herunterladen",
+            data=pdf_bytes,
+            file_name=f"factchecker_zertifikat_{name.replace(' ', '_')}.pdf",
+            mime="application/pdf",
+            key="download_button"
+        )
+
+        # Ballon-Effekt beim Klick
+        st.markdown("""
+        <script>
+        const dlButton = parent.document.querySelector('button[data-testid="baseButton-download_button"]');
+        if (dlButton) {
+            dlButton.addEventListener('click', function() {
+                const balloons = document.createElement('div');
+                balloons.innerHTML = "🎈🎉🎈";
+                balloons.style.position = "fixed";
+                balloons.style.top = "20px";
+                balloons.style.left = "50%";
+                balloons.style.transform = "translateX(-50%)";
+                balloons.style.fontSize = "3rem";
+                balloons.style.zIndex = "9999";
+                balloons.style.animation = "fadeout 3s ease-out forwards";
+                document.body.appendChild(balloons);
+                setTimeout(() => balloons.remove(), 3000);
+            });
+        }
+        </script>
         <style>
-        div.stDownloadButton {
-            display: flex;
-            justify-content: center;
+        @keyframes fadeout {
+            0% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(80px); }
         }
         </style>
-    """, unsafe_allow_html=True)
-
-    st.download_button(
-        label="📥 Zertifikat herunterladen",
-        data=pdf_bytes,
-        file_name=f"factchecker_zertifikat_{name.replace(' ', '_')}.pdf",
-        mime="application/pdf",
-        key="download_button"
-    )
-
-    # Ballon-Effekt beim Klick
-    st.markdown("""
-    <script>
-    const dlButton = parent.document.querySelector('button[data-testid="baseButton-download_button"]');
-    if (dlButton) {
-        dlButton.addEventListener('click', function() {
-            const balloons = document.createElement('div');
-            balloons.innerHTML = "🎈🎉🎈";
-            balloons.style.position = "fixed";
-            balloons.style.top = "20px";
-            balloons.style.left = "50%";
-            balloons.style.transform = "translateX(-50%)";
-            balloons.style.fontSize = "3rem";
-            balloons.style.zIndex = "9999";
-            balloons.style.animation = "fadeout 3s ease-out forwards";
-            document.body.appendChild(balloons);
-            setTimeout(() => balloons.remove(), 3000);
-        });
-    }
-    </script>
-    <style>
-    @keyframes fadeout {
-        0% { opacity: 1; }
-        100% { opacity: 0; transform: translateY(80px); }
-    }
-    </style>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
+    
+    if (
+        st.session_state.text_key == "offboarding" and st.session_state.text_index == 8
+    ) and st.session_state.ui_state["OffboardingPDF"] == False:
+        st.session_state.ui_state["OffboardingPDF"] = True
+        st.rerun()

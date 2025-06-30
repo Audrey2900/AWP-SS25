@@ -188,6 +188,14 @@ BUBBLE_TEXTS = {
     "SentimentSliderFalse": [
         "Hmmm, bei mir tut sich nichts. Wir brauchen eine andere Schlussfolgerung."
     ],
+    "AiPictureSelector": [
+        "Stimmt, hier kannst du jetzt selbst ausprobieren eigene Fake-Bilder zu erstellen."
+    ],
+    "AiBradolini": [
+        "Du hast selbst erlebt, wie schnell und unkompliziert sich solche manipulierten Bilder erzeugen lassen. ",
+        "Gleichzeitig wurde deutlich, wie schwer es oft ist, sie als Fälschung zu entlarven – vor allem, wenn man nicht genau hinschaut oder typische Hinweise übersieht.",
+        "Dieses Ungleichgewicht hat auch einen Namen: Bradolinis Gesetz "
+    ],
     ######### Mission 2 #########
     "mission2_resultA": [
     "Hmm, das war die echte Nachrichten-Wolke.",
@@ -227,10 +235,7 @@ BUBBLE_TEXTS = {
     ],
     "mission3.2": [
     "Wow, das war gar nicht so leicht – aber super gemacht!",
-    "Zum Schluss noch ein paar Tipps, wie du Deepfakes besser erkennen kannst:",
-    "Achte besonders auf unnatürliche Augenbewegungen oder wenig Lidschlag. Verwaschene Übergänge im Gesicht oder seltsame Hintergrunddetails sind auch oft ein Hinweis.",
-    "Fehlende Metadaten oder unbekannte Quellen? Auch das ist verdächtig!",
-    "Wenn dir etwas seltsam vorkommt: Frag nach, schau genau hin – und vertrau deinem Gefühl!"
+    "Wichtig ist vor allem: Wenn etwas seltsam wirkt, frag nach, schau genau hin und vertrau deinem Gefühl!"
     ],
     ######### Mission 4 #########
     "mission4.1": [
@@ -240,8 +245,8 @@ BUBBLE_TEXTS = {
     "Komm, ein letztes Mal bündeln wir unsere Kräfte – dann hast du den Artikel erflogreich repariert!"
     ],
     "mission4.2": [
-    "Super gemacht – wieder ein Stück der Plattform repariert!",
+    "Super gemacht – jetzt haben wir endlich den gesamten Artikel repariert!",
     "Du hast gezeigt, dass du Fake News und Deepfakes nicht so leicht auf den Leim gehst.",
-    "Und das Wichtigste: Du hast den Blick fürs Detail geschärft – eine echte Superkraft im Netz!"
-    ]
+    "Und das Wichtigste: Du hast den Blick fürs Detail geschärft – eine echte Superkraft im Netz!",
+    ],
 }

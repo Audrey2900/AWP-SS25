@@ -13,6 +13,8 @@ _UI_KEYS = [
     "CoronaQuizDone",
     "FCQuiz",
     "FCQuizDone",
+    "Offboarding",
+    "OffboardingPDF",
 
     
 
@@ -24,6 +26,8 @@ _UI_KEYS = [
     "NoCorruptionCoronaZone",
     "NoCorruptionFaktenChecker",
     "NoCorruptionSentimentSlider",
+    "NoCorruptionMission2",
+    "NoCorruptionMission3",
     "NoCorruptionAiFakeNews",
 ]
 

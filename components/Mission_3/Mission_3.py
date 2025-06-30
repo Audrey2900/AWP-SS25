@@ -1,15 +1,17 @@
+import time
 import streamlit as st
 from PIL import Image
 import os
 from io import BytesIO
 from data.char_speech_state import set_text_key
+from data.zone_anchor import autojump
 
 def render():
     col1, col2 = st.columns([3, 1])
     with col1:
         st.title("Täuschend echte Bilder – oder doch nicht?", anchor="mission3")
     with col2:
-        st.button("", on_click=set_text_key, args=("mission3.1",), key="chat3-1")
+        st.button("", on_click=set_text_key, args=("mission3.1", "mission3"), key="chat3-1")
 
     # Custom CSS für einheitliche Bildgrößen, Layout und farbige Progress Bars
     st.markdown("""
@@ -261,12 +263,23 @@ def render():
             st.markdown(f"<div style='font-size: 1.5em; font-weight: margin-top: 10px;'>{progress_html}</div>", unsafe_allow_html=True)
             st.markdown(f"<div style='font-size: 2em;'>Erfolgsquote: {prozent_richtig:.1f}%</div>", unsafe_allow_html=True)
 
+        st.markdown('<div id="Mission3Ende"></div>', unsafe_allow_html=True)
+
         if st.button("Neu starten", use_container_width=True):
             st.session_state.deepfake_antworten = {}
             st.session_state.deepfake_abgegeben = False
             st.rerun()
 
         st.button("", on_click=set_text_key, args=("mission3.2",), key="chat3-2")
+
+
+    if (
+        st.session_state.text_key == "mission3.2" and st.session_state.text_index == 2
+    ) and st.session_state.ui_state["NoCorruptionMission3"] == False:
+        autojump("Mission3Ende")
+        time.sleep(1.5)
+        st.session_state.ui_state["NoCorruptionMission3"] = True
+        st.rerun()
 
 if __name__ == "__main__":
     render()

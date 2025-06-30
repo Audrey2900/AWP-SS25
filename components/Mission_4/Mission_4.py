@@ -1,15 +1,16 @@
+import time
 import streamlit as st
 from data.char_speech_state import set_text_key
 
 def render():
-    st.title("Fast geschafft – bring Licht ins digitale Dunkel")
+    st.title("Fast geschafft – bring Licht ins digitale Dunkel", anchor="Mission4")
 
     # Intro-Dialog durch Chatbutton
-    st.button("", on_click=set_text_key, args=("mission4.1",), key="chat4-1")
+    st.button("", on_click=set_text_key, args=("mission4.1", "Mission4"), key="chat4-1")
 
     st.markdown("<div style='height: 24px;'></div>", unsafe_allow_html=True)
 
-    # Fragen+ Lösungen
+    # Quizdefinition
     quiz = [
         {
             "frage": "Was ist ein typisches visuelles Merkmal eines Deepfakes?",
@@ -51,6 +52,7 @@ def render():
 
     st.markdown("<div style='height: 24px;'></div>", unsafe_allow_html=True)
 
+    # Initialisierung der Antworten
     if "mission4_antworten" not in st.session_state:
         st.session_state.mission4_antworten = [0] * len(quiz)
 
@@ -65,45 +67,26 @@ def render():
         st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
 
     if st.button("Abgeben", key="mission4_abgeben"):
-        punkte = 0
-        for i, eintrag in enumerate(quiz):
-            if st.session_state.mission4_antworten[i] == eintrag["lösung"]:
-                punkte += 1
+        punkte = sum(
+            1 for i, eintrag in enumerate(quiz)
+            if st.session_state.mission4_antworten[i] == eintrag["lösung"]
+        )
+        st.session_state.mission4_result = punkte
+        st.session_state.mission4_submitted = True
+        st.rerun()
+
+    # Ergebnis anzeigen, falls vorhanden
+    if st.session_state.get("mission4_submitted"):
+        punkte = st.session_state.get("mission4_result", 0)
 
         st.success(f"Du hast {punkte} von {len(quiz)} Fragen richtig beantwortet!")
 
         st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
 
-        # Ergebnis-Dialog durch Chatbutton
-        st.button("", on_click=set_text_key, args=("mission4.2",), key="chat4-2")
-
         if punkte == len(quiz):
             st.markdown("### Glückwunsch, du hast alle Hinweise richtig entschlüsselt!")
             st.markdown("Der Zeitungsartikel ist nun wieder vollständig lesbar:")
-
             st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
-
-            st.markdown("""
-            ---
-            ## Deepfakes erkennen
-
-            ### Praktische Hinweise
-
-            - **Augen, Gesicht & Bewegungen analysieren**  
-              Achte auf unnatürliche Augenbewegungen, seltenes Blinzeln oder asymmetrische Gesichter.  
-              Auch ein weiches, glänzendes Hautbild oder falsche Schattenverläufe fallen auf.
-
-            - **Stimme und Sprache prüfen**  
-              Audio-Deepfakes erkennt man an monotonen oder emotionslosen Stimmen, fehlenden Pausen oder unnatürlichen Geräuschen.
-
-            - **Kontext und Quelle kritisch hinterfragen**  
-              Seriöse Medien berichten über den Inhalt? Nutze die SIFT-Methode: **Stop, Investigate source, Find coverage, Trace statement**
-
-            - **Technische Hilfsmittel nutzen**  
-              Tools wie der DeepFake‑o‑meter, Microsoft Authenticator oder FakeCatcher analysieren Deepfakes, sind aber nicht unfehlbar – **kritisches Denken bleibt entscheidend!**
-
-            ---
-            """)
         else:
             st.markdown("Du kannst es nochmal versuchen oder unten die richtigen Antworten vergleichen.")
             st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
@@ -111,6 +94,20 @@ def render():
                 for i, eintrag in enumerate(quiz):
                     richtige = eintrag["optionen"][eintrag["lösung"]]
                     st.markdown(f"**Frage {i+1}:** {richtige}")
+
+        if st.session_state.ui_state["NoCorruptionAiFakeNews"] == False:
+            time.sleep(1.5)
+            st.session_state.ui_state["NoCorruptionAiFakeNews"] = True
+            st.rerun()
+
+        st.button("", on_click=set_text_key, args=("mission4.2",), key="chat4-2")
+
+    if (
+        st.session_state.text_key == "mission4.2" and st.session_state.text_index == 2
+    ) and st.session_state.ui_state["Offboarding"] == False:
+        time.sleep(1.5)
+        st.session_state.ui_state["Offboarding"] = True
+        st.rerun()
 
 if __name__ == "__main__":
     st.set_page_config(page_title="Deepfake erkennen", layout="centered")

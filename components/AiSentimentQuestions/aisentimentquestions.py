@@ -1,7 +1,9 @@
+import time
 import streamlit as st
 
 from data.char_speech_state import set_text_key
 from data.ui_states import set_ui_state
+from data.zone_anchor import autojump
 
 def render():
 
@@ -53,6 +55,8 @@ def render():
         and st.session_state.text_index == 1
         and not st.session_state.ui_state["SentimentSliderDone"]
     ):
+        autojump("SentimentSlider")
+        time.sleep(1.5)
         set_ui_state("SentimentSliderDone", True)
         set_ui_state("NoCorruptionSentimentSlider", True)
         st.rerun()

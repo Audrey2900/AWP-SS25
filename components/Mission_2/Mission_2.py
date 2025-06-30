@@ -1,7 +1,9 @@
+import time
 import altair as alt
 import streamlit as st
 import pandas as pd
 from data.char_speech_state import set_text_key
+from data.zone_anchor import autojump
 
 def render():
     col1, col2 = st.columns([3, 1])
@@ -9,7 +11,7 @@ def render():
         st.title("Versteckte Hinweise im Wortchaos", anchor="mission2")
  
     st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-    st.button("", on_click=set_text_key, args=("mission2.1",), key="chat1")
+    st.button("", on_click=set_text_key, args=("mission2.1",), key="chatMission21")
 
     col1, col2 = st.columns(2)
     with col1:
@@ -96,13 +98,24 @@ def render():
             tooltip=['word', 'frequency']
         ).properties(width=300, height=400, title="Fake News")
 
+        st.markdown('<div id="Mission2Ende"></div>', unsafe_allow_html=True)
+
         col1, col2 = st.columns(2)
         with col1:
             st.altair_chart(chart_true, use_container_width=True)
         with col2:
             st.altair_chart(chart_fake, use_container_width=True)
 
-        st.button("", on_click=set_text_key, args=("mission2.4",), key="chat4")
+        st.button("", on_click=set_text_key, args=("mission2.4",), key="chatMission24")
+
+        if (
+            st.session_state.text_key == "mission2.4" and st.session_state.text_index == 1
+        ) and st.session_state.ui_state["NoCorruptionMission2"] == False:
+            autojump("Mission2Ende")
+            time.sleep(1.5)
+            st.session_state.ui_state["NoCorruptionMission2"] = True
+            st.rerun()
+
 
 if __name__ == "__main__":
     render()
