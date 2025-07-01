@@ -35,7 +35,7 @@ def render():
     **Technische Hilfsmittel nutzen:**  
     Werkzeuge wie der Deepfake-o-meter, Microsoft Authenticator oder FakeCatcher können Hinweise liefern, sind aber nicht unfehlbar. Kritisches Denken bleibt entscheidend.
 
-    Wenn dir etwas seltsam vorkommt: **Frag nach, schau genau hin – und vertraue deinem Bauchgefühl.**  
-    Ein kritischer Blick ist der beste Schutz gegen Deepfakes.
-    ---
+    **Wenn dir etwas seltsam vorkommt:**
+    Frag nach, schau genau hin – und vertraue deinem Bauchgefühl. 
+    Ein kritischer Blick ist der beste Schutz gegen Deepfakes. ---
     """)
