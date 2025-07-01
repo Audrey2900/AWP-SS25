@@ -157,7 +157,9 @@ def show_classification_chart(df):
     )
 
 @st.cache_data(show_spinner=False)
-def generate_wordcloud(text, stopwords):
+def generate_wordcloud(text, stopwords_tuple):
+    # Tuple zurück in Set umwandeln für WordCloud
+    stopwords = set(stopwords_tuple)
     wordcloud = WordCloud(
         width=800,
         height=300,
@@ -185,11 +187,11 @@ def show_wordcloud(df, basis, lang):
         stopwords = set(STOPWORDS).union({
             "dass", "die", "der", "und", "mit", "ist", "ein", "eine", "im", "den", "Video", "sind", "ja",
             "des", "für", "auf", "sich", "nicht", "wie", "auch", "es", "das", "zu", "von", "am", "Prozent", "Irreführende",
-            "wurden", "man", "Keine Belege", " "
+            "wurden", "man", "Keine Belege", " "
         })
     else:
         stopwords = set(STOPWORDS).union({
-            "False", "Misleading", "Fake", " "
+            "False", "Misleading", "Fake", " "
         })
     
     wörter = ["Bill Gates", "Vitamin C", "5G"]
@@ -199,7 +201,10 @@ def show_wordcloud(df, basis, lang):
             if f" {wort.lower()} " in f" {text.lower()} ":
                 text += (" " + wort) * 100
 
-    wordcloud = generate_wordcloud(text, stopwords)
+    # WICHTIG: Set in sortiertes Tuple umwandeln für stabiles Caching
+    stopwords_tuple = tuple(sorted(stopwords))
+    
+    wordcloud = generate_wordcloud(text, stopwords_tuple)
 
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.imshow(wordcloud, interpolation='bilinear')
