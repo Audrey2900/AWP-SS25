@@ -17,7 +17,6 @@ def render():
     deepfakefinder()
     
     st.markdown("""
-                
     **Zusätzlicher Tipp:**  
     Prüfe, woher das Bild oder Video stammt. Fehlende Metadaten oder unbekannte Quellen können ein Warnsignal sein.
 
@@ -34,9 +33,9 @@ def render():
     Wird das Material auch von seriösen Quellen berichtet? Nutze die SIFT-Methode: Stop – Investigate the source – Find other coverage – Trace the original context.
 
     **Technische Hilfsmittel nutzen:**  
-    Werkzeuge wie der Deepfake‑o‑meter, Microsoft Authenticator oder FakeCatcher können Hinweise liefern, sind aber nicht unfehlbar. Kritisches Denken bleibt entscheidend.
+    Werkzeuge wie der Deepfake-o-meter, Microsoft Authenticator oder FakeCatcher können Hinweise liefern, sind aber nicht unfehlbar. Kritisches Denken bleibt entscheidend.
 
-        Wenn dir etwas seltsam vorkommt: **Frag nach, schau genau hin – und vertraue deinem Bauchgefühl.**  
-        Ein kritischer Blick ist der beste Schutz gegen Deepfakes.
-        
-        ---""")
+    Wenn dir etwas seltsam vorkommt: **Frag nach, schau genau hin – und vertraue deinem Bauchgefühl.**  
+    Ein kritischer Blick ist der beste Schutz gegen Deepfakes.
+    ---
+    """)
