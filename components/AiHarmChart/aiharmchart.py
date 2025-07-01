@@ -40,6 +40,9 @@ def render():
         hovertemplate='%{label}<br>%{percent}',
     )
 
-    fig.update_layout(showlegend=False)
-
-    st.plotly_chart(fig, use_container_width=True, height=500)
+    fig.update_layout(
+        showlegend=False,
+        height=500
+    )
+    
+    st.plotly_chart(fig, use_container_width=True)
