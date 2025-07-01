@@ -148,7 +148,7 @@ import components.Mission_4.Mission_4 as Mission4
 
 #Corona.render()
 
-#FactCheckers.render()
+FactCheckers.render()
 
 AiFakeNews.render()
 

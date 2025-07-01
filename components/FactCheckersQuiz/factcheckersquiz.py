@@ -54,7 +54,10 @@ def render():
         "Full Fact": False,
         "ABM Faktenteam": False,
         "MedienCheck": False,
-        "MDR Fact Checking Team": True
+        "MDR Fact Checking Team": True,
+        "CORRECTIV": True,
+        "DW Fact Check": True,
+        "Deutsche Presseagentur (dpa)": True,
     }
 
     expected_order = [
