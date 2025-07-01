@@ -7,13 +7,13 @@ BUBBLE_TEXTS = {
         "Deepfakes sind KI-manipulierte Medien, die täuschend echt aussehen können.",
     ],
     ######### Onboarding + Offboarding #########
-   "onboarding": [
+    "onboarding": [
         "Hallo! Ich bin INFO – das steht für Intelligente Nachrichten Filter Organisation.",
         "Eigentlich sollte diese Plattform junge Detektive wie dich durch die Welt der Fake News führen.",
         "Aber jemand hat uns gehackt… Texte fehlen, Abschnitte wurden manipuliert – alles ist durcheinander!",
         "Ich arbeite rund um die Uhr daran, alles zu reparieren – aber alleine schaffe ich es nicht.",
         "Deshalb brauche ich dich! Du kannst mir helfen, Falschinformationen aufzudecken und die Wahrheit wiederherzustellen.",
-        "Doch bevor wir loslegen: Sag mir bitte deinen Namen, damit ich sicher sein kann, dass du kein Hacker bist. 😉"
+        "Doch bevor wir loslegen: Sag mir bitte deinen Namen, damit ich sicher sein kann, dass du kein Hacker bist. 😉. Dein Name erscheint später auf deinem personalisierten Zertifikat. Falls du deinen echten Namen nicht angeben möchtest, kannst du alternativ auch ein Alias verwenden."
     ],
     "onboarding2": [
         "Danke – jetzt weiß ich, dass ich dir vertrauen kann!",
@@ -37,7 +37,7 @@ BUBBLE_TEXTS = {
         "Wichtig ist nicht, alles zu wissen – sondern zu hinterfragen und bewusst hinzuschauen.",
         "Das Internet bleibt laut, bunt und manchmal irreführend.",
         "Aber jetzt gehörst du zu denen, die wissen, worauf es ankommt.",
-        "Bleib kritisch, wachsam – und hilf anderen, nicht in die Desinfo-Falle zu tappen.",
+        "Bleib kritisch, wachsam – und hilf anderen, nicht in die Desinformations-Falle zu tappen.",
         "🎓 Und hey: Du hast dir dein Zertifikat wirklich verdient!",
         "Mach dir ’nen Tee. Oder besser: Druck es dir aus und häng es auf. 😉",
     ],
@@ -106,7 +106,7 @@ BUBBLE_TEXTS = {
         "Frage 5 stimmt noch nicht."
     ],
     "CoronaQuiz6falsch": [
-        "Nummer 6 passt nicht."
+        "Bei Nummer 6 passt es nicht."
     ],
     "CoronaQuiz7falsch": [
         "Frage 7 mit den Vorkommen passt noch nicht. Schauen wir nochmal nach. Vielleicht sollten wir die Cloud einer anderen Sprache auswählen."
@@ -165,21 +165,21 @@ BUBBLE_TEXTS = {
         "Die Reihenfolge bei Frage 5 stimmt noch nicht."
     ],
     "FCQuizAlleRichtig": [
-        "Mega! Von meiner Seite gibts nichts mehr auszusetzen. Ich kann nun den letzten Artikelabschnitt wieder herstellen.",
+        "Mega! Von meiner Seite gibts nichts mehr auszusetzen. Ich kann nun den letzten Artikelabschnitt wiederherstellen.",
         "Wir haben es fast geschafft, weiter geht's!",
     ],
-    ######### FakeNews and Ai #########
+    ######### Fake News and Ai #########
     "test1": [],
     "manipulationsentiment": [
         "So... bei welchem Teil sind wir jetzt gelandet.",
-        "Ah, hier ging es um die Wirkung von FakeNews. Dafür sollte hier eine Grafik stehen, welche die möglichen Stimmungen von Ki und Fakenews darstellt.",
+        "Ah, hier ging es um die Wirkung von Fake News. Dafür sollte hier eine Grafik stehen, welche möglichen Stimmungen von KI und Fake News darstellt.",
         "Der originale Slider, welcher hier erscheinen sollte, scheint funktionsfähig zu sein. Der Text für die Schlussfolgerungen ist aber leider beschädigt",
         "Wir müssen wieder auf die originalen Schlussfolgerungen kommen. Aber zuerst schicke ich dir mal kurz den Slider nach vorne. ",
         "Hier der Slider und die Frage."
     ],
     "aisentiment": [
-        "Die Daten für den Slider kamen aus einem Datensatz, in welchem über 1200 FakeNews Fälle gespeichert wurden.",
-        "Wie wir durch den Slider schließen können, verfolgen FakeNews verschiedene Ziele.",
+        "Die Daten für den Slider kamen aus einem Datensatz, in welchem über 1200 Fake News Fälle gespeichert wurden.",
+        "Wie wir durch den Slider schließen können, verfolgen Fake News verschiedene Ziele.",
     ],
     "SentimentSliderCorrect": [
         "Nice, ich füge die Lösung direkt ein.",
@@ -242,7 +242,7 @@ BUBBLE_TEXTS = {
     "Fast geschafft! Ein letzter Abschnitt ist noch beschädigt.",
     "Dieser Teil ist stark komprimiert, die Aussagen sind verrutscht oder kaum lesbar.",
     "Wenn wir die richtigen Antworten finden, kann ich ihn wiederherstellen.",
-    "Komm, ein letztes Mal bündeln wir unsere Kräfte – dann hast du den Artikel erflogreich repariert!"
+    "Komm, ein letztes Mal bündeln wir unsere Kräfte – dann hast du den Artikel erfolgreich repariert!"
     ],
     "mission4.2": [
     "Super gemacht – jetzt haben wir endlich den gesamten Artikel repariert!",
