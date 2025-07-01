@@ -17,11 +17,11 @@ def render():
     with col1:
         if st.button("Wähle Option A", key="option_a"):
             st.session_state["chosen_option"] = "A"
-        st.image("static/true.png")
+        st.image("static/True.png")
     with col2:
         if st.button("Wähle Option B", key="option_b"):
             st.session_state["chosen_option"] = "B"
-        st.image("static/false.png")
+        st.image("static/False.png")
 
     st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
