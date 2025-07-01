@@ -1,7 +1,11 @@
 import streamlit as st
+import components.OnboardingLogic.onboardinglogic as OnboardingLogic
 from data.char_speech_state import set_text_key
+from data.ui_states import set_ui_state
 
 def render():
+    st.markdown('<div id="OnboardingAnchor"></div>', unsafe_allow_html=True)
+    OnboardingLogic.render()
     st.header("Willkommen bei InfoGuard – der interaktiven Lernplattform für aufmerksame Internet-Detektive.")
 
     st.write("")  # Pufferplatz
@@ -41,7 +45,11 @@ def render():
 
         st.button("", on_click=set_text_key, args=("onboarding3",), key="chat3")
 
-        if st.session_state.get("text_key") == "onboarding3":
+        if (
+            st.session_state.get("text_key") == "onboarding3"             
+            and st.session_state.text_index == 3
+        ) or st.session_state.ui_state["OnboardingText"] == True:
+            set_ui_state("OnboardingText", True)
             st.markdown("""
             ---
             ### 🔍 Was sind Fake News – und warum sind sie gefährlich?
@@ -60,3 +68,4 @@ def render():
             """)
 
             st.button("", on_click=set_text_key, args=("onboarding4",), key="chat4")
+    st.stop()

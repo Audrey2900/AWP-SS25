@@ -28,7 +28,7 @@ BUBBLE_TEXTS = {
         "Lies dir den nächsten Abschnitt aufmerksam durch. Er hilft dir, Desinformationen zu erkennen!"
     ],
     "onboarding4": [
-        "Los geht's – deine erste Mission wartet!"
+        "Los geht's – deine erste Mission wartet!",
     ],
     "offboarding": [
         "Puh... was für eine Reise!",

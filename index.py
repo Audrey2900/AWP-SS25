@@ -129,10 +129,6 @@ init_ui_state()
 
 st.divider()
 
-# Header
-st.title("Lern-Dashboard: Fake News & Deepfakes")
-
-
 ## Andere Dashboards:
 
 import zones.factcheckers as FactCheckers
@@ -144,9 +140,10 @@ import components.Mission_2.Mission_2 as mission2
 import components.Mission_3.Mission_3 as Mission3
 import components.Mission_4.Mission_4 as Mission4
 
-#Onboarding.render()
+if st.session_state.ui_state["OnboardingDone"] == False:
+    Onboarding.render()
 
-#Corona.render()
+Corona.render()
 
 FactCheckers.render()
 
