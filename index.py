@@ -146,9 +146,9 @@ import components.Mission_4.Mission_4 as Mission4
 
 #Onboarding.render()
 
-Corona.render()
+#Corona.render()
 
-#FactCheckers.render()
+FactCheckers.render()
 
 #AiFakeNews.render()
 
