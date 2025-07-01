@@ -274,7 +274,7 @@ def render():
 
 
     if (
-        st.session_state.text_key == "mission3.2" and st.session_state.text_index == 2
+        st.session_state.text_key == "mission3.2" and st.session_state.text_index == 1
     ) and st.session_state.ui_state["NoCorruptionMission3"] == False:
         autojump("Mission3Ende")
         time.sleep(1.5)

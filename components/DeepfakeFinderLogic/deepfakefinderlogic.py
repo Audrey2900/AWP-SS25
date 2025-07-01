@@ -37,5 +37,5 @@ def render():
 
     **Wenn dir etwas seltsam vorkommt:**
     Frag nach, schau genau hin – und vertraue deinem Bauchgefühl. 
-    Ein kritischer Blick ist der beste Schutz gegen Deepfakes. ---
+    Ein kritischer Blick ist der beste Schutz gegen Deepfakes.
     """)
