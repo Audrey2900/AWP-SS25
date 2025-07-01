@@ -12,48 +12,47 @@ from data.char_speech_state import set_text_key
 
 def render():
     
-    # st.title("Künstliche Intelligenz und Fake News - wie hängt das zusammen?")
+    st.title("Künstliche Intelligenz und Fake News - wie hängt das zusammen?")
 
-    # st.markdown("""
-    # Künstliche Intelligenz (KI) wird heute in vielen Bereichen eingesetzt, zum Beispiel bei automatischen Übersetzungen, Chatbots oder Bilderkennungen. Sie verarbeitet große Mengen an Daten und erkennt Muster. Genau das macht sie auch anfällig für Fehler, vor allem dann, wenn sie mit einseitigen oder falschen Informationen trainiert wurde.
+    st.markdown("""
+    Künstliche Intelligenz (KI) wird heute in vielen Bereichen eingesetzt, zum Beispiel bei automatischen Übersetzungen, Chatbots oder Bilderkennungen. Sie verarbeitet große Mengen an Daten und erkennt Muster. Genau das macht sie auch anfällig für Fehler, vor allem dann, wenn sie mit einseitigen oder falschen Informationen trainiert wurde.
 
-    # Wenn im Netz viele Falschmeldungen vorkommen, übernimmt die KI diese Inhalte, ohne sie zu hinterfragen. Sie verbreitet sie weiter, oft in scheinbar sachlicher Form. So kann KI ungewollt zur Verbreitung von Fake News beitragen, obwohl sie eigentlich neutral wirken soll.
-    # """)
+    Wenn im Netz viele Falschmeldungen vorkommen, übernimmt die KI diese Inhalte, ohne sie zu hinterfragen. Sie verbreitet sie weiter, oft in scheinbar sachlicher Form. So kann KI ungewollt zur Verbreitung von Fake News beitragen, obwohl sie eigentlich neutral wirken soll.
+    """)
 
-    # st.markdown('<div id="KiDiskriminierung"></div>', unsafe_allow_html=True)
-    # st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
+    st.markdown('<div id="KiDiskriminierung"></div>', unsafe_allow_html=True)
+    st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 
+    st.markdown("""
+    ### Warum KI nicht immer fair ist
 
-    # st.markdown("""
-    # ### Warum KI nicht immer fair ist
+    Künstliche Intelligenz basiert auf Daten. Wenn diese Daten Vorurteile enthalten, übernimmt die KI diese Muster und wiederholt sie. Studien zeigen, dass viele KI-Modelle Menschen unterschiedlich behandeln, je nach Aussehen, Geschlecht oder Herkunft.
 
-    # Künstliche Intelligenz basiert auf Daten. Wenn diese Daten Vorurteile enthalten, übernimmt die KI diese Muster und wiederholt sie. Studien zeigen, dass viele KI-Modelle Menschen unterschiedlich behandeln, je nach Aussehen, Geschlecht oder Herkunft.
+    Gesichtserkennungsprogramme zum Beispiel erkennen weiße Männer deutlich besser als Schwarze Frauen. Bildgeneratoren zeigen bei Begriffen wie „Chef“ fast ausschließlich Männer. Auch in Texten werden Klischees übernommen, wenn sie häufig genug im Trainingsmaterial vorkamen.
 
-    # Gesichtserkennungsprogramme zum Beispiel erkennen weiße Männer deutlich besser als Schwarze Frauen. Bildgeneratoren zeigen bei Begriffen wie „Chef“ fast ausschließlich Männer. Auch in Texten werden Klischees übernommen, wenn sie häufig genug im Trainingsmaterial vorkamen.
+    In einer bereinigten Grafik werden reale Beispiele gezeigt, bei denen KI diskriminierend oder einseitig gearbeitet hat. Dabei wurde das Feld „none“ entfernt, um gezielt sichtbar zu machen, wie KI Entscheidungen treffen würde, wenn sie tatsächlich nach bestimmten Mustern bevorzugt oder benachteiligt.
 
-    # In einer bereinigten Grafik werden reale Beispiele gezeigt, bei denen KI diskriminierend oder einseitig gearbeitet hat. Dabei wurde das Feld „none“ entfernt, um gezielt sichtbar zu machen, wie KI Entscheidungen treffen würde, wenn sie tatsächlich nach bestimmten Mustern bevorzugt oder benachteiligt.
+    """)
 
-    # """)
+    HarmChart.render() 
 
-    # HarmChart.render() 
+    HarmChartExamples.render()
 
-    # HarmChartExamples.render()
+    st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 
-    # st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
+    AiSentiment.render()
 
-    # AiSentiment.render()
+    if st.session_state.ui_state["NoCorruptionSentimentSlider"] == False:
+        Corruption.render()
 
-    # if st.session_state.ui_state["NoCorruptionSentimentSlider"] == False:
-    #     Corruption.render()
-
-    # if st.toggle("Quellen", key="quelleAiSentiment"):
-    #     st.markdown("""
-    #     <div style="border:1px solid #ccc; border-radius:6px; padding:10px; margin-top:5px;">
-    #     <ul>
-    #         <li><a href='https://airtable.com/appOU03dlKuBdbmty/shrEkrIYINbrcKQ3z/tbleGYjNLn2D4Xfzs' target='_blank'>Datensatz</a></li>
-    #     </ul>
-    #     </div>
-    #     """, unsafe_allow_html=True)
+    if st.toggle("Quellen", key="quelleAiSentiment"):
+        st.markdown("""
+        <div style="border:1px solid #ccc; border-radius:6px; padding:10px; margin-top:5px;">
+        <ul>
+            <li><a href='https://airtable.com/appOU03dlKuBdbmty/shrEkrIYINbrcKQ3z/tbleGYjNLn2D4Xfzs' target='_blank'>Datensatz</a></li>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
 
     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 
