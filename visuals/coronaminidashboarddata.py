@@ -156,6 +156,18 @@ def show_classification_chart(df):
         }
     )
 
+@st.cache_data(show_spinner=False)
+def generate_wordcloud(text, stopwords):
+    wordcloud = WordCloud(
+        width=800,
+        height=300,
+        background_color='white',
+        stopwords=stopwords,
+        max_words=100,
+        colormap='viridis'
+    ).generate(text)
+    return wordcloud
+
 def show_wordcloud(df, basis, lang):
     st.header("Wordcloud")
 
@@ -187,14 +199,7 @@ def show_wordcloud(df, basis, lang):
             if f" {wort.lower()} " in f" {text.lower()} ":
                 text += (" " + wort) * 100
 
-    wordcloud = WordCloud(
-        width=800,
-        height=300,
-        background_color='white',
-        stopwords=stopwords,
-        max_words=100,
-        colormap='viridis'
-    ).generate(text)
+    wordcloud = generate_wordcloud(text, stopwords)
 
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.imshow(wordcloud, interpolation='bilinear')
