@@ -144,13 +144,13 @@ import components.Mission_2.Mission_2 as mission2
 import components.Mission_3.Mission_3 as Mission3
 import components.Mission_4.Mission_4 as Mission4
 
-Onboarding.render()
+#Onboarding.render()
 
-#Corona.render()
+Corona.render()
 
-#FactCheckers.render()
+FactCheckers.render()
 
-#AiFakeNews.render()
+AiFakeNews.render()
 
 if st.session_state.ui_state["Offboarding"] == True:
     Offboarding.render()
