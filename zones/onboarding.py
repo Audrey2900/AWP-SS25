@@ -67,5 +67,5 @@ def render():
             Und genau das trainierst du hier – mit Sam an deiner Seite.
             """)
 
-            st.button("", on_click=set_text_key, args=("onboarding4",), key="chat_onboardin2")
+            st.button("", on_click=set_text_key, args=("onboarding4",), key="chat_onboarding4")
     st.stop()

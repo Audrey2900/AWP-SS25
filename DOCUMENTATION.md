@@ -11,6 +11,7 @@
     4.3 Praktische Anwendung & Spezialfunktionen
 5. Installation und Setup  
     5.1 Deployment auf Streamlit Cloud und lokales Deployment
+    5.2 Empfehlungen zur Bildeinbindung
 6. Komponenten-Details
 7. Herausforderungen und Lösungen
 8. Erweiterungsmöglichkeiten
@@ -59,19 +60,19 @@ Das Projekt "Fake News Visualisierung & Aufklärung" ist eine interaktive Webanw
 - **Funktionalität**: Anzeige von Kennzahlen wie Anzahl der Länder, häufigste Fake-News-Kategorien etc.
 - **Nutzen**: Schneller Überblick über die wichtigsten Daten auf einen Blick
 
-#### Interaktive Quiz-Komponenten (Neu)
+#### Interaktive Quiz-Komponenten
 
 - **Funktionalität**: Interaktive Wissenstests zu Corona-Fake-News und Faktencheckern
 - **Nutzen**: Spielerische Wissensüberprüfung mit sofortigem Feedback
 - **Besonderheit**: Automatische Auswertung und Anzeige der korrekten Antworten
 
-#### Deepfake-Erkennung (Mission 3) (Neu)
+#### Deepfake-Erkennung (Mission 3)
 
 - **Funktionalität**: Interaktive Übung zur Unterscheidung echter und KI-generierter Bilder
 - **Nutzen**: Sensibilisierung für KI-generierte Inhalte
 - **Besonderheit**: Bilder werden auf einheitliche Größe (350x250px) gebracht für konsistente Darstellung
 
-#### Faktenchecker-Bereich (Neu)
+#### Faktenchecker-Bereich
 
 - **Funktionalität**: Informationen über Arbeit und Geschichte von Faktencheckern
 - **Nutzen**: Aufklärung über wichtige Instanzen der Fake-News-Bekämpfung
@@ -91,8 +92,8 @@ Das Projekt "Fake News Visualisierung & Aufklärung" ist eine interaktive Webanw
 - **Spielerische Elemente**: Kombination von Bildern und Texten im PictureSelector
 - **Informationen abrufen**: Auf- und Zuklappen von Expander-Elementen zu Verschwörungstheorien
 - **Geografische Exploration**: Drehen und Zoomen der 3D-Weltkarte
-- **Wissen testen**: Beantwortung von Quiz-Fragen mit direktem Feedback (Neu)
-- **Bilderkennung**: Unterscheidung echter und KI-generierter Bilder (Neu)
+- **Wissen testen**: Beantwortung von Quiz-Fragen mit direktem Feedback
+- **Bilderkennung**: Unterscheidung echter und KI-generierter Bilder
 
 ## 2. Streamlit
 
@@ -130,7 +131,7 @@ AWP-SS25/
 ├── static/                   # Statische Dateien
 │   ├── FakeCovid_July2020.csv # Hauptdatensatz
 │   ├── styles/               # CSS-Dateien
-│   ├── pictureGeneration/    # Bilder für den PictureSelector (Neu)
+│   ├── pictureGeneration/    # Bilder für den PictureSelector
 │   ├── Original_Bilder/      # Echte Bilder für Deepfake-Erkennung (Neu)
 │   └── KI_Bilder/            # KI-generierte Bilder für Vergleich (Neu)
 ├── visuals/                  # Visualisierungskomponenten
@@ -138,13 +139,13 @@ AWP-SS25/
 ├── components/               # Wiederverwendbare UI-Komponenten
 │   ├── CoronaMiniDashboard/  # Dashboard-Komponente
 │   ├── CoronaExpanders/      # Expander-Komponente
-│   ├── CoronaQuiz/           # Quiz-Komponente (Neu)
+│   ├── CoronaQuiz/           # Quiz-Komponente
 │   ├── chart_animation/      # Animierte Charts
 │   └── PictureSelector/      # Bild-Auswahl-Komponente
 └── zones/                    # Inhaltsbereiche der Anwendung
     ├── corona.py             # Corona-spezifische Inhalte
-    ├── Mission_3.py          # Deepfake-Erkennungsaufgabe (Neu)
-    └── factcheckers.py       # Bereich zu Faktencheckern (Neu)
+    ├── Mission_3.py          # Deepfake-Erkennungsaufgabe
+    └── factcheckers.py       # Bereich zu Faktencheckern
 usw.
 ```
 
@@ -203,7 +204,7 @@ usw.
 - **Integration**: Bindet CoronaExpanders und andere Komponenten ein
 - **Update Juni 2025**: Integration des neuen Corona-Quiz und verbesserter Visualisierungen
 
-#### Mission_3.py (Neu)
+#### Mission_3.py
 
 - **Funktionalität**: Deepfake-Erkennungsaufgabe
 - **Besonderheiten**:
@@ -212,7 +213,7 @@ usw.
   - Implementiert ein Bewertungssystem für Nutzerantworten
   - Dynamische Fortschrittsanzeige der Ergebnisse
 
-#### factcheckers.py (Neu)
+#### factcheckers.py
 
 - **Funktionalität**: Informationsseite zu Faktencheckern
 - **Inhalte**: Geschichte, Arbeit und Bedeutung von Faktencheckern
@@ -263,9 +264,28 @@ usw.
 - **Caching**:
   - Nutzung von `@st.cache_data` für schnelles Nachladen
   - Vermeidung wiederholter CSV-Verarbeitung
-- **Bildverarbeitung (Neu)**:
+- **Bildverarbeitung**:
   - Standardisierung von Bildgrößen und -formaten
   - Zentrale Ausrichtung für konsistentes Layout
+
+### Caching-Optimierung (Ergänzung zu Abschnitt 4.1)
+
+#### Caching-Optimierungen
+
+- **Streamlit Caching**: Nutzung von `@st.cache_data` für schnelles Nachladen
+- **Deterministisches Caching**: 
+  - Für komplexe Datenstrukturen wie Sets, die nicht deterministisch gehashed werden
+  - Umwandlung in sortierte Tuples vor dem Caching:
+  ```python
+  @st.cache_data
+  def generate_wordcloud(text, stopwords_tuple):
+      stopwords = set(stopwords_tuple)  # Tuple zurück in Set umwandeln
+      # Weitere Verarbeitung...
+  
+  # Beim Aufruf: Set in sortiertes Tuple umwandeln
+  stopwords_tuple = tuple(sorted(stopwords))
+  wordcloud = generate_wordcloud(text, stopwords_tuple)
+  ```
 
 ### Bibliotheken und Dependencies
 
@@ -277,7 +297,7 @@ usw.
   - Dataframe-Operationen, Gruppierung, Aggregation, Zeitreihenanalyse
 - **Streamlit Components v1**: Integration eigener HTML/JS/CSS-Komponenten
   - Verwendet für PictureSelector und animierte Diagramme
-- **Pillow (v10.0+)**: Bildverarbeitung für standardisierte Bildgrößen (Neu)
+- **Pillow (v10.0+)**: Bildverarbeitung für standardisierte Bildgrößen
 
 ## 4.2 Wichtige Funktionen
 
@@ -653,7 +673,27 @@ Wenn **kein Deployment in der Cloud** erfolgt, sondern die App lokal ausgeführt
 "app/static/(NameVomBild,Gif)"
 ```
 
-## 5. Komponenten-Details
+## 5.2 Empfehlungen zur Bildeinbindung
+
+#### Lokale Entwicklung
+
+Für die lokale Entwicklung gibt es zwei empfohlene Wege, Bilder zu laden:
+
+1. **Komponenten-Ordner-Ansatz**: 
+   ```python
+   import pathlib
+   img_path = pathlib.Path(__file__).parent / "factcheckers_pic" / "factcheckersintro.webp"
+   st.image(str(img_path), use_container_width=True)
+   ```
+
+2. **Direkter Pfad-Ansatz** (wenn Bilder im static-Ordner liegen):
+   ```python
+   st.image("app/static/factcheckersintro.webp", use_container_width=True)
+   ```
+
+> Hinweis: Bei Verwendung von GitHub Codespaces oder ähnlichen Umgebungen kann der direkte Pfad zu Problemen führen, da die statischen Dateien möglicherweise nicht im erwarteten Verzeichnis liegen.
+
+## 6. Komponenten-Details
 
 ### Animierte Diagramme
 
@@ -719,13 +759,13 @@ background.paste(img, offset)
 
 **Lösung**: Relative Einheiten (%, vh) und Flexbox-Layout für bessere Anpassungsfähigkeit.
 
-### 4. Einheitliche Bildgrößen für konsistente Darstellung (Neu)
+### 4. Einheitliche Bildgrößen für konsistente Darstellung
 
 **Herausforderung**: Bilder mit unterschiedlichen Größen und Seitenverhältnissen führen zu unruhigem Layout.
 
 **Lösung**: Bildverarbeitung mit Pillow, um alle Bilder auf einheitliche Größe zu bringen und zentriert darzustellen.
 
-### 5. Performance-Optimierung für animierte Visualisierungen (Neu)
+### 5. Performance-Optimierung für animierte Visualisierungen
 
 **Herausforderung**: Animationen waren zu langsam oder liefen nicht flüssig genug.
 
@@ -752,7 +792,7 @@ Die Anwendung ist insgesamt sehr gut erweiterbar, da die Zustände zentral über
 - [Streamlit Dokumentation](https://docs.streamlit.io/)
 - [Plotly Python Dokumentation](https://plotly.com/python/)
 - [Pandas Dokumentation](https://pandas.pydata.org/docs/)
-- [Pillow Dokumentation](https://pillow.readthedocs.io/) (Neu)
+- [Pillow Dokumentation](https://pillow.readthedocs.io/)
 
 ### Projekthistorie und Meilensteine
 
@@ -760,9 +800,11 @@ Die Anwendung ist insgesamt sehr gut erweiterbar, da die Zustände zentral über
 - **Juni 2025**: Entwicklung der Kernkomponenten
 - **11. Juni 2025**: Erste Dokumentation
 - **24. Juni 2025**: Erweiterung um Quiz-Komponenten, Performance-Optimierungen und Deepfake-Erkennung
+- **1. Juli 2025**: UI-Optimierungen, verbesserte Bildeinbindung, deterministisches Caching für Wordclouds
+- **3. Juli 2025**: Finale Textkorrektur und 
 - **Juli 2025**: Fertigstellung sowie Kundenübernahme
 
 ---
 
-**Stand:** 30. Juni 2025  
+**Stand:** 03. Juli 2025  
 **Autor:** Luca Breisinger, Ronny Friedmann
