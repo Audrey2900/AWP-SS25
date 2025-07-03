@@ -10,12 +10,6 @@ def render():
     current_texts = get_current_bubble_texts()
     bubble_text = current_texts[st.session_state.text_index]
 
-    col1, col2 = st.columns(2)
-    with col1:
-        st.button("← Zurück", on_click=update_text, args=(-1,), disabled=st.session_state.text_index == 0)
-    with col2:
-        st.button("Weiter →", on_click=update_text, args=(+1,), disabled=st.session_state.text_index == len(BUBBLE_TEXTS) - 1)
-
     st.button("hidden_next", key="hidden_next_button", on_click=update_text, args=(+1,))
 
     st.markdown(f"""
