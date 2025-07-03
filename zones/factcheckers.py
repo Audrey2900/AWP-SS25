@@ -40,7 +40,7 @@ Die **Deutsche Presseagentur (dpa)** hat ebenfalls ein spezialisiertes Team aufg
 Einige dieser Redaktionen arbeiten inzwischen eng zusammen, zum Beispiel im Projekt **GADMO**.
 """)
     
-    st.button("", on_click=set_text_key, args=("FCwerprüftde", "factcheckers"), key="chat")
+    st.button("", on_click=set_text_key, args=("FCwerprüftde", "factcheckers"), key="chat_factcheckers1")
 
     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 
@@ -54,7 +54,7 @@ Zum Netzwerk gehören unter anderem CORRECTIV, AFP Deutschland, die dpa, der Bay
 Ein Vorteil von GADMO ist, dass Redaktionen nicht doppelt an derselben Sache arbeiten müssen. Wenn etwa eine Falschmeldung gleichzeitig in mehreren Ländern kursiert, können die Beteiligten ihre Erkenntnisse direkt abstimmen.
 """)
     
-    st.button("", on_click=set_text_key, args=("FCgadmo",), key="chat2")
+    st.button("", on_click=set_text_key, args=("FCgadmo",), key="chat_factcheckers2")
 
     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 
@@ -85,7 +85,7 @@ Ein Vorteil von GADMO ist, dass Redaktionen nicht doppelt an derselben Sache arb
         img_path2 = pathlib.Path(__file__).parent / "factcheckers_pic" / "400FactCheckingTeams.webp"
         st.image(str(img_path2), use_container_width=True)
     
-    st.button("", on_click=set_text_key, args=("FCifcn",), key="chat3")
+    st.button("", on_click=set_text_key, args=("FCifcn",), key="chat_factcheckers3")
 
     img_path3 = pathlib.Path(__file__).parent / "factcheckers_pic" / "IFCNcerts.png"
     st.image(str(img_path3), use_container_width=True)
@@ -102,7 +102,7 @@ Auch bei gefälschten Videos kommen Faktenchecker zum Einsatz. Sie analysieren A
 Trotzdem: Je besser die Technik, desto schwerer die Erkennung. Deswegen ist Aufklärung so wichtig – also zu wissen, dass es solche Fälschungen überhaupt gibt und wie sie aussehen können.
 """)
     
-    st.button("", on_click=set_text_key, args=("FCdeepfakes",), key="chat4")
+    st.button("", on_click=set_text_key, args=("FCdeepfakes",), key="chat_factcheckers4")
 
     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 
@@ -117,7 +117,7 @@ Ob man eine politische Maßnahme gut oder schlecht findet, bleibt jedem selbst �
 > *„Faktencheck-Redaktionen widerlegen falsche Informationen und helfen so, die öffentliche Debatte auf eine verlässliche Grundlage zu stellen.“*
 """)
     
-    st.button("", on_click=set_text_key, args=("FCzensur",), key="chat5")
+    st.button("", on_click=set_text_key, args=("FCzensur",), key="chat_factcheckers5")
 
     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 
@@ -146,13 +146,13 @@ In Deutschland wurde das Thema ab dem Jahr **2016** präsenter. Vor allem durch 
         </div>
         """, unsafe_allow_html=True)
 
-    st.button("", on_click=set_text_key, args=("FCwann",), key="chat6")
+    st.button("", on_click=set_text_key, args=("FCwann",), key="chat_factcheckers6")
 
     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
     st.markdown('<div id="AnchorFCQuizDone"></div>', unsafe_allow_html=True)
 
     if st.session_state.ui_state["FCQuizDone"] == False:
-        st.button("", on_click=set_text_key, args=("FCaufgabe", "FCQuiz"), key="chat7")
+        st.button("", on_click=set_text_key, args=("FCaufgabe", "FCQuiz"), key="chat_factcheckers7")
         if (
             st.session_state.text_key == "FCaufgabe" and st.session_state.text_index == 3
         ) or st.session_state.ui_state["FCQuiz"]:

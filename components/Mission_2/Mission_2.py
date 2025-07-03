@@ -36,7 +36,7 @@ def render():
             st.button("", on_click=set_text_key, args=("mission2_resultB",), key="chat_m2_b")
 
         st.markdown("---\n## Auflösung: Was verrät uns die Sprache?")
-        st.button("", on_click=set_text_key, args=("mission2.3",), key="chat3")
+        st.button("", on_click=set_text_key, args=("mission2.3",), key="chat2.3")
 
         # Sentiment-Diagramm
         data = pd.DataFrame({

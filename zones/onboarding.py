@@ -26,7 +26,7 @@ def render():
             st.session_state.text_index = 0  # Text-Index zurücksetzen
             st.rerun()  # Seite neu laden, damit der neue Text angezeigt wird
 
-        st.button("", on_click=set_text_key, args=("onboarding2",), key="chat2")
+        st.button("", on_click=set_text_key, args=("onboarding2",), key="chat_onboardin2")
 
         st.markdown("""
         ---
@@ -43,7 +43,7 @@ def render():
         🏆 **Zertifikat**: Am Ende bekommst du ein persönliches Zertifikat als echter Faktenchecker.
         """)
 
-        st.button("", on_click=set_text_key, args=("onboarding3",), key="chat3")
+        st.button("", on_click=set_text_key, args=("onboarding3",), key="chat_onboardin3")
 
         if (
             st.session_state.get("text_key") == "onboarding3"             
@@ -67,5 +67,5 @@ def render():
             Und genau das trainierst du hier – mit Sam an deiner Seite.
             """)
 
-            st.button("", on_click=set_text_key, args=("onboarding4",), key="chat4")
+            st.button("", on_click=set_text_key, args=("onboarding4",), key="chat_onboardin2")
     st.stop()
