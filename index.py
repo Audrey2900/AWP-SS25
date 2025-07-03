@@ -137,18 +137,15 @@ import zones.corona as Corona
 import zones.aifakenews as AiFakeNews
 import zones.onboarding as Onboarding
 import zones.offboarding as Offboarding
-import components.Mission_2.Mission_2 as mission2
-import components.Mission_3.Mission_3 as Mission3
-import components.Mission_4.Mission_4 as Mission4
 
 if st.session_state.ui_state["OnboardingDone"] == False:
     Onboarding.render()
 
-#Corona.render()
+Corona.render()
 
-#FactCheckers.render()
+FactCheckers.render()
 
-#AiFakeNews.render()
+AiFakeNews.render()
 
 if st.session_state.ui_state["Offboarding"] == True:
     Offboarding.render()
