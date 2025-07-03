@@ -48,6 +48,12 @@ div[data-testid="stMainBlockContainer"] {
 [class*="st-key-quelle"] [data-testid="stMarkdownContainer"] {
     color: #1a73e8 !important;
 }
+header[data-testid="stHeader"] {
+    display: none;
+}
+div[data-testid="stMainBlockContainer"] {
+    padding-top: 0 !important;
+}
 .corrupt {
     display: inline-block;
     background: repeating-linear-gradient(
@@ -105,9 +111,6 @@ def load_css(file_path):
 css_path = pathlib.Path("static/styles/global.css")
 load_css(css_path)
 
-
-st.divider()
-
 ############################## Charakter + Sprechblase ##############################
 import components.CharSpeechBubble.charspeechbubble as CharSpeechBubble
 CharSpeechBubble.render()
@@ -120,14 +123,12 @@ ResetTimer.render()
 ############################## Timer ##############################
 
 ############################## Init Zones ##############################
-from data.zone_anchor import autojump, init_zone_state
+from data.zone_anchor import init_zone_state
 from data.ui_states import init_ui_state
 
 init_zone_state()
 init_ui_state()
 ############################## Init Zones ##############################
-
-st.divider()
 
 ## Andere Dashboards:
 
