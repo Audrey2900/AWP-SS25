@@ -181,7 +181,7 @@ def render():
 
     if (
         st.session_state.text_key == "transitionFactcheckers"
-        and st.session_state.text_index == 6
+        and st.session_state.text_index == 0
         and not st.session_state.ui_state["CoronaQuizDone"]
     ):
         autojump("AnchorQuizDone")

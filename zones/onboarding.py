@@ -47,7 +47,7 @@ def render():
 
         if (
             st.session_state.get("text_key") == "onboarding3"             
-            and st.session_state.text_index == 3
+            and st.session_state.text_index == 1
         ) or st.session_state.ui_state["OnboardingText"] == True:
             set_ui_state("OnboardingText", True)
             st.markdown("""

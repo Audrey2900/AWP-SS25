@@ -151,13 +151,7 @@ In Deutschland wurde das Thema ab dem Jahr **2016** präsenter. Vor allem durch 
     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
     st.markdown('<div id="AnchorFCQuizDone"></div>', unsafe_allow_html=True)
 
-    if st.session_state.ui_state["FCQuizDone"] == False:
-        st.button("", on_click=set_text_key, args=("FCaufgabe", "FCQuiz"), key="chat_factcheckers7")
-        if (
-            st.session_state.text_key == "FCaufgabe" and st.session_state.text_index == 3
-        ) or st.session_state.ui_state["FCQuiz"]:
-            st.session_state.ui_state["FCQuiz"] = True
-            FactCheckersQuiz.render()
+    FactCheckersQuiz.render()
 
     if st.session_state.ui_state["NoCorruptionFaktenChecker"] == False:
         Corruption.render()

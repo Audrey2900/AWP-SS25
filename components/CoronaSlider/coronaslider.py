@@ -13,6 +13,8 @@ def render():
 
         st.button("", on_click=set_text_key, args=("6000", "CoronaSlider"), key="chatcorona6000")
 
+        CoronasliderLogic.render()
+
     if st.session_state.ui_state["CoronaSliderDone"] == True:
         st.markdown("""
         **Das Problem:** Viele dieser Gerüchte waren nicht nur falsch, sondern gefährlich.  
@@ -31,9 +33,3 @@ def render():
             """, unsafe_allow_html=True)
 
         st.button("", on_click=set_text_key, args=("coronadone",), key="donecoronalider")
-
-    if (
-        st.session_state.text_key == "6000" and st.session_state.text_index == 4
-    ) or st.session_state.ui_state["CoronaSlider"]:
-        st.session_state.ui_state["CoronaSlider"] = True
-        CoronasliderLogic.render()

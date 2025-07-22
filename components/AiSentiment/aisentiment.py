@@ -9,14 +9,9 @@ def render():
     if st.session_state.ui_state["SentimentSlider"] == False:
         st.button("", on_click=set_text_key, args=("manipulationsentiment", "SentimentSlider"), key="chataisentiment1")
 
-    if (
-        st.session_state.text_key == "manipulationsentiment" and st.session_state.text_index == 4
-    ) or st.session_state.ui_state["SentimentSlider"] == True:
-        st.session_state.ui_state["SentimentSlider"] = True
-        AiSentimentSlider.render()
+    AiSentimentSlider.render()
 
-    if st.session_state.ui_state["SentimentSlider"] == True and st.session_state.ui_state["SentimentSliderDone"] == False:
-        AiSentimentQuestions.render()
+    AiSentimentQuestions.render()
 
     if st.session_state.ui_state["SentimentSliderDone"] == True:
         st.markdown("""

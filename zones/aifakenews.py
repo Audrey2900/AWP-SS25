@@ -42,9 +42,6 @@ def render():
 
     AiSentiment.render()
 
-    if st.session_state.ui_state["NoCorruptionSentimentSlider"] == False:
-        Corruption.render()
-
     if st.toggle("Quellen", key="quelleAiSentiment"):
         st.markdown("""
         <div style="border:1px solid #ccc; border-radius:6px; padding:10px; margin-top:5px;">
@@ -57,9 +54,6 @@ def render():
     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 
     Mission2.render()
-
-    if st.session_state.ui_state["NoCorruptionMission2"] == False:
-        Corruption.render()
 
     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 
@@ -76,9 +70,6 @@ def render():
     DeepfakeFinderLogic.render()
 
     Mission3.render()
-
-    if st.session_state.ui_state["NoCorruptionMission3"] == False:
-        Corruption.render()
 
     st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 

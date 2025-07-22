@@ -86,7 +86,7 @@ BUBBLE_TEXTS = {
     ],
     "CoronaQuiz": [
         "Wieder eine Beschädigung... Dieser Corona-Bereich ist eigentlich vollständig repariert. Kleine Probleme sind aber noch da.",
-        "So wie bei dir vorhin, ist bei mir hier im Hintergrund alles Rot. Viele Daten sind noch beschädigt.",
+        "So wie bei dir vorhin, ist bei mir hier im Hintergrund alles rot. Viele Daten sind noch beschädigt.",
         "Ich brauche wieder deine Hilfe, kann ich erneut auf dich zählen? Du musst mir nun ein paar Fragen beantworten. Die Daten sollten wir im Artikeltext und dem Dashboard finden können.",
         "Hier die Fragen."
     ],
@@ -145,7 +145,7 @@ BUBBLE_TEXTS = {
     ],
     "FCaufgabe" : [
         "Alles durch? Dann können wir jetzt endlich die Frage aus dem vorherigen Abschnitt richtig beantworten.",
-        "Gerade sehe ich auch, dass andere Basisdaten im Hintergrund bei mir beschäfigt sind.",
+        "Gerade sehe ich auch, dass andere Basisdaten im Hintergrund bei mir beschädigt sind.",
         "Selbst wenn wir die Frage aus dem vorherigen Abschnitt richtig beantworten, werde ich so nicht den nachfolgenden Teil der Website ziehen können. Wenn wir aber so vorgehen, wie vorhin, sollten wir ganz einfach die beschädigten Daten korrigieren können.",
         "Einen Moment, ich schicke dir mal kurz einige Fragen in den Vordergrund.",
     ],
